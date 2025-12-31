@@ -3,6 +3,8 @@ import { Button } from './ui/button'
 import AnimatedCounter from './AnimatedCounter'
 
 export default function TrustedBySection() {
+  const partners = ["Skill Hub", "Digital India", "Startup", "AICTE", "NSDC"];
+  
   return (
     <section className="bg-white py-12 border-t-2 border-[#0A2342]">
       <div className="max-w-7xl mx-auto px-6">
@@ -15,7 +17,7 @@ export default function TrustedBySection() {
 
         <div className="mt-8 overflow-hidden relative">
           <div className="flex animate-scroll gap-16 items-center">
-            {["Skill Hub", "Digital India", "Startup", "AICTE", "NSDC", "Skill Hub", "Digital India", "Startup", "AICTE", "NSDC"].map((name, i) => (
+            {[...partners, ...partners, ...partners, ...partners].map((name, i) => (
               <div
                 key={i}
                 className="px-6 py-3 rounded-md bg-[#F4F7FB] text-[#0A2342] font-semibold text-xl shadow-sm whitespace-nowrap flex-shrink-0"
@@ -36,7 +38,7 @@ export default function TrustedBySection() {
             }
           }
           .animate-scroll {
-            animation: scroll 20s linear infinite;
+            animation: scroll 12s linear infinite;
           }
           .animate-scroll:hover {
             animation-play-state: paused;

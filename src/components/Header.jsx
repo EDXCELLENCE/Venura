@@ -1,14 +1,17 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import { Link, useLocation } from 'react-router-dom'
 import { Button } from './ui/button'
 
 export default function Header({ mobileMenuOpen, setMobileMenuOpen, handleNavClick }) {
+  const location = useLocation()
+  
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-white border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-0">
+        <Link to="/" className="flex items-center gap-0">
           <img
             src="/logoicon.png"
             alt="Venura Icon"
@@ -19,11 +22,11 @@ export default function Header({ mobileMenuOpen, setMobileMenuOpen, handleNavCli
             alt="Venura"
             className="h-10 w-auto mt-3"
           />
-        </div>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-16 text-sm text-gray-700">
-          <a href="#About" onClick={(e) => handleNavClick(e, 'About')} className="hover:text-[#FF7A00] cursor-pointer">About</a>
+          <Link to="/about" className={`hover:text-[#FF7A00] cursor-pointer ${location.pathname === '/about' ? 'text-[#FF7A00] font-semibold' : ''}`}>About Us</Link>
           <a href="#Programs" onClick={(e) => handleNavClick(e, 'Programs')} className="hover:text-[#FF7A00] cursor-pointer">Programs</a>
           <a href="#internships" onClick={(e) => handleNavClick(e, 'Internships')} className="hover:text-[#FF7A00] cursor-pointer">Internships</a>
           <a href="#Become Affiliate" onClick={(e) => handleNavClick(e, 'Become Affiliate')} className="hover:text-[#FF7A00] cursor-pointer">Become Affiliate</a>
@@ -56,7 +59,7 @@ export default function Header({ mobileMenuOpen, setMobileMenuOpen, handleNavCli
           className="md:hidden border-t border-gray-200 bg-white"
         >
           <nav className="flex flex-col px-6 py-4 space-y-4">
-            <a href="#About" onClick={(e) => handleNavClick(e, 'About')} className="text-gray-700 hover:text-[#FF7A00] py-2 cursor-pointer">About</a>
+            <Link to="/about" className={`py-2 cursor-pointer hover:text-[#FF7A00] ${location.pathname === '/about' ? 'text-[#FF7A00] font-semibold' : 'text-gray-700'}`} onClick={() => setMobileMenuOpen(false)}>About Us</Link>
             <a href="#Programs" onClick={(e) => handleNavClick(e, 'Programs')} className="text-gray-700 hover:text-[#FF7A00] py-2 cursor-pointer">Programs</a>
             <a href="#internships" onClick={(e) => handleNavClick(e, 'Internships')} className="text-gray-700 hover:text-[#FF7A00] py-2 cursor-pointer">Internships</a>
             <a href="#Become Affiliate" onClick={(e) => handleNavClick(e, 'Become Affiliate')} className="text-gray-700 hover:text-[#FF7A00] py-2 cursor-pointer">Become Affiliate</a>
