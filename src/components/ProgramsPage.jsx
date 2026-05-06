@@ -1,12 +1,12 @@
-import React from 'react'
+import { useState } from 'react'
 import { Clock3, TrendingUp, ArrowRight, IndianRupee, Users, Star } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
 
 export default function ProgramsPage() {
-const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
-const [activeFilter, setActiveFilter] = React.useState('All')
+const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+const [activeFilter, setActiveFilter] = useState('All')
 
 const handleNavClick = (e) => {
 if (e) e.preventDefault()

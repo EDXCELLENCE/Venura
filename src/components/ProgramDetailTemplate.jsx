@@ -1,15 +1,15 @@
-import React from 'react'
+import { useState, useEffect, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { Mail, Users, Clock3, BadgeCheck, Layers3 } from 'lucide-react'
 import Header from './Header'
 import Footer from './Footer'
 
 export default function ProgramDetailTemplate({ programData }) {
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
-  const [activeCurriculumTab, setActiveCurriculumTab] = React.useState('foundation')
-  const [activeFeatureSection, setActiveFeatureSection] = React.useState(null)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [activeCurriculumTab, setActiveCurriculumTab] = useState('foundation')
+  const [activeFeatureSection, setActiveFeatureSection] = useState(null)
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (programData?.title) document.title = `${programData.title} | Venura`
   }, [programData?.title])
 
@@ -91,10 +91,10 @@ export default function ProgramDetailTemplate({ programData }) {
         <p className={className}>
           Sources:{' '}
           {source.map((item, idx) => (
-            <React.Fragment key={`${item.label}-${idx}`}>
+            <Fragment key={`${item.label}-${idx}`}>
               <a href={item.url} target="_blank" rel="noreferrer" className="underline hover:text-[#0A2342]">{item.label}</a>
               {idx < source.length - 1 ? ', ' : ''}
-            </React.Fragment>
+            </Fragment>
           ))}
         </p>
       )
@@ -103,7 +103,7 @@ export default function ProgramDetailTemplate({ programData }) {
     return <p className={className}>{source}</p>
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!activeFeatureSection && defaultSectionKey) {
       const storageKey = `program-sidebar-section-${programData.path || 'default'}`
       const savedSection = window.localStorage.getItem(storageKey)
@@ -112,7 +112,7 @@ export default function ProgramDetailTemplate({ programData }) {
     }
   }, [activeFeatureSection, defaultSectionKey, availableSections, programData.path])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (activeFeatureSection) {
       const storageKey = `program-sidebar-section-${programData.path || 'default'}`
       window.localStorage.setItem(storageKey, activeFeatureSection)

@@ -1,12 +1,12 @@
-import React from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useInView } from 'framer-motion'
 
 export default function AnimatedCounter({ value, suffix = '' }) {
-  const ref = React.useRef(null)
+  const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
-  const [count, setCount] = React.useState(0)
+  const [count, setCount] = useState(0)
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!isInView) return
 
     const numericValue = parseInt(value.replace(/\D/g, ''))

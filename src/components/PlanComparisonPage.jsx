@@ -1,11 +1,11 @@
-import React from 'react'
+import { useState } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
 
 export default function PlanComparisonPage() {
   const location = useLocation()
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const programData = location.state?.programData
 
   const handleNavClick = (e) => {

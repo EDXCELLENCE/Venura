@@ -1,9 +1,9 @@
-import React from 'react'
+import { useState } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 
 export default function PrivacyPage() {
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const handleNavClick = (e) => {
     if (e) e.preventDefault()
     setMobileMenuOpen(false)

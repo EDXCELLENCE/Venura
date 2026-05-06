@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Briefcase, Target, Users, BookOpen, Award, Globe } from "lucide-react";
 import { Card, CardContent } from "./ui/card";
@@ -7,7 +7,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 
 export default function AboutUs() {
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const pillars = [
     {

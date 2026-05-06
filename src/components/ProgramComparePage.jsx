@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import { Info, CheckCircle2, Star, TrendingUp, XCircle, Trophy, ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import Header from './Header'
@@ -163,10 +163,10 @@ function CellValue({ rowKey, value }) {
 }
 
 export default function ProgramComparePage() {
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
-  const [selected, setSelected] = React.useState(['AI & ML', 'Full-Stack', 'Data Science'])
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [selected, setSelected] = useState(['AI & ML', 'Full-Stack', 'Data Science'])
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.title = 'Compare Programs | Venura'
   }, [])
 

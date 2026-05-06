@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   ArrowRight,
@@ -161,7 +161,7 @@ const quickAnswers = [
 ]
 
 export default function AmbassadorProgramPage() {
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const handleLogoClick = () => {
     setMobileMenuOpen(false)

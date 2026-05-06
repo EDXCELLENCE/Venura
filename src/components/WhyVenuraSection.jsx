@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function WhyVenuraSection() {
   const features = [
     { icon: '🤖', title: 'AI-Powered Smart Learning', desc: 'Personalized learning paths, analytics, and intelligent recommendations.' },

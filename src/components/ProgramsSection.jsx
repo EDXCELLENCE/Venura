@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from "react";
 import { BookOpen, Award, Briefcase } from "lucide-react";
 
 const programs = [
@@ -75,7 +75,7 @@ export default function ProgramsSection() {
           {programs.map((program, idx) => {
             const Icon = program.icon;
             return (
-              <React.Fragment key={idx}>
+              <Fragment key={idx}>
                 <div
                   className="relative bg-white rounded-3xl p-8 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col flex-1 group"
                   style={{ border: `2px solid ${program.border}` }}
@@ -139,7 +139,7 @@ export default function ProgramsSection() {
                     </span>
                   </div>
                 )}
-              </React.Fragment>
+              </Fragment>
             );
           })}
         </div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import Header from './Header'
 import ProgramsSection from './ProgramsSection'
 import HeroSection from './HeroSection'
@@ -10,7 +10,7 @@ import CTASection from './CTASection'
 import Footer from './Footer'
 
 export default function HomePage() {
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const handleLogoClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })

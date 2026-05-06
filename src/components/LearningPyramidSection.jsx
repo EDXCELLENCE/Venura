@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function LearningPyramidSection() {
   const badges = [
     { icon: '🛡️', title: 'ISO 9001:2015', sub: 'Quality Certified', bg: 'bg-blue-50', border: 'border-blue-200' },

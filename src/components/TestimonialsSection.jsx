@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Briefcase, MapPin, Quote, Star } from 'lucide-react'
 
 const testimonials = [

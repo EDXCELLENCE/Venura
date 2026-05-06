@@ -1,7 +1,7 @@
-import * as React from "react"
+import { forwardRef } from "react"
 import { cn } from "../../lib/utils"
 
-const Card = React.forwardRef(({ className, ...props }, ref) => (
+const Card = forwardRef(({ className, ...props }, ref) => (
   <div
     ref={ref}
     className={cn(
@@ -13,7 +13,7 @@ const Card = React.forwardRef(({ className, ...props }, ref) => (
 ))
 Card.displayName = "Card"
 
-const CardContent = React.forwardRef(({ className, ...props }, ref) => (
+const CardContent = forwardRef(({ className, ...props }, ref) => (
   <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
 ))
 CardContent.displayName = "CardContent"

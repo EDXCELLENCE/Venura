@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import {
   Search,
   HelpCircle,
@@ -396,17 +396,17 @@ const categoryMeta = {
 }
 
 export default function FAQPage() {
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
-  const [openItem, setOpenItem] = React.useState(null)
-  const [searchText, setSearchText] = React.useState('')
-  const [selectedCategory, setSelectedCategory] = React.useState('All')
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [openItem, setOpenItem] = useState(null)
+  const [searchText, setSearchText] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('All')
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.title = 'FAQ | Venura'
   }, [])
 
-  const categories = React.useMemo(() => ['All', ...faqData.map((item) => item.category)], [])
-  const totalQuestions = React.useMemo(
+  const categories = useMemo(() => ['All', ...faqData.map((item) => item.category)], [])
+  const totalQuestions = useMemo(
     () => faqData.reduce((count, item) => count + item.questions.length, 0),
     []
   )
@@ -416,7 +416,7 @@ export default function FAQPage() {
     setOpenItem((prev) => (prev === id ? null : id))
   }
 
-  const filteredFaqs = React.useMemo(() => {
+  const filteredFaqs = useMemo(() => {
     return faqData
       .filter((item) => {
         if (selectedCategory !== 'All' && item.category !== selectedCategory) {
@@ -454,18 +454,18 @@ export default function FAQPage() {
       })
   }, [searchText, selectedCategory])
 
-  const visibleQuestionIds = React.useMemo(
+  const visibleQuestionIds = useMemo(
     () => filteredFaqs.flatMap((item) => item.questions.map((question) => question.id)),
     [filteredFaqs]
   )
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (openItem && !visibleQuestionIds.includes(openItem)) {
       setOpenItem(null)
     }
   }, [openItem, visibleQuestionIds])
 
-  const featuredQuestions = React.useMemo(
+  const featuredQuestions = useMemo(
     () => faqData.slice(0, 6).map((item) => {
       const question = item.questions[0]
       return {
@@ -478,7 +478,7 @@ export default function FAQPage() {
     []
   )
 
-  const categoryCounts = React.useMemo(() => {
+  const categoryCounts = useMemo(() => {
     return faqData.reduce((accumulator, item) => {
       accumulator[item.category] = item.questions.length
       return accumulator

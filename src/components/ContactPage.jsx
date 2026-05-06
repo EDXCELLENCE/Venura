@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import { Mail, MapPin, Phone, Send, AlertCircle, Clock3, Sparkles, MessageCircle, ShieldCheck, CheckCircle2 } from 'lucide-react'
 import { Toaster } from 'react-hot-toast'
 import toast from 'react-hot-toast'
@@ -6,10 +6,10 @@ import Header from './Header'
 import Footer from './Footer'
 
 export default function ContactPage() {
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
-  const [isSubmitting, setIsSubmitting] = React.useState(false)
-  const [activeFaq, setActiveFaq] = React.useState(0)
-  const [values, setValues] = React.useState({
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [activeFaq, setActiveFaq] = useState(0)
+  const [values, setValues] = useState({
     fullName: '',
     email: '',
     phone: '',
@@ -20,9 +20,9 @@ export default function ContactPage() {
     timeline: 'Within 1 month',
     message: '',
   })
-  const [errors, setErrors] = React.useState({})
+  const [errors, setErrors] = useState({})
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.title = 'Contact | Venura'
   }, [])
 
