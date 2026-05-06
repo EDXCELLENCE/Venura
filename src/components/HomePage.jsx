@@ -1,55 +1,43 @@
 import React from 'react'
-import { Toaster } from 'react-hot-toast'
-import toast from 'react-hot-toast'
 import Header from './Header'
+import ProgramsSection from './ProgramsSection'
 import HeroSection from './HeroSection'
-import TrustedBySection from './TrustedBySection'
 import WhyVenuraSection from './WhyVenuraSection'
 import LearningPathsSection from './LearningPathsSection'
 import LearningPyramidSection from './LearningPyramidSection'
+import TestimonialsSection from './TestimonialsSection'
 import CTASection from './CTASection'
 import Footer from './Footer'
 
 export default function HomePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
 
-  const handleNavClick = (e, label) => {
-    e.preventDefault()
-    toast.success(`${label} - Coming Soon!`, {
-      duration: 3000,
-      position: 'top-center',
-      style: {
-        background: '#0A2342',
-        color: '#fff',
-        fontWeight: 'bold',
-      },
-      iconTheme: {
-        primary: '#FF7A00',
-        secondary: '#fff',
-      },
-    })
+  const handleLogoClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setMobileMenuOpen(false)
+  }
+
+  const handleNavClick = (e) => {
+    if (e) e.preventDefault()
     setMobileMenuOpen(false)
   }
 
   return (
     <div className="w-full">
-      <Toaster />
-      
-      <Header 
+      <Header
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
         handleNavClick={handleNavClick}
+        handleLogoClick={handleLogoClick}
       />
       
       <HeroSection />
-      
-      <TrustedBySection />
-      
       <WhyVenuraSection />
-      
       <LearningPathsSection />
+      <ProgramsSection />
       
       <LearningPyramidSection />
+      <TestimonialsSection />
       
       <CTASection />
       

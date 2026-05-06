@@ -10,11 +10,18 @@ export default function WhyVenuraSection() {
     { icon: '🚀', title: 'Startup Launch Support', desc: 'Pitch ideas, gain mentorship, and access startup ecosystems.' },
   ]
 
+  const stats = [
+    { icon: '⭐', value: '4.9/5', label: 'Student Reviews' },
+    { icon: '🎯', value: '95%', label: 'Success Rate' },
+    { icon: '🚀', value: '2000+', label: 'Career Transitions' },
+    { icon: '💰', value: '150%', label: 'Average Salary Hike' },
+  ];
+
   return (
-    <section className="relative bg-white py-16 text-[#0A2342] border-t-2 border-[#0A2342]" style={{ backgroundImage: 'url("/image copy 2.png")', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+    <section className="relative bg-white py-14 md:py-16 text-[#0A2342] border-t-2 border-[#0A2342]">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="mb-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-extrabold">
+          <h2 className="text-3xl md:text-4xl font-extrabold">
             Why <span className="text-[#FF7A00]">Venura</span> Stands Out
           </h2>
           <div className="w-32 h-1 bg-gradient-to-r from-transparent via-[#FF7A00] to-transparent mx-auto mt-4"></div>
@@ -22,6 +29,21 @@ export default function WhyVenuraSection() {
         <p className="text-center text-lg text-[#0A2342]/70 max-w-2xl mx-auto mb-10">
           We merge AI-powered learning, mentorship, and real-world experience to build future-ready professionals.
         </p>
+
+        {/* Stats Row */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+          {stats.map((stat, idx) => (
+            <div
+              key={idx}
+              className="bg-gradient-to-b from-[#0A2342] to-[#0A2342]/90 rounded-2xl p-8 flex flex-col items-center justify-center text-white border-2 border-[#FF7A00] shadow-md min-h-[120px]"
+              style={{ borderColor: idx === 0 ? '#fff' : '#FF7A00' }}
+            >
+              <div className="text-3xl mb-2">{stat.icon}</div>
+              <div className="text-3xl font-bold mb-1" style={{ color: '#FF7A00' }}>{stat.value}</div>
+              <div className="text-base opacity-90">{stat.label}</div>
+            </div>
+          ))}
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {features.map((item) => (

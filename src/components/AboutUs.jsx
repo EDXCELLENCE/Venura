@@ -4,6 +4,7 @@ import { Briefcase, Target, Users, BookOpen, Award, Globe } from "lucide-react";
 import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import Header from "./Header";
+import Footer from "./Footer";
 
 export default function AboutUs() {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
@@ -64,10 +65,10 @@ export default function AboutUs() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          Venura — Building a Global EdTech Ecosystem
+          Venura — Building a Global Tech Ecosystem
         </motion.h1>
         <p className="mt-8 text-xl max-w-3xl mx-auto px-4">
-          Venura is a global EdTech brand redefining how learners worldwide gain future‑ready skills. We combine world‑class education, real internships, and global mentorship to create confident professionals prepared for international careers.
+          Venura is a global Tech brand redefining how learners worldwide gain future‑ready skills. We combine world‑class education, real internships, and global mentorship to create confident professionals prepared for international careers.
         </p>
       </section>
 
@@ -221,11 +222,16 @@ export default function AboutUs() {
             Whether you're a student, mentor, or hiring partner — there's a
             place for you in our ecosystem.
           </p>
-          <Button className="px-12 py-7 rounded-2xl text-lg bg-white text-[#0A2342] hover:bg-gray-100 font-bold">
-            Conatct us
+          <Button
+            className="px-12 py-7 rounded-2xl text-lg bg-white text-[#0A2342] hover:bg-gray-100 font-bold"
+            onClick={() => window.location.href = '/contact'}
+          >
+            Contact Us
           </Button>
         </div>
       </section>
+
+      <Footer handleNavClick={handleNavClick} />
     </div>
   );
 }

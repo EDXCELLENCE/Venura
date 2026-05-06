@@ -11,7 +11,8 @@ export default function CTASection() {
   ]
 
   return (
-    <section className="relative py-24 bg-gradient-to-br from-[#0A2342] via-[#0A2342]/95 to-[#0A2342] text-white overflow-hidden border-t-4 border-[#FF7A00]">
+    <section className="relative py-14 md:py-16 bg-gradient-to-br from-[#0A2342] via-[#0A2342]/95 to-[#0A2342] text-white overflow-hidden border-t-2 border-[#0A2342]">
+      <div className="absolute top-0 left-0 right-0 h-px bg-white/20"></div>
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,122,0,0.1),transparent_50%)]"></div>
       </div>
@@ -20,7 +21,7 @@ export default function CTASection() {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
           {/* LEFT TEXT */}
           <div className="lg:w-1/2">
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
+            <h2 className="text-3xl md:text-4xl font-extrabold mb-6 leading-tight">
               Start Your <span className="text-[#FF7A00]">Journey</span> with Venura
             </h2>
             <div className="w-32 h-1 bg-gradient-to-r from-transparent via-[#FF7A00] to-transparent mb-6"></div>
