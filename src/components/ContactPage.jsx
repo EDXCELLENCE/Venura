@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Mail, MapPin, Phone, Send, AlertCircle, Clock3, Sparkles, MessageCircle, ShieldCheck, CheckCircle2 } from 'lucide-react'
+import { Mail, MapPin, Phone, Clock, CheckCircle2, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react'
+import { motion } from 'framer-motion'
 import { Toaster } from 'react-hot-toast'
 import toast from 'react-hot-toast'
 import Header from './Header'
@@ -8,17 +9,16 @@ import Footer from './Footer'
 export default function ContactPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [activeFaq, setActiveFaq] = useState(0)
+  const [successMessage, setSuccessMessage] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('general')
   const [values, setValues] = useState({
-    fullName: '',
+    name: '',
     email: '',
     phone: '',
-    whatsapp: '',
-    program: 'Full-Stack Development',
-    careerStage: 'Student',
-    preferredContact: 'WhatsApp',
-    timeline: 'Within 1 month',
+    subject: '',
     message: '',
+    consent: false,
   })
   const [errors, setErrors] = useState({})
 
@@ -37,40 +37,35 @@ export default function ContactPage() {
   }
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target
-    setValues((prev) => ({ ...prev, [name]: value }))
+    const { name, value, type, checked } = e.target
+    setValues((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value,
+    }))
     setErrors((prev) => ({ ...prev, [name]: '' }))
   }
 
   const validateForm = () => {
     const nextErrors = {}
 
-    if (!values.fullName.trim() || values.fullName.trim().length < 2) {
-      nextErrors.fullName = 'Name must be at least 2 characters'
+    if (!values.name.trim()) {
+      nextErrors.name = 'Full name is required'
     }
-
     if (!values.email.trim()) {
       nextErrors.email = 'Email is required'
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
       nextErrors.email = 'Enter a valid email address'
     }
-
-    if (values.phone && !/^[0-9\s\-+()]*$/.test(values.phone)) {
+    if (!values.phone.trim()) {
+      nextErrors.phone = 'Phone number is required'
+    } else if (!/^[0-9\s\-+()]*$/.test(values.phone)) {
       nextErrors.phone = 'Enter a valid phone number'
-    } else if (values.phone && values.phone.replace(/\D/g, '').length < 10) {
-      nextErrors.phone = 'Phone number must be at least 10 digits'
     }
-
-    if (values.whatsapp && !/^[0-9\s\-+()]*$/.test(values.whatsapp)) {
-      nextErrors.whatsapp = 'Enter a valid WhatsApp number'
-    } else if (values.whatsapp && values.whatsapp.replace(/\D/g, '').length < 10) {
-      nextErrors.whatsapp = 'WhatsApp number must be at least 10 digits'
-    }
-
     if (!values.message.trim()) {
       nextErrors.message = 'Message is required'
-    } else if (values.message.trim().length < 10) {
-      nextErrors.message = 'Message must be at least 10 characters'
+    }
+    if (!values.consent) {
+      nextErrors.consent = 'You must agree to be contacted'
     }
 
     setErrors(nextErrors)
@@ -82,18 +77,15 @@ export default function ContactPage() {
     if (!validateForm()) return
 
     setIsSubmitting(true)
+    setErrorMessage('')
     try {
-      const subject = encodeURIComponent(`Venura Contact: ${values.program}`)
+      const subject = encodeURIComponent(`Venura Contact: ${values.subject || 'General Inquiry'}`)
       const body = encodeURIComponent(
         [
-          `Name: ${values.fullName}`,
+          `Name: ${values.name}`,
           `Email: ${values.email}`,
-          `Phone: ${values.phone || 'N/A'}`,
-          `WhatsApp: ${values.whatsapp || 'N/A'}`,
-          `Program: ${values.program}`,
-          `Career Stage: ${values.careerStage}`,
-          `Preferred Contact: ${values.preferredContact}`,
-          `Timeline: ${values.timeline}`,
+          `Phone: ${values.phone}`,
+          `Subject: ${values.subject}`,
           '',
           'Message:',
           values.message,
@@ -101,63 +93,111 @@ export default function ContactPage() {
       )
 
       window.location.href = `mailto:info@venuratech.com?subject=${subject}&body=${body}`
-      toast.success('Opening your email app with the message draft.')
+      setSuccessMessage(true)
       setValues({
-        fullName: '',
+        name: '',
         email: '',
         phone: '',
-        whatsapp: '',
-        program: 'Full-Stack Development',
-        careerStage: 'Student',
-        preferredContact: 'WhatsApp',
-        timeline: 'Within 1 month',
+        subject: '',
         message: '',
+        consent: false,
       })
-      setErrors({})
-    } catch {
-      toast.error('Failed to send message. Please try again.')
+      setTimeout(() => setSuccessMessage(false), 5000)
+    } catch (error) {
+      setErrorMessage(error.message || 'Failed to submit form. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
   }
 
-  const fieldError = (name) => (
-    errors[name] ? (
-      <div className="flex items-center gap-1 mt-1 text-red-600 text-xs">
-        <AlertCircle className="w-3.5 h-3.5" />
-        <span>{errors[name]}</span>
-      </div>
-    ) : null
-  )
-
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText('info@venuratech.com')
-      toast.success('Email copied to clipboard')
-    } catch {
-      toast.error('Could not copy email')
-    }
-  }
-
-  const faqs = [
+  const contactOptions = [
     {
-      q: 'How quickly will someone respond?',
-      a: 'Our admissions team usually replies within 2-6 working hours. For late-night requests, you will receive a response the next business morning.',
+      icon: <Phone className="w-6 h-6" />,
+      title: 'Customer Support',
+      details: '+91 7093769898',
+      description: '24/7 Technical Support',
+      color: 'bg-blue-500',
     },
     {
-      q: 'Can I get program guidance before enrolling?',
-      a: 'Yes. We provide a free guidance call to map your background, goals, and best-fit program before you commit.',
+      icon: <Mail className="w-6 h-6" />,
+      title: 'Business Inquiries',
+      details: 'contact@venuratech.com',
+      description: 'Response within 2 hours',
+      color: 'bg-purple-500',
     },
     {
-      q: 'Do you support working professionals?',
-      a: 'Absolutely. We have weekday evening and weekend options, plus recorded access so you can learn with flexibility.',
+      icon: <Linkedin className="w-6 h-6" />,
+      title: 'Partnerships',
+      details: 'partners@venuratech.com',
+      description: 'Strategic partnerships',
+      color: 'bg-green-500',
+    },
+    {
+      icon: <Mail className="w-6 h-6" />,
+      title: 'Careers',
+      details: 'careers@venuratech.com',
+      description: 'Join our team',
+      color: 'bg-[#FF7A00]',
     },
   ]
 
-  return (
-    <div className="min-h-screen bg-white text-[#0A2342]">
-      <Toaster />
+  const services = [
+    {
+      title: 'Full-Stack Development',
+      description: 'Comprehensive development solutions',
+      icon: '💻',
+    },
+    {
+      title: 'AI & Machine Learning',
+      description: 'Intelligent systems & automation',
+      icon: '🤖',
+    },
+    {
+      title: 'Web Development',
+      description: 'Modern web applications',
+      icon: '🌐',
+    },
+    {
+      title: 'Mobile Apps',
+      description: 'iOS & Android development',
+      icon: '📱',
+    },
+  ]
 
+  const faqs = {
+    general: [
+      {
+        question: 'What programs do you offer?',
+        answer: 'We offer Full-Stack Development, AI & ML, Data Science, Python, Java Backend, Cybersecurity, and specialized Ambassador programs.',
+      },
+      {
+        question: 'How do you ensure quality?',
+        answer: 'We follow industry best practices with mentor-guided projects, code reviews, and comprehensive assessments at each level.',
+      },
+      {
+        question: "What's the typical program duration?",
+        answer: 'Foundation level takes 4-8 weeks, Professional level 12-16 weeks, and Expert level 16-20 weeks with flexibility based on learning pace.',
+      },
+    ],
+    technical: [
+      {
+        question: 'What technologies do you teach?',
+        answer: 'We focus on popular tech stacks including React.js, Node.js, Python, Java, Machine Learning libraries, and cloud platforms like AWS.',
+      },
+      {
+        question: 'Do you provide internship support?',
+        answer: 'Yes, we provide internship pathways with startups and established companies as part of our placement support.',
+      },
+      {
+        question: 'Is there post-program support?',
+        answer: 'Absolutely. We provide lifetime access to learning materials, community support, and career guidance assistance.',
+      },
+    ],
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50 font-sans text-[#0A2342]">
+      <Toaster />
       <Header
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
@@ -165,257 +205,369 @@ export default function ContactPage() {
         handleLogoClick={handleLogoClick}
       />
 
-      <main className="pt-24">
-        <section className="relative pt-28 pb-16 px-6 bg-gradient-to-br from-[#0A2342] via-[#123861] to-[#0A2342] overflow-hidden border-b-2 border-[#0A2342]">
-          <div className="absolute inset-0 opacity-15">
-            <div className="absolute top-24 left-10 w-72 h-72 bg-[#FF7A00] rounded-full blur-3xl" />
-            <div className="absolute bottom-12 right-10 w-96 h-96 bg-[#FF7A00] rounded-full blur-3xl" />
-          </div>
+      {/* Hero Section */}
+      <div className="bg-gradient-to-r from-[#0A2342] to-[#1a3d5c] text-white pt-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl"
+          >
+            <div className="flex items-center space-x-2 mb-6">
+              <Phone className="w-5 h-5 text-[#FF7A00]" />
+              <span className="text-sm font-medium text-orange-100">24/7 Support Available</span>
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+              Get in Touch with<span className="block text-[#FF7A00]">Venura Today</span>
+            </h1>
+            <p className="text-lg text-slate-200 mb-8 max-w-2xl">
+              Have questions about our programs? Ready to start your learning journey? Our team is here to help you find the perfect program and path for your career goals.
+            </p>
+          </motion.div>
+        </div>
+      </div>
 
-          <div className="max-w-7xl mx-auto relative z-10 grid lg:grid-cols-2 gap-8 items-center">
-            <div>
-              <span className="inline-flex items-center gap-2 bg-white/10 border border-white/20 px-4 py-2 rounded-full text-slate-100 text-sm font-semibold mb-5">
-                <Sparkles className="w-4 h-4 text-[#FF7A00]" /> Admissions and Career Guidance Desk
-              </span>
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-5 leading-tight">
-                Let&apos;s Build Your
-                <span className="block text-[#FF7A00]">Career Roadmap</span>
-              </h1>
-              <p className="text-lg text-slate-200 max-w-2xl leading-relaxed mb-7">
-                Get expert help on program selection, batch planning, and job outcomes. Share your goals and we will suggest the fastest practical path.
-              </p>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-xl">
-                <div className="bg-white/10 border border-white/20 rounded-xl px-3 py-3 text-center">
-                  <p className="text-2xl font-bold text-[#FF7A00]">2-6h</p>
-                  <p className="text-xs text-slate-200">Avg. Response</p>
-                </div>
-                <div className="bg-white/10 border border-white/20 rounded-xl px-3 py-3 text-center">
-                  <p className="text-2xl font-bold text-[#FF7A00]">1:1</p>
-                  <p className="text-xs text-slate-200">Guidance Call</p>
-                </div>
-                <div className="bg-white/10 border border-white/20 rounded-xl px-3 py-3 text-center col-span-2 sm:col-span-1">
-                  <p className="text-2xl font-bold text-[#FF7A00]">100%</p>
-                  <p className="text-xs text-slate-200">No Spam Promise</p>
-                </div>
+      {/* Contact Options Cards */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 pb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+        >
+          {contactOptions.map((option, idx) => (
+            <motion.div
+              key={idx}
+              whileHover={{ y: -5 }}
+              className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-all duration-300"
+            >
+              <div className={`w-12 h-12 ${option.color} rounded-lg flex items-center justify-center mb-4 text-white`}>
+                {option.icon}
               </div>
+              <h3 className="text-lg font-semibold text-slate-900 mb-2">{option.title}</h3>
+              <p className="text-slate-800 font-medium mb-1">{option.details}</p>
+              <p className="text-sm text-slate-600">{option.description}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Main Content Area */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+          {/* Form Section */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:col-span-2 bg-white rounded-xl border border-slate-200 p-8 shadow-sm"
+          >
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold text-slate-900 mb-2">Send us a message</h2>
+              <p className="text-slate-600">We'll respond within 24 hours</p>
             </div>
 
-            <div className="bg-white/10 border border-white/20 rounded-3xl p-6 backdrop-blur-md shadow-2xl">
-              <h3 className="text-white text-xl font-bold mb-4">Quick Reach Options</h3>
-              <div className="space-y-3">
-                <a href="mailto:info@venuratech.com" className="flex items-center justify-between bg-white/10 hover:bg-white/20 transition border border-white/20 rounded-xl px-4 py-3">
-                  <div className="flex items-center gap-3">
-                    <Mail className="w-5 h-5 text-[#FF7A00]" />
-                    <div>
-                      <p className="text-white font-semibold text-sm">Email</p>
-                      <p className="text-slate-200 text-xs">info@venuratech.com</p>
-                    </div>
-                  </div>
-                  <span className="text-xs font-bold text-[#FF7A00]">Open</span>
-                </a>
-                <a href="tel:+917093769898" className="flex items-center justify-between bg-white/10 hover:bg-white/20 transition border border-white/20 rounded-xl px-4 py-3">
-                  <div className="flex items-center gap-3">
-                    <Phone className="w-5 h-5 text-[#FF7A00]" />
-                    <div>
-                      <p className="text-white font-semibold text-sm">Call</p>
-                      <p className="text-slate-200 text-xs">+91 7093769898</p>
-                    </div>
-                  </div>
-                  <span className="text-xs font-bold text-[#FF7A00]">Dial</span>
-                </a>
-                <button onClick={copyEmail} className="w-full text-left flex items-center justify-between bg-white/10 hover:bg-white/20 transition border border-white/20 rounded-xl px-4 py-3">
-                  <div className="flex items-center gap-3">
-                    <MessageCircle className="w-5 h-5 text-[#FF7A00]" />
-                    <div>
-                      <p className="text-white font-semibold text-sm">Copy Email</p>
-                      <p className="text-slate-200 text-xs">For quick sharing</p>
-                    </div>
-                  </div>
-                  <span className="text-xs font-bold text-[#FF7A00]">Copy</span>
-                </button>
+            {successMessage && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                className="bg-green-50 border-l-4 border-green-500 p-4 mb-6 rounded-lg"
+              >
+                <div className="flex items-center">
+                  <CheckCircle2 className="text-green-500 text-xl mr-3" />
+                  <p className="text-green-800 font-medium">Thank you for your message! We'll contact you shortly.</p>
+                </div>
+              </motion.div>
+            )}
+
+            {errorMessage && (
+              <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-6 rounded-lg">
+                <p className="text-red-800 font-medium">{errorMessage}</p>
               </div>
-            </div>
-          </div>
-        </section>
+            )}
 
-        <section className="py-12 md:py-14 px-6 bg-slate-50 border-b-2 border-[#0A2342]">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <aside className="lg:col-span-4 space-y-4">
-              <h2 className="text-3xl font-bold text-slate-900">Connect With Our Team</h2>
-              <p className="text-slate-600">Tell us where you are now and where you want to go. We will help map the right program and timeline.</p>
-
-              <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                <div className="flex items-center gap-3 mb-3">
-                  <Clock3 className="w-5 h-5 text-[#FF7A00]" />
-                  <p className="font-bold text-slate-900">Support Hours</p>
-                </div>
-                <p className="text-sm text-slate-700">Monday - Saturday: 9:30 AM - 8:30 PM</p>
-                <p className="text-sm text-slate-700">Sunday: 11:00 AM - 5:00 PM</p>
-              </div>
-
-              <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 mt-1 text-[#FF7A00]" />
-                  <div>
-                    <p className="font-bold text-slate-900 mb-1">Visit Us</p>
-                    <p className="text-sm text-slate-700">Koramangala, Bangalore, Karnataka 560034</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="rounded-2xl border border-[#0A2342]/15 bg-[#0A2342] text-white p-5 shadow-sm">
-                <div className="flex items-center gap-2 mb-2">
-                  <ShieldCheck className="w-5 h-5 text-[#FF7A00]" />
-                  <p className="font-bold">Privacy Promise</p>
-                </div>
-                <p className="text-sm text-slate-200">Your information is used only for counseling and program guidance. No unsolicited marketing.</p>
-              </div>
-
-              <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                <h3 className="text-lg font-bold text-slate-900 mb-3">What happens after you submit?</h3>
-                <div className="space-y-3 text-sm">
-                  <div className="flex gap-3"><CheckCircle2 className="w-4 h-4 mt-0.5 text-[#FF7A00]" /><p>Profile review and goals matching</p></div>
-                  <div className="flex gap-3"><CheckCircle2 className="w-4 h-4 mt-0.5 text-[#FF7A00]" /><p>Program and batch recommendation</p></div>
-                  <div className="flex gap-3"><CheckCircle2 className="w-4 h-4 mt-0.5 text-[#FF7A00]" /><p>Fee plan and next-step guidance</p></div>
-                </div>
-              </div>
-            </aside>
-
-            <div className="lg:col-span-8 rounded-3xl border border-slate-200 p-6 md:p-8 bg-white shadow-lg">
-              <div className="mb-6">
-                <h3 className="text-2xl font-bold text-slate-900">Request Personalized Guidance</h3>
-                <p className="text-sm text-slate-600 mt-1">Share a few details and our team will reach out with a tailored plan.</p>
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div>
-                    <label htmlFor="fullName" className="block text-sm font-semibold mb-1">Full Name</label>
-                    <input id="fullName" name="fullName" value={values.fullName} onChange={handleInputChange} placeholder="Enter your full name" className="w-full rounded-xl border border-slate-300 focus:border-[#FF7A00] focus:ring-2 focus:ring-[#FF7A00]/20 outline-none px-3 py-2.5" />
-                    {fieldError('fullName')}
-                  </div>
-
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-semibold mb-1">Email</label>
-                    <input id="email" name="email" type="email" value={values.email} onChange={handleInputChange} placeholder="Enter your email" className="w-full rounded-xl border border-slate-300 focus:border-[#FF7A00] focus:ring-2 focus:ring-[#FF7A00]/20 outline-none px-3 py-2.5" />
-                    {fieldError('email')}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-semibold mb-1">Phone</label>
-                    <input id="phone" name="phone" value={values.phone} onChange={handleInputChange} placeholder="Enter phone number" className="w-full rounded-xl border border-slate-300 focus:border-[#FF7A00] focus:ring-2 focus:ring-[#FF7A00]/20 outline-none px-3 py-2.5" />
-                    {fieldError('phone')}
-                  </div>
-
-                  <div>
-                    <label htmlFor="whatsapp" className="block text-sm font-semibold mb-1">WhatsApp</label>
-                    <input id="whatsapp" name="whatsapp" value={values.whatsapp} onChange={handleInputChange} placeholder="Enter WhatsApp number" className="w-full rounded-xl border border-slate-300 focus:border-[#FF7A00] focus:ring-2 focus:ring-[#FF7A00]/20 outline-none px-3 py-2.5" />
-                    {fieldError('whatsapp')}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div>
-                    <label htmlFor="program" className="block text-sm font-semibold mb-1">Program Interest</label>
-                    <select id="program" name="program" value={values.program} onChange={handleInputChange} className="w-full rounded-xl border border-slate-300 focus:border-[#FF7A00] focus:ring-2 focus:ring-[#FF7A00]/20 outline-none px-3 py-2.5">
-                      <option>AI/ML</option>
-                      <option>Data Science</option>
-                      <option>Full-Stack Development</option>
-                      <option>Java Backend</option>
-                      <option>Cybersecurity</option>
-                      <option>Python</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label htmlFor="careerStage" className="block text-sm font-semibold mb-1">Career Stage</label>
-                    <select id="careerStage" name="careerStage" value={values.careerStage} onChange={handleInputChange} className="w-full rounded-xl border border-slate-300 focus:border-[#FF7A00] focus:ring-2 focus:ring-[#FF7A00]/20 outline-none px-3 py-2.5">
-                      <option>Student</option>
-                      <option>Working Professional</option>
-                      <option>Career Switcher</option>
-                      <option>Freelancer</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div>
-                    <label htmlFor="preferredContact" className="block text-sm font-semibold mb-1">Preferred Contact</label>
-                    <select id="preferredContact" name="preferredContact" value={values.preferredContact} onChange={handleInputChange} className="w-full rounded-xl border border-slate-300 focus:border-[#FF7A00] focus:ring-2 focus:ring-[#FF7A00]/20 outline-none px-3 py-2.5">
-                      <option>WhatsApp</option>
-                      <option>Phone Call</option>
-                      <option>Email</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label htmlFor="timeline" className="block text-sm font-semibold mb-1">When do you want to start?</label>
-                    <select id="timeline" name="timeline" value={values.timeline} onChange={handleInputChange} className="w-full rounded-xl border border-slate-300 focus:border-[#FF7A00] focus:ring-2 focus:ring-[#FF7A00]/20 outline-none px-3 py-2.5">
-                      <option>Immediately</option>
-                      <option>Within 1 month</option>
-                      <option>1-3 months</option>
-                      <option>Just exploring</option>
-                    </select>
-                  </div>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Full Name *</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={values.name}
+                    onChange={handleInputChange}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#FF7A00] focus:border-[#FF7A00] transition-colors ${
+                      errors.name ? 'border-red-500' : 'border-slate-300'
+                    }`}
+                    placeholder="Your name"
+                  />
+                  {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name}</p>}
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-semibold mb-1">What are your goals?</label>
-                  <textarea id="message" name="message" rows="5" value={values.message} onChange={handleInputChange} placeholder="Example: I want to transition from support to data science in 4 months and need a roadmap." className="w-full rounded-xl border border-slate-300 focus:border-[#FF7A00] focus:ring-2 focus:ring-[#FF7A00]/20 outline-none px-3 py-2.5" />
-                  {fieldError('message')}
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Email Address *</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={values.email}
+                    onChange={handleInputChange}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#FF7A00] focus:border-[#FF7A00] transition-colors ${
+                      errors.email ? 'border-red-500' : 'border-slate-300'
+                    }`}
+                    placeholder="your@email.com"
+                  />
+                  {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email}</p>}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Phone Number *</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={values.phone}
+                    onChange={handleInputChange}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#FF7A00] focus:border-[#FF7A00] transition-colors ${
+                      errors.phone ? 'border-red-500' : 'border-slate-300'
+                    }`}
+                    placeholder="+91 XXXXXXXXXX"
+                  />
+                  {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone}</p>}
                 </div>
 
-                <div className="flex flex-wrap gap-3 items-center">
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="inline-flex items-center gap-2 bg-[#FF7A00] text-white font-bold px-7 py-3 rounded-xl hover:bg-[#e56d00] disabled:opacity-60"
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Subject</label>
+                  <select
+                    name="subject"
+                    value={values.subject}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#FF7A00] focus:border-[#FF7A00] transition-colors bg-white"
                   >
-                    <Send className="w-4 h-4" />
-                    {isSubmitting ? 'Sending...' : 'Request Guidance'}
-                  </button>
-                  <p className="text-xs text-slate-500">By submitting, you agree to be contacted for counseling and admissions support.</p>
+                    <option value="">Select a subject</option>
+                    <option value="program-inquiry">Program Inquiry</option>
+                    <option value="internship">Internship Program</option>
+                    <option value="careers">Career Opportunities</option>
+                    <option value="partnership">Partnership</option>
+                    <option value="support">Technical Support</option>
+                    <option value="other">Other</option>
+                  </select>
                 </div>
-              </form>
-            </div>
-          </div>
-        </section>
+              </div>
 
-        <section className="py-12 md:py-14 px-6 bg-white border-b border-slate-200">
-          <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 items-start">
-            <div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-4">Frequently Asked Questions</h3>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Your Message *</label>
+                <textarea
+                  name="message"
+                  value={values.message}
+                  onChange={handleInputChange}
+                  rows="5"
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#FF7A00] focus:border-[#FF7A00] transition-colors ${
+                    errors.message ? 'border-red-500' : 'border-slate-300'
+                  }`}
+                  placeholder="Tell us how we can help you..."
+                />
+                {errors.message && <p className="text-red-600 text-sm mt-1">{errors.message}</p>}
+              </div>
+
+              <div className="flex items-start space-x-3 py-4">
+                <input
+                  type="checkbox"
+                  id="consent"
+                  name="consent"
+                  checked={values.consent}
+                  onChange={handleInputChange}
+                  className="mt-1 w-4 h-4 text-[#FF7A00] border-slate-300 rounded focus:ring-[#FF7A00]"
+                />
+                <label htmlFor="consent" className="text-sm text-slate-700">
+                  I agree to be contacted by Venura regarding my inquiry. Your information will be used in accordance with our Privacy Policy.
+                </label>
+              </div>
+              {errors.consent && <p className="text-red-600 text-sm">{errors.consent}</p>}
+
+              <motion.button
+                type="submit"
+                disabled={isSubmitting}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className={`w-full bg-[#FF7A00] text-white font-semibold py-3 px-6 rounded-lg transition-all ${
+                  isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-[#ff8f2a]'
+                }`}
+              >
+                {isSubmitting ? (
+                  <span className="flex items-center justify-center">
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      />
+                    </svg>
+                    Sending...
+                  </span>
+                ) : (
+                  'Send Message'
+                )}
+              </motion.button>
+            </form>
+          </motion.div>
+
+          {/* Sidebar */}
+          <div className="space-y-6">
+            {/* Services */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm"
+            >
+              <h3 className="text-xl font-bold text-slate-900 mb-4">Our Programs</h3>
               <div className="space-y-3">
-                {faqs.map((item, index) => (
-                  <button
-                    key={item.q}
-                    onClick={() => setActiveFaq(index)}
-                    className={`w-full text-left rounded-xl border p-4 transition ${activeFaq === index ? 'border-[#FF7A00] bg-orange-50/40' : 'border-slate-200 bg-white hover:border-slate-300'}`}
-                  >
-                    <p className="font-semibold text-slate-900">{item.q}</p>
-                    {activeFaq === index && <p className="text-sm text-slate-600 mt-2">{item.a}</p>}
-                  </button>
+                {services.map((service, idx) => (
+                  <div key={idx} className="flex items-center p-3 hover:bg-slate-50 rounded-lg transition-colors">
+                    <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center mr-3">
+                      <span className="text-lg">{service.icon}</span>
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-slate-900">{service.title}</h4>
+                      <p className="text-sm text-slate-600">{service.description}</p>
+                    </div>
+                  </div>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
-            <div className="rounded-2xl bg-gradient-to-br from-[#0A2342] to-[#123861] border border-[#0A2342] p-6 text-white">
-              <h3 className="text-2xl font-bold mb-3">Prefer a Direct Admission Call?</h3>
-              <p className="text-slate-200 mb-5">Our counselor can help you choose the best-fit program based on your current profile and target role.</p>
-              <div className="flex flex-wrap gap-3">
-                <a href="tel:+917093769898" className="inline-flex items-center gap-2 bg-[#FF7A00] hover:bg-[#e56d00] text-white font-bold px-6 py-3 rounded-xl transition">
-                  <Phone className="w-4 h-4" /> Call Now
-                </a>
-                <a href="mailto:info@venuratech.com" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold px-6 py-3 rounded-xl transition">
-                  <Mail className="w-4 h-4" /> Email Team
-                </a>
+            {/* Get in Touch */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="bg-[#0A2342] text-white rounded-xl p-6 shadow-sm"
+            >
+              <h3 className="text-xl font-bold mb-4">Get in Touch</h3>
+              <div className="space-y-4">
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-3">
+                    <Phone className="text-white w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-orange-100">Call Us</p>
+                    <p className="font-semibold">+91 7093769898</p>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-3">
+                    <Clock className="text-white w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-orange-100">Business Hours</p>
+                    <p className="font-semibold">Mon-Sat: 9AM-8PM</p>
+                  </div>
+                </div>
               </div>
-            </div>
+            </motion.div>
+
+            {/* Follow Us */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm"
+            >
+              <h3 className="text-xl font-bold text-slate-900 mb-4">Follow Us</h3>
+              <div className="flex space-x-3">
+                {[
+                  { icon: Facebook, color: 'bg-blue-600 hover:bg-blue-700' },
+                  { icon: Twitter, color: 'bg-sky-500 hover:bg-sky-600' },
+                  { icon: Linkedin, color: 'bg-blue-700 hover:bg-blue-800' },
+                  { icon: Instagram, color: 'bg-pink-600 hover:bg-pink-700' },
+                ].map((social, idx) => (
+                  <motion.a
+                    key={idx}
+                    href="#"
+                    whileHover={{ y: -3 }}
+                    className={`w-10 h-10 ${social.color} rounded-lg flex items-center justify-center text-white transition-colors`}
+                  >
+                    <social.icon className="w-5 h-5" />
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
           </div>
-        </section>
-      </main>
+        </div>
+
+        {/* FAQ Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mb-16"
+        >
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-slate-900 mb-2">Frequently Asked Questions</h2>
+            <p className="text-slate-600">Find answers to common questions</p>
+          </div>
+
+          <div className="flex space-x-2 mb-6 overflow-x-auto pb-2">
+            {Object.keys(faqs).map((key) => (
+              <button
+                key={key}
+                onClick={() => setSelectedCategory(key)}
+                className={`px-4 py-2 rounded-lg font-medium text-sm transition-colors whitespace-nowrap ${
+                  selectedCategory === key
+                    ? 'bg-[#FF7A00] text-white'
+                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}
+              >
+                {key.charAt(0).toUpperCase() + key.slice(1)}
+              </button>
+            ))}
+          </div>
+
+          <div className="space-y-4">
+            {faqs[selectedCategory].map((faq, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.1 }}
+                className="bg-white border border-slate-200 rounded-xl p-6 hover:border-[#FF7A00] transition-colors"
+              >
+                <h3 className="font-semibold text-slate-900 mb-3">{faq.question}</h3>
+                <p className="text-slate-700">{faq.answer}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* CTA Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.7 }}
+          className="bg-gradient-to-r from-[#0A2342] to-[#1a3d5c] rounded-2xl text-white p-8 md:p-12 text-center mb-8"
+        >
+          <h2 className="text-3xl font-bold mb-4">Ready to Start Your Journey?</h2>
+          <p className="text-slate-300 mb-8 max-w-2xl mx-auto">
+            Let's discuss how Venura can help you build a successful career in tech with our expert-led programs and industry partnerships.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-[#FF7A00] text-white hover:bg-[#ff8f2a] font-semibold py-3 px-8 rounded-lg"
+            >
+              Schedule a Consultation
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-transparent border-2 border-white text-white hover:bg-white/10 font-semibold py-3 px-8 rounded-lg"
+            >
+              Explore Programs
+            </motion.button>
+          </div>
+        </motion.div>
+      </div>
 
       <Footer handleNavClick={handleNavClick} />
     </div>
