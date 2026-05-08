@@ -17,7 +17,7 @@ export default function PlanComparisonPage() {
     return (
       <div className="w-full min-h-screen bg-white">
         <Header mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} handleNavClick={handleNavClick} handleLogoClick={() => setMobileMenuOpen(false)} />
-        <main className="pt-28 px-6 max-w-5xl mx-auto text-center">
+        <main className="px-6 max-w-5xl mx-auto text-center" style={{ paddingTop: 'calc(var(--site-header-offset, 4rem) + 1.5rem)' }}>
           <h1 className="text-3xl font-bold text-[#0A2342] mb-4">Plan Comparison</h1>
           <p className="text-slate-600 mb-8">No comparison data found. Open this page from a program details page.</p>
           <Link to="/programs" className="bg-[#FF7A00] hover:bg-[#e56d00] text-white font-bold py-3 px-8 rounded-xl">Back to Programs</Link>
@@ -31,7 +31,7 @@ export default function PlanComparisonPage() {
     <div className="w-full min-h-screen bg-white">
       <Header mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} handleNavClick={handleNavClick} handleLogoClick={() => setMobileMenuOpen(false)} />
 
-      <main className="pt-28 pb-14 px-6 bg-slate-50 min-h-[80vh]">
+      <main className="pb-14 px-6 bg-slate-50 min-h-[80vh]" style={{ paddingTop: 'calc(var(--site-header-offset, 4rem) + 1.5rem)' }}>
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8">
             <h1 className="text-3xl md:text-4xl font-extrabold text-[#0A2342] mb-2">{programData.title} Plan Comparison</h1>

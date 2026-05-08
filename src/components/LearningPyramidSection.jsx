@@ -18,7 +18,7 @@ export default function LearningPyramidSection() {
             Trusted by Thousands of Learners &amp; Top Companies
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#FF7A00] to-transparent mx-auto mb-3" />
-          <p className="text-[#0A2342]/60 text-lg">Industry-recognised certifications and a proven track record</p>
+          <p className="text-[#0A2342]/60 text-lg">Industry-recognized certifications and a proven track record</p>
         </div>
 
         {/* Trust badges */}

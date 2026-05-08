@@ -516,7 +516,7 @@ export default function FAQPage() {
         handleLogoClick={handleLogoClick}
       />
 
-      <main className="pt-24">
+      <main style={{ paddingTop: 'var(--site-header-offset, 4rem)' }}>
         <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(255,122,0,0.18),transparent_28%),linear-gradient(135deg,#071a33_0%,#0A2342_38%,#123861_100%)] px-6 pb-20 pt-32">
           <div className="absolute inset-0 opacity-20">
             <div className="absolute left-10 top-16 h-72 w-72 rounded-full bg-[#FF7A00] blur-3xl" />

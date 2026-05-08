@@ -59,7 +59,7 @@ export default function AboutUs() {
       />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-[#0A2342] to-[#FF7A00] text-white py-24 text-center mt-16">
+      <section className="bg-gradient-to-r from-[#0A2342] to-[#FF7A00] text-white py-24 text-center mt-16" style={{ marginTop: 'var(--site-header-offset, 4rem)' }}>
         <motion.h1
           className="text-5xl font-bold"
           initial={{ opacity: 0, y: 30 }}

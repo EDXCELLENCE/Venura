@@ -62,7 +62,7 @@ export default function ProgramsSection() {
         {/* Header */}
         <div className="text-center mb-14">
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#0A2342] mb-3">
-            FutureX <span className="text-[#FF7A00]">3-Layer</span> Learning Pyramid
+            Venura <span className="text-[#FF7A00]">3-Layer</span> Learning Pyramid
           </h2>
           <div className="w-32 h-1 bg-gradient-to-r from-transparent via-[#FF7A00] to-transparent mx-auto mb-4" />
           <p className="text-[#0A2342]/60 text-lg max-w-2xl mx-auto">

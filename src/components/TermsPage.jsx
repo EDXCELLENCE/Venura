@@ -12,7 +12,7 @@ export default function TermsPage() {
   return (
     <div className="w-full min-h-screen bg-white">
       <Header mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} handleNavClick={handleNavClick} handleLogoClick={() => setMobileMenuOpen(false)} />
-      <main className="pt-28 pb-16 px-6">
+      <main className="pb-16 px-6" style={{ paddingTop: 'calc(var(--site-header-offset, 4rem) + 1.5rem)' }}>
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold text-[#0A2342] mb-6">Terms and Conditions</h1>
           <div className="space-y-5 text-slate-700 leading-relaxed">

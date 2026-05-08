@@ -30,9 +30,9 @@ export default function CTASection() {
             </p>
 
             <ul className="text-slate-300 space-y-3 mb-10">
-              <li>• 3-Level learning • Mentor support</li>
-              <li>• Skill • Project • Internship certificates</li>
-              <li>• Internship pathways with startups/NGOs</li>
+              <li>• Three-level structured learning with dedicated mentor support</li>
+              <li>• Skill, project, and internship certifications</li>
+              <li>• Internship pathways with startup and NGO partners</li>
             </ul>
 
             {/* CTA Buttons */}

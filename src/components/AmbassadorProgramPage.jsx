@@ -183,7 +183,10 @@ export default function AmbassadorProgramPage() {
         handleLogoClick={handleLogoClick}
       />
 
-      <section className="relative overflow-hidden bg-[#091a31] px-6 pb-20 pt-32 text-white">
+      <section
+        style={{ paddingTop: 'calc(var(--site-header-offset, 5.5rem) + 2rem)' }}
+        className="relative overflow-hidden bg-[#091a31] px-6 pb-20 text-white"
+      >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,122,0,0.28),_transparent_28%),radial-gradient(circle_at_85%_20%,_rgba(255,255,255,0.08),_transparent_18%),linear-gradient(135deg,#091a31_0%,#0b2748_55%,#10243b_100%)]" />
         <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,0.6)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.6)_1px,transparent_1px)] [background-size:42px_42px]" />
         <div className="absolute left-[8%] top-20 h-40 w-40 rounded-full bg-[#FF7A00]/40 blur-3xl" />

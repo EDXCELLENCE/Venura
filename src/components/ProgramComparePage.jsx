@@ -196,7 +196,7 @@ export default function ProgramComparePage() {
         handleLogoClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false) }}
       />
 
-      <main className="pt-24">
+      <main style={{ paddingTop: 'calc(var(--site-header-offset, 4rem) + 1rem)' }}>
         {/* Hero */}
         <section className="relative pt-14 pb-12 px-6 bg-gradient-to-br from-[#0A2342] via-[#1a3a5f] to-[#0A2342]">
           <div className="max-w-7xl mx-auto relative z-10">

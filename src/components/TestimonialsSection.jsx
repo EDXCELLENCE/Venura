@@ -9,7 +9,7 @@ const testimonials = [
     location: 'Bangalore',
     image: 'https://ui-avatars.com/api/?name=Priya+Sharma&background=FF7A00&color=fff&size=200',
     rating: 5,
-    text: "Venura's Full-Stack program transformed my career. The hands-on projects and mentorship helped me land my dream job at Google. The curriculum was perfectly aligned with industry needs.",
+    text: "Venura's Full-Stack program transformed my career. The project-first training and mentorship helped me secure my role at Google.",
     program: 'Full-Stack Development',
   },
   {
@@ -19,7 +19,7 @@ const testimonials = [
     location: 'Hyderabad',
     image: 'https://ui-avatars.com/api/?name=Rahul+Verma&background=0A2342&color=fff&size=200',
     rating: 5,
-    text: "The Data Science program gave me practical skills I could apply immediately. Real-world projects and personalized mentorship made all the difference. Now I'm building ML models at Microsoft!",
+    text: "The Data Science program gave me practical skills I could apply immediately. Real-world projects and mentorship helped me transition into Microsoft.",
     program: 'Data Science',
   },
   {
@@ -29,7 +29,7 @@ const testimonials = [
     location: 'Mumbai',
     image: 'https://ui-avatars.com/api/?name=Anjali+Patel&background=FF7A00&color=fff&size=200',
     rating: 5,
-    text: 'From zero AI knowledge to building production-ready ML models in 3 months! The AI & ML program is comprehensive, practical, and career-focused. Best investment in my career.',
+    text: 'From zero AI knowledge to building production-ready ML models in 3 months. The AI & ML track is practical, structured, and career-focused.',
     program: 'AI & ML',
   },
   {
@@ -39,7 +39,7 @@ const testimonials = [
     location: 'Delhi',
     image: 'https://ui-avatars.com/api/?name=Arjun+Singh&background=0A2342&color=fff&size=200',
     rating: 5,
-    text: 'The Java Backend program covered everything from Spring Boot to microservices. The real internship opportunity helped me gain experience before I even completed the course. Highly recommended!',
+    text: 'The Java Backend track covered Spring Boot through microservices. Internship exposure helped me gain real experience before course completion.',
     program: 'Java Backend',
   },
   {
@@ -49,7 +49,7 @@ const testimonials = [
     location: 'Pune',
     image: 'https://ui-avatars.com/api/?name=Sneha+Reddy&background=FF7A00&color=fff&size=200',
     rating: 5,
-    text: 'The Cybersecurity program gave me hands-on experience with real security tools and scenarios. The mentors are industry experts who provided invaluable guidance. Now securing systems at Cisco!',
+    text: 'The Cybersecurity program gave me hands-on exposure to real tools and scenarios. Mentor guidance helped me confidently move into Cisco.',
     program: 'Cybersecurity',
   },
   {
@@ -59,7 +59,7 @@ const testimonials = [
     location: 'Noida',
     image: 'https://ui-avatars.com/api/?name=Vikram+Desai&background=0A2342&color=fff&size=200',
     rating: 5,
-    text: 'Amazing learning experience! The project-based approach and career support team helped me transition from a non-tech background to a developer role. Forever grateful to the Venura team.',
+    text: 'A strong learning experience. The project-based model and career support helped me transition from a non-tech background into development.',
     program: 'Full-Stack Development',
   },
 ]
