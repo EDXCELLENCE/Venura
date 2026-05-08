@@ -323,7 +323,7 @@ export default function ProgramComparePage() {
 
             {/* CTA */}
             <div className="mt-12 text-center bg-gradient-to-br from-[#0A2342] to-[#1a3a5f] rounded-2xl p-8 text-white">
-              <h2 className="text-3xl font-bold mb-4">Still Can't Decide?</h2>
+              <h2 className="text-3xl font-bold mb-4">Still Can&apos;t Decide?</h2>
               <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
                 Talk to our career counselor for personalized guidance based on your background and goals.
               </p>

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-export default function Footer({ handleNavClick }) {
+export default function Footer() {
   return (
     <footer className="bg-white text-slate-700 border-t-2 border-[#0A2342]">
       <div className="max-w-7xl mx-auto px-6 py-8">

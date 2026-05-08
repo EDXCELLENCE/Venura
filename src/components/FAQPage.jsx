@@ -593,7 +593,7 @@ export default function FAQPage() {
           </div>
         </section>
 
-        <section className="border-y border-[#0A2342]/10 bg-white px-6 py-10">
+        <section className="border-t-2 border-[#0A2342] bg-[#f6f8fb] px-6 py-10">
           <div className="mx-auto max-w-7xl">
             <div className="mb-6 flex items-center justify-between gap-4 flex-wrap">
               <div>

@@ -26,6 +26,7 @@ export default function Header({ mobileMenuOpen, setMobileMenuOpen, handleNavCli
   const [studentName, setStudentName] = useState(null)
   const [profileOpen, setProfileOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const navTypographyClass = 'text-[14px] md:text-sm font-semibold tracking-[0.01em]'
 
   const navItems = [
     { path: '/', label: 'Home', icon: Home },
@@ -127,15 +128,15 @@ export default function Header({ mobileMenuOpen, setMobileMenuOpen, handleNavCli
   }
 
   return (
-    <header ref={headerRef} className="fixed block w-full z-50">
+    <header ref={headerRef} className="fixed top-0 left-0 right-0 block w-full z-50">
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.3 }}
         className={`transition-all duration-300 ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-lg border-b border-gray-300 shadow-lg'
-            : 'bg-white/95 backdrop-blur-sm border-b border-gray-300'
+            ? 'bg-white/95 backdrop-blur-lg border-b-2 border-[#0A2342]/20 shadow-lg'
+            : 'bg-white/95 backdrop-blur-sm border-b-2 border-[#0A2342]/20'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-0">
@@ -154,8 +155,8 @@ export default function Header({ mobileMenuOpen, setMobileMenuOpen, handleNavCli
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`flex ${item.bgColor || ''} items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                      active ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                    className={`flex ${item.bgColor || ''} items-center px-4 py-2 rounded-lg ${navTypographyClass} transition-all duration-200 ${
+                      active ? 'text-[#0A2342] bg-[#FF7A00]/10 border border-[#FF7A00]/30' : 'text-gray-700 hover:text-[#0A2342] hover:bg-[#0A2342]/5'
                     }`}
                   >
                     <span className="mr-2">
@@ -173,18 +174,18 @@ export default function Header({ mobileMenuOpen, setMobileMenuOpen, handleNavCli
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => setProfileOpen((prev) => !prev)}
-                      className="flex items-center space-x-3 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-xl px-4 py-2 hover:shadow-md transition-shadow"
+                      className="flex items-center space-x-3 bg-gradient-to-r from-[#0A2342]/5 to-[#FF7A00]/10 border border-[#0A2342]/15 rounded-xl px-4 py-2 hover:shadow-md transition-shadow"
                     >
                       <div className="relative">
-                        <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+                        <div className="w-8 h-8 bg-gradient-to-br from-[#0A2342] to-[#14345d] rounded-lg flex items-center justify-center">
                           <span className="text-white font-medium text-sm">{studentName.charAt(0).toUpperCase()}</span>
                         </div>
-                        <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white" />
+                        <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-[#FF7A00] rounded-full border-2 border-white" />
                       </div>
 
                       <div className="text-left">
                         <p className="text-sm font-medium text-gray-900 truncate max-w-[120px]">{studentName}</p>
-                        <p className="text-xs text-gray-500">Student</p>
+                        <p className="text-xs text-[#0A2342]/70">Student</p>
                       </div>
 
                       <ChevronDown className={`text-gray-400 transition-transform duration-200 ${profileOpen ? 'rotate-180' : ''}`} size={16} />
@@ -199,11 +200,11 @@ export default function Header({ mobileMenuOpen, setMobileMenuOpen, handleNavCli
                           transition={{ duration: 0.2 }}
                           className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 z-50 overflow-hidden"
                         >
-                          <div className="p-4 border-b border-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50">
+                          <div className="p-4 border-b border-gray-100 bg-gradient-to-r from-[#0A2342]/5 to-[#FF7A00]/10">
                             <div className="flex items-center space-x-3">
                               <div>
                                 <p className="font-medium text-gray-900">{studentName}</p>
-                                <p className="text-xs text-blue-600">Student Portal</p>
+                                <p className="text-xs text-[#0A2342]">Student Portal</p>
                               </div>
                             </div>
                           </div>
@@ -212,7 +213,7 @@ export default function Header({ mobileMenuOpen, setMobileMenuOpen, handleNavCli
                             <motion.button
                               whileHover={{ x: 5 }}
                               onClick={handleStudentDashboard}
-                              className="flex w-full items-center px-4 py-3 text-sm text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                              className="flex w-full items-center px-4 py-3 text-sm text-gray-700 rounded-lg hover:bg-[#0A2342]/5 transition-colors"
                             >
                               <LayoutDashboard className="mr-3 text-gray-400" size={16} />
                               Dashboard
@@ -221,7 +222,7 @@ export default function Header({ mobileMenuOpen, setMobileMenuOpen, handleNavCli
                             <motion.button
                               whileHover={{ x: 5 }}
                               onClick={handleStudentLogout}
-                              className="flex w-full items-center px-4 py-3 text-sm text-red-600 rounded-lg hover:bg-red-50 transition-colors"
+                              className="flex w-full items-center px-4 py-3 text-sm text-[#FF7A00] rounded-lg hover:bg-[#FF7A00]/10 transition-colors"
                             >
                               <LogOut className="mr-3" size={16} />
                               Sign Out
@@ -239,7 +240,7 @@ export default function Header({ mobileMenuOpen, setMobileMenuOpen, handleNavCli
                   <button
                     type="button"
                     onClick={handleStudentLogin}
-                    className="flex items-center bg-black rounded-3xl text-white px-5 py-2.5 font-medium"
+                    className="flex items-center bg-[#0A2342] hover:bg-[#14345d] rounded-3xl text-white px-5 py-2.5 font-medium transition-colors"
                   >
                     <LogIn className="mr-2" size={16} />
                     Student LogIn
@@ -251,7 +252,7 @@ export default function Header({ mobileMenuOpen, setMobileMenuOpen, handleNavCli
             <div className="md:hidden flex items-center">
               {studentName && (
                 <div className="mr-3">
-                  <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+                  <div className="w-8 h-8 bg-gradient-to-br from-[#0A2342] to-[#14345d] rounded-lg flex items-center justify-center">
                     <span className="text-white font-medium text-xs">{studentName.charAt(0).toUpperCase()}</span>
                   </div>
                 </div>
@@ -260,7 +261,7 @@ export default function Header({ mobileMenuOpen, setMobileMenuOpen, handleNavCli
               <motion.button
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setMobileMenuOpen((prev) => !prev)}
-                className="p-2 text-gray-700 hover:text-blue-600 rounded-lg hover:bg-gray-100"
+                className="p-2 text-gray-700 hover:text-[#0A2342] rounded-lg hover:bg-[#0A2342]/5"
               >
                 {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </motion.button>
@@ -276,18 +277,18 @@ export default function Header({ mobileMenuOpen, setMobileMenuOpen, handleNavCli
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.2 }}
-              className="md:hidden bg-white border-t border-gray-200 shadow-xl"
+              className="md:hidden bg-white border-t border-[#0A2342]/20 shadow-xl"
             >
               <div className="px-4 py-3">
                 {studentName && (
-                  <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl">
+                  <div className="mb-6 p-4 bg-gradient-to-r from-[#0A2342]/5 to-[#FF7A00]/10 rounded-xl">
                     <div className="flex items-center space-x-3">
-                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                      <div className="w-12 h-12 bg-gradient-to-br from-[#0A2342] to-[#14345d] rounded-xl flex items-center justify-center">
                         <span className="text-white font-medium text-lg">{studentName.charAt(0).toUpperCase()}</span>
                       </div>
                       <div>
                         <p className="font-medium text-gray-900">{studentName}</p>
-                        <p className="text-sm text-blue-600">Student Account</p>
+                        <p className="text-sm text-[#0A2342]">Student Account</p>
                       </div>
                     </div>
                   </div>
@@ -303,8 +304,8 @@ export default function Header({ mobileMenuOpen, setMobileMenuOpen, handleNavCli
                         <Link
                           to={item.path}
                           onClick={handleMobileItemClick}
-                          className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium ${
-                            active ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:bg-gray-50'
+                          className={`flex items-center px-4 py-3 rounded-lg ${navTypographyClass} ${
+                            active ? 'text-[#0A2342] bg-[#FF7A00]/10 border border-[#FF7A00]/30' : 'text-gray-700 hover:bg-[#0A2342]/5'
                           }`}
                         >
                           <span className="mr-3">
@@ -323,7 +324,7 @@ export default function Header({ mobileMenuOpen, setMobileMenuOpen, handleNavCli
                       <motion.button
                         whileTap={{ scale: 0.98 }}
                         onClick={handleStudentDashboard}
-                        className="flex w-full items-center justify-center px-4 py-3 bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 rounded-lg font-medium"
+                        className="flex w-full items-center justify-center px-4 py-3 bg-gradient-to-r from-[#0A2342]/10 to-[#FF7A00]/15 text-[#0A2342] rounded-lg font-medium"
                       >
                         <LayoutDashboard className="mr-2" size={16} />
                         Go to Dashboard
@@ -332,7 +333,7 @@ export default function Header({ mobileMenuOpen, setMobileMenuOpen, handleNavCli
                       <motion.button
                         whileTap={{ scale: 0.98 }}
                         onClick={handleStudentLogout}
-                        className="flex w-full items-center justify-center px-4 py-3 bg-gradient-to-r from-red-50 to-pink-50 text-red-600 rounded-lg font-medium"
+                        className="flex w-full items-center justify-center px-4 py-3 bg-gradient-to-r from-[#FF7A00]/10 to-[#FF7A00]/20 text-[#FF7A00] rounded-lg font-medium"
                       >
                         <LogOut className="mr-2" size={16} />
                         Sign Out
@@ -343,7 +344,7 @@ export default function Header({ mobileMenuOpen, setMobileMenuOpen, handleNavCli
                       <button
                         type="button"
                         onClick={handleStudentLogin}
-                        className="flex items-center justify-center px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-medium shadow-sm"
+                        className="flex w-full items-center justify-center px-4 py-3 bg-[#0A2342] hover:bg-[#14345d] text-white rounded-lg font-medium shadow-sm transition-colors"
                       >
                         <LogIn className="mr-2" size={16} />
                         Student Login

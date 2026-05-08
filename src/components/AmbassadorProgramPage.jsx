@@ -12,7 +12,6 @@ import {
   GraduationCap,
   Layers3,
   Megaphone,
-  Rocket,
   ShieldCheck,
   Sparkles,
   Star,
@@ -272,7 +271,7 @@ export default function AmbassadorProgramPage() {
         </div>
       </section>
 
-      <section className="bg-white px-6 py-16">
+      <section className="bg-[#f6f8fb] px-6 py-16">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div className="max-w-3xl">
@@ -309,7 +308,7 @@ export default function AmbassadorProgramPage() {
         </div>
       </section>
 
-      <section className="border-t-2 border-[#0A2342] bg-[#fffaf5] px-6 py-16">
+      <section className="border-t-2 border-[#0A2342] bg-[#f6f8fb] px-6 py-16">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div className="max-w-3xl">
@@ -385,7 +384,7 @@ export default function AmbassadorProgramPage() {
         </div>
       </section>
 
-      <section className="bg-white px-6 py-16">
+      <section className="bg-[#f6f8fb] px-6 py-16">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#FF7A00]">Activation path</p>
@@ -432,7 +431,7 @@ export default function AmbassadorProgramPage() {
         </div>
       </section>
 
-      <section className="bg-[#fffaf5] px-6 py-16">
+      <section className="bg-[#f6f8fb] px-6 py-16">
         <div className="mx-auto max-w-7xl rounded-[36px] border border-[#0A2342]/10 bg-white px-8 py-10 shadow-[0_24px_70px_rgba(10,35,66,0.08)] md:px-12">
           <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-start">
             <div>
@@ -454,7 +453,7 @@ export default function AmbassadorProgramPage() {
         </div>
       </section>
 
-      <section className="border-t border-slate-200 bg-white px-6 py-16">
+      <section className="border-t-2 border-[#0A2342] bg-[#f6f8fb] px-6 py-16">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
             <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#FF7A00]">Quick answers</p>
@@ -479,7 +478,7 @@ export default function AmbassadorProgramPage() {
         </div>
       </section>
 
-      <section className="border-t border-slate-200 bg-[#0A2342] px-6 py-16 text-white">
+      <section className="border-t-2 border-[#0A2342] bg-[#0A2342] px-6 py-16 text-white">
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
             <div>

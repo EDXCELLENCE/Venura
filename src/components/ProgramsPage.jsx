@@ -1,12 +1,147 @@
-import { useState } from 'react'
-import { Clock3, TrendingUp, ArrowRight, IndianRupee, Users, Star } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
+import { ArrowRight, Briefcase, Clock3, Code2, FolderKanban, IndianRupee, Rocket, Sparkles, Star, TrendingUp, Users } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
 
+function AnimatedCounter({ target, suffix = '', duration = 2000 }) {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    let startTime = null
+    let animationId = null
+
+    const animate = (timestamp) => {
+      if (!startTime) startTime = timestamp
+      const progress = (timestamp - startTime) / duration
+      
+      if (progress < 1) {
+        setCount(Math.floor(target * progress))
+        animationId = requestAnimationFrame(animate)
+      } else {
+        setCount(target)
+      }
+    }
+
+    animationId = requestAnimationFrame(animate)
+
+    return () => {
+      if (animationId) cancelAnimationFrame(animationId)
+    }
+  }, [target, duration])
+
+  const formatNumber = (num) => {
+    if (suffix === 'K+') return `${(num / 1000).toFixed(0)}K+`
+    if (suffix === '%') return `${num}%`
+    if (suffix === '+') return `${String(num).padStart(2, '0')}+`
+    return num
+  }
+
+  return <>{formatNumber(count)}</>
+}
+
 export default function ProgramsPage() {
 const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 const [activeFilter, setActiveFilter] = useState('All')
+const heroPillsRef = useRef(null)
+const [cursorGlow, setCursorGlow] = useState({ x: 0, y: 0 })
+const [heroWordIndex, setHeroWordIndex] = useState(0)
+
+const heroPills = [
+{ text: 'Industry Certification', icon: Sparkles, color: 'from-emerald-400 to-cyan-400' },
+{ text: 'Real Projects', icon: Code2, color: 'from-blue-400 to-indigo-400' },
+{ text: 'Flexible Schedule', icon: Clock3, color: 'from-violet-400 to-purple-400' },
+{ text: 'Expert Mentors', icon: Users, color: 'from-rose-400 to-pink-400' },
+{ text: 'Career Launch', icon: Rocket, color: 'from-orange-400 to-red-400' },
+{ text: 'Portfolio Ready', icon: FolderKanban, color: 'from-amber-400 to-yellow-400' },
+]
+
+const heroWords = ['Tech Career', 'AI - Journey', 'Web Development', 'Data Science', 'Cloud Computing']
+
+useEffect(() => {
+const slider = heroPillsRef.current
+
+if (!slider || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+return undefined
+}
+
+const isMobile = () => window.matchMedia('(max-width: 767px)').matches
+
+if (!isMobile()) {
+return undefined
+}
+
+let running = true
+let frameId = null
+const speed = 0.35
+const loopWidth = slider.scrollWidth / 2
+
+const tick = () => {
+if (!running) return
+slider.scrollLeft += speed
+if (slider.scrollLeft >= loopWidth) {
+slider.scrollLeft -= loopWidth
+}
+frameId = requestAnimationFrame(tick)
+}
+
+const stop = () => {
+running = false
+}
+
+const start = () => {
+if (running) return
+running = true
+frameId = requestAnimationFrame(tick)
+}
+
+frameId = requestAnimationFrame(tick)
+slider.addEventListener('mouseenter', stop)
+slider.addEventListener('mouseleave', start)
+slider.addEventListener('touchstart', stop, { passive: true })
+slider.addEventListener('touchend', start)
+
+const onResize = () => {
+if (!isMobile()) {
+stop()
+} else {
+start()
+}
+}
+
+window.addEventListener('resize', onResize)
+
+return () => {
+cancelAnimationFrame(frameId)
+slider.removeEventListener('mouseenter', stop)
+slider.removeEventListener('mouseleave', start)
+slider.removeEventListener('touchstart', stop)
+slider.removeEventListener('touchend', start)
+window.removeEventListener('resize', onResize)
+}
+}, [])
+
+useEffect(() => {
+const intervalId = setInterval(() => {
+setHeroWordIndex((current) => (current + 1) % heroWords.length)
+}, 3000)
+
+return () => clearInterval(intervalId)
+}, [heroWords.length])
+
+useEffect(() => {
+const handleMouseMove = (event) => {
+setCursorGlow({
+x: (event.clientX / window.innerWidth) * 100,
+y: (event.clientY / window.innerHeight) * 100,
+})
+}
+
+window.addEventListener('mousemove', handleMouseMove)
+
+return () => window.removeEventListener('mousemove', handleMouseMove)
+}, [])
 
 const handleNavClick = (e) => {
 if (e) e.preventDefault()
@@ -116,42 +251,158 @@ handleNavClick={handleNavClick}
 handleLogoClick={() => setMobileMenuOpen(false)}
 />
 
-<section className="relative pb-12 md:pb-16 px-6 bg-gradient-to-br from-[#0A2342] via-[#1a3a5f] to-[#0A2342] overflow-hidden" style={{ paddingTop: 'calc(var(--site-header-offset, 4rem) + 2rem)' }}>
-<div className="absolute inset-0 opacity-10">
-<div className="absolute top-20 left-10 w-72 h-72 bg-[#FF7A00] rounded-full blur-3xl" />
-<div className="absolute bottom-20 right-10 w-96 h-96 bg-[#FF7A00] rounded-full blur-3xl" />
-</div>
-<div className="max-w-7xl mx-auto text-center relative z-10">
-<div className="inline-block mb-4">
-<span className="bg-[#FF7A00]/20 text-[#FF7A00] px-4 py-2 rounded-full text-sm font-semibold border border-[#FF7A00]/30">
-6+ Industry-Aligned Programs
-</span>
-</div>
-<h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-Transform Your Career
-<br />
-<span className="text-[#FF7A00]">One Program at a Time</span>
-</h1>
-<p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-Master in-demand skills with hands-on projects, expert mentorship, and a proven learning framework
-</p>
-<div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-12">
-{[
-{ label: 'Programs', value: '6+' },
-{ label: 'Success Rate', value: '95%' },
-{ label: 'Avg. Duration', value: '3 Months' },
-{ label: 'Career Support', value: '100%' },
-].map((stat, index) => (
-<div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-<p className="text-3xl font-bold text-[#FF7A00]">{stat.value}</p>
-<p className="text-slate-300 text-sm mt-1">{stat.label}</p>
-</div>
-))}
-</div>
-</div>
+<section
+id="home"
+aria-labelledby="hero-heading"
+className="relative flex items-center justify-center overflow-hidden bg-gradient-to-t from-blue-50 via-transparent px-0 pt-20 md:px-6"
+>
+  <div className="pointer-events-none absolute inset-0 h-[80%]" aria-hidden="true">
+    <div
+      className="absolute inset-0 z-0"
+      style={{
+        backgroundImage: `
+          linear-gradient(90deg, rgba(59, 130, 246, 0.35) 1px, transparent 1px),
+    </div>
+          linear-gradient(0deg, rgba(59, 130, 246, 0.35) 1px, transparent 1px)
+        `,
+        backgroundSize: '70px 70px',
+        backgroundPosition: '0 0',
+        mixBlendMode: 'multiply',
+        opacity: 1,
+      }}
+    />
+  </div>
+  <div className="relative z-20 mx-auto w-full" style={{ paddingTop: 'calc(var(--site-header-offset, 4rem) + 1rem)' }}>
+    <div className="relative overflow-hidden backdrop-blur-xl">
+      <div className="absolute -inset-0.5 opacity-30 blur-sm" />
+
+      <div className="relative overflow-hidden backdrop-blur-md">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-20"
+          style={{
+            background: `radial-gradient(circle at ${cursorGlow.x}% ${cursorGlow.y}%, rgba(56, 189, 248, 0.3) 0%, transparent 50%)`,
+          }}
+        />
+
+        <div className="relative z-10 px-2 py-3 text-center md:px-8 md:py-12">
+          <h1 className="group relative mx-auto w-fit overflow-hidden rounded-full px-0.5 py-0.5 text-center">
+            <div className="animate-gradient-x absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 via-pink-500 to-purple-500 bg-[length:200%_200%] opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="relative z-10 rounded-full border border-white/30 bg-gradient-to-r from-white/95 via-blue-50/95 to-white/95 px-6 py-3 text-xl font-bold uppercase tracking-tight backdrop-blur-sm md:text-2xl">
+              <span className="text-black">Learn With Purpose. Grow With Confidence.</span>
+            </div>
+            <div className="absolute inset-0 -z-10 rounded-full shadow-lg shadow-cyan-500/20 transition-shadow duration-500 group-hover:shadow-cyan-500/40" />
+          </h1>
+
+          <div
+            ref={heroPillsRef}
+            className="no-scrollbar mx-auto mt-10 mb-8 flex flex-nowrap items-center justify-start gap-3 overflow-x-auto px-2 py-2 md:flex-wrap md:justify-center md:gap-4 md:overflow-visible"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {heroPills.map((pill, index) => {
+              const Icon = pill.icon
+
+              return (
+                <motion.div
+                  key={`${pill.text}-${index}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, delay: index * 0.06 }}
+                  className="shrink-0"
+                >
+                  <div
+                    className={`flex items-center gap-2 rounded-full border border-white/10 bg-gradient-to-r px-5 py-3 text-sm font-medium text-white shadow-lg md:text-base ${pill.color}`}
+                    role="note"
+                  >
+                    <Icon className="text-white" size={16} />
+                    <span className="whitespace-nowrap">{pill.text}</span>
+                    <Briefcase className="ml-1 text-white/50" size={12} />
+                  </div>
+                </motion.div>
+              )
+            })}
+          </div>
+
+          <motion.h1
+            id="hero-heading"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="mb-6 px-2 text-4xl font-bold leading-tight tracking-tight text-gray-700 md:mb-8 md:text-5xl"
+          >
+            Launch your{' '}
+            <span className="relative inline-block">
+              <span className="absolute inset-0 bg-gradient-to-r from-cyan-50 via-blue-50 to-violet-50 opacity-70 blur-xl" />
+              <motion.span
+                key={heroWordIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="animate-gradient-x relative bg-gradient-to-r from-cyan-400 via-blue-400 to-violet-400 bg-clip-text font-black text-transparent"
+              >
+                {heroWords[heroWordIndex]}
+              </motion.span>
+            </span>{' '}
+            with real-world experience
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="mx-auto mb-10 max-w-4xl text-lg leading-relaxed tracking-wide text-slate-600 md:mb-12 md:text-xl"
+          >
+            Join 5,000+ students who transformed their careers with hands-on projects, expert mentorship,
+            and industry-recognized certifications in cutting-edge technologies.
+          </motion.p>
+
+          <div className="flex flex-wrap justify-center gap-8">
+            {[
+              { target: 10000, suffix: 'K+', label: 'Students Trained', color: 'text-cyan-400' },
+              { target: 98, suffix: '%', label: 'Success Rate', color: 'text-emerald-400' },
+              { target: 3, suffix: '+', label: 'Years of Excellence', color: 'text-violet-400' },
+              { target: 50, suffix: '', label: 'Program', color: 'text-rose-400' },
+            ].map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
+                className="text-center"
+              >
+                <div className={`mb-1 text-3xl font-bold md:text-4xl ${stat.color}`}>
+                  <AnimatedCounter target={stat.target} suffix={stat.suffix} />
+                </div>
+                <div className="text-sm text-gray-700 md:text-base">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>{`
+    @keyframes gradient-x {
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .animate-gradient-x {
+      background-size: 200% 200%;
+      animation: gradient-x 3s ease infinite;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+  `}</style>
 </section>
 
-<section className="py-12 md:py-16 px-6 bg-gradient-to-b from-slate-50 to-white border-t-2 border-[#0A2342]">
+<section className="py-12 md:py-16 px-6 bg-[#f6f8fb] border-t-2 border-[#0A2342]">
 <div className="max-w-7xl mx-auto">
 <div className="text-center mb-10">
 <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-4">Choose Your Learning Path</h2>
@@ -184,8 +435,6 @@ className="inline-flex items-center gap-2 bg-gradient-to-r from-[#FF7A00] to-[#f
 >
 ⚖️ Compare Programs Side-by-Side
 </Link>
-</div>
-
 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 {filtered.map((program, index) => (
 <div
@@ -242,8 +491,6 @@ loading="lazy"
 </div>
 <p className="text-xs text-slate-500 mt-0.5">Best For</p>
 </div>
-</div>
-
 <Link
 to={program.path}
 className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#FF7A00] to-[#ff8f2a] hover:from-[#e56d00] hover:to-[#FF7A00] text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 group/btn"
@@ -253,7 +500,9 @@ className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#FF7A00
 </Link>
 </div>
 </div>
+</div>
 ))}
+</div>
 </div>
 </div>
 </section>
@@ -262,7 +511,7 @@ className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#FF7A00
 <div className="max-w-4xl mx-auto text-center">
 <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">Not Sure Which Program to Pick?</h2>
 <p className="text-lg md:text-xl text-slate-200 mb-8">
-We'll help you find the right fit — whether you're just starting out or switching careers.
+We&apos;ll help you find the right fit — whether you&apos;re just starting out or switching careers.
 </p>
 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
 <button

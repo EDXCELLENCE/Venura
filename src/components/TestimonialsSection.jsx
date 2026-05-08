@@ -68,7 +68,7 @@ export default function TestimonialsSection() {
   const track = [...testimonials, ...testimonials]
 
   return (
-    <section className="bg-white border-t-2 border-[#0A2342] py-14 md:py-16 px-6 overflow-hidden">
+    <section className="bg-[#f6f8fb] border-t-2 border-[#0A2342] py-14 md:py-16 px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}

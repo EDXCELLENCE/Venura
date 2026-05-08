@@ -32,11 +32,10 @@ export default function HomePage() {
       />
       
       <HeroSection />
-      <WhyVenuraSection />
-      <LearningPathsSection />
-      <ProgramsSection />
-      
       <LearningPyramidSection />
+      <LearningPathsSection />
+      <WhyVenuraSection />
+      <ProgramsSection />
       <TestimonialsSection />
       
       <CTASection />

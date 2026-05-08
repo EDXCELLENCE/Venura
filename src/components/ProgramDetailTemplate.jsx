@@ -55,32 +55,20 @@ export default function ProgramDetailTemplate({ programData }) {
     URL.revokeObjectURL(url)
   }
 
-  if (!programData) return null
-
-  const curriculum = programData.curriculum || []
-  const hasPhaseData = curriculum.some((module) => module.phase)
-  const oneThird = Math.ceil(curriculum.length / 3)
-  const foundationModules = hasPhaseData ? curriculum.filter((module) => module.phase === 'foundation') : curriculum.slice(0, oneThird)
-  const intermediateModules = hasPhaseData ? curriculum.filter((module) => module.phase === 'intermediate') : curriculum.slice(oneThird, oneThird * 2)
-  const advancedModules = hasPhaseData ? curriculum.filter((module) => module.phase === 'advanced') : curriculum.slice(oneThird * 2)
-  const seatsAvailable = programData.batchInfo?.seatsAvailable
-  const totalSeats = programData.batchInfo?.totalSeats
-  const enrolledCount = typeof seatsAvailable === 'number' && typeof totalSeats === 'number'
-    ? Math.max(totalSeats - seatsAvailable, 0)
-    : null
+  const programPath = programData?.path || 'default'
   const availableSections = [
-    { key: 'topics', label: "What You'll Learn", icon: '🧠', enabled: !!programData.topics },
-    { key: 'prerequisites', label: 'Prerequisites', icon: '📌', enabled: !!programData.prerequisites },
-    { key: 'curriculum', label: 'Curriculum', icon: '🗺️', enabled: !!programData.curriculum },
-    { key: 'projects', label: 'Projects', icon: '🛠️', enabled: !!programData.projects },
+    { key: 'topics', label: 'What You\'ll Learn', icon: '🧠', enabled: !!programData?.topics },
+    { key: 'prerequisites', label: 'Prerequisites', icon: '📌', enabled: !!programData?.prerequisites },
+    { key: 'curriculum', label: 'Curriculum', icon: '🗺️', enabled: !!programData?.curriculum },
+    { key: 'projects', label: 'Projects', icon: '🛠️', enabled: !!programData?.projects },
     { key: 'pricing', label: 'Pricing', icon: '💳', enabled: true },
-    { key: 'certifications', label: 'Certifications', icon: '🎓', enabled: !!programData.certifications },
+    { key: 'certifications', label: 'Certifications', icon: '🎓', enabled: !!programData?.certifications },
     { key: 'outcomes', label: 'Career Outcomes', icon: '📈', enabled: true },
-    { key: 'instructors', label: 'Instructors', icon: '👨‍🏫', enabled: !!programData.instructors },
-    { key: 'reviews', label: 'Reviews', icon: '⭐', enabled: !!programData.reviews },
-    { key: 'comparison', label: 'Why Choose Venura?', icon: '⚖️', enabled: !!programData.competitorComparison },
-    { key: 'certificate', label: 'Certificate', icon: '📜', enabled: !!programData.certificatePreview },
-    { key: 'faqs', label: 'FAQs', icon: '❓', enabled: !!programData.faqs },
+    { key: 'instructors', label: 'Instructors', icon: '👨‍🏫', enabled: !!programData?.instructors },
+    { key: 'reviews', label: 'Reviews', icon: '⭐', enabled: !!programData?.reviews },
+    { key: 'comparison', label: 'Why Choose Venura?', icon: '⚖️', enabled: !!programData?.competitorComparison },
+    { key: 'certificate', label: 'Certificate', icon: '📜', enabled: !!programData?.certificatePreview },
+    { key: 'faqs', label: 'FAQs', icon: '❓', enabled: !!programData?.faqs },
   ].filter((section) => section.enabled)
   const defaultSectionKey = availableSections[0]?.key || null
 
@@ -105,19 +93,33 @@ export default function ProgramDetailTemplate({ programData }) {
 
   useEffect(() => {
     if (!activeFeatureSection && defaultSectionKey) {
-      const storageKey = `program-sidebar-section-${programData.path || 'default'}`
+      const storageKey = `program-sidebar-section-${programPath}`
       const savedSection = window.localStorage.getItem(storageKey)
       const isValidSaved = savedSection && availableSections.some((section) => section.key === savedSection)
       setActiveFeatureSection(isValidSaved ? savedSection : defaultSectionKey)
     }
-  }, [activeFeatureSection, defaultSectionKey, availableSections, programData.path])
+  }, [activeFeatureSection, defaultSectionKey, availableSections, programPath])
 
   useEffect(() => {
     if (activeFeatureSection) {
-      const storageKey = `program-sidebar-section-${programData.path || 'default'}`
+      const storageKey = `program-sidebar-section-${programPath}`
       window.localStorage.setItem(storageKey, activeFeatureSection)
     }
-  }, [activeFeatureSection, programData.path])
+  }, [activeFeatureSection, programPath])
+
+  if (!programData) return null
+
+  const curriculum = programData.curriculum || []
+  const hasPhaseData = curriculum.some((module) => module.phase)
+  const oneThird = Math.ceil(curriculum.length / 3)
+  const foundationModules = hasPhaseData ? curriculum.filter((module) => module.phase === 'foundation') : curriculum.slice(0, oneThird)
+  const intermediateModules = hasPhaseData ? curriculum.filter((module) => module.phase === 'intermediate') : curriculum.slice(oneThird, oneThird * 2)
+  const advancedModules = hasPhaseData ? curriculum.filter((module) => module.phase === 'advanced') : curriculum.slice(oneThird * 2)
+  const seatsAvailable = programData.batchInfo?.seatsAvailable
+  const totalSeats = programData.batchInfo?.totalSeats
+  const enrolledCount = typeof seatsAvailable === 'number' && typeof totalSeats === 'number'
+    ? Math.max(totalSeats - seatsAvailable, 0)
+    : null
 
   const contentCardClass = 'motion-card bg-gradient-to-br from-white to-slate-50 rounded-2xl p-4 border border-slate-200 shadow-sm hover:shadow-md transition-all'
   const sectionTitleClass = 'text-2xl font-extrabold text-[#0A2342] mb-5 tracking-tight'
@@ -135,7 +137,7 @@ export default function ProgramDetailTemplate({ programData }) {
     if (activeFeatureSection === 'topics') {
       return (
         <div>
-          <h3 className={sectionTitleClass}>What You'll Learn</h3>
+          <h3 className={sectionTitleClass}>What You&apos;ll Learn</h3>
           <div className="grid md:grid-cols-2 gap-4 motion-grid">
             {(programData.topics || []).map((topic, idx) => (
               <div key={idx} className={contentCardClass}>
@@ -299,7 +301,7 @@ export default function ProgramDetailTemplate({ programData }) {
             </div>
           </div>
           <div className={`${contentCardClass} mt-4`}>
-            <p className="font-semibold text-slate-900 mb-2">Skills You'll Master</p>
+              <p className="font-semibold text-slate-900 mb-2">Skills You&apos;ll Master</p>
             <div className="flex flex-wrap gap-2">{(programData.skills || []).map((skill, idx) => <span key={idx} className="text-xs bg-[#FF7A00] text-white px-2 py-1 rounded-full">{skill}</span>)}</div>
           </div>
           {programData.growthStats && (
@@ -361,7 +363,7 @@ export default function ProgramDetailTemplate({ programData }) {
                     <p className="text-xs text-slate-600">{review.role}</p>
                   </div>
                 </div>
-                <p className="text-sm text-slate-600 mt-1">"{review.text}"</p>
+                <p className="text-sm text-slate-600 mt-1">&ldquo;{review.text}&rdquo;</p>
                 {review.company && <p className="text-xs text-slate-500 mt-2">Now at {review.company}</p>}
               </div>
             ))}
@@ -491,7 +493,7 @@ export default function ProgramDetailTemplate({ programData }) {
         </section>
 
         {programData.quickStats && (
-          <section className="py-8 px-6 bg-white border-b border-slate-200">
+          <section className="py-8 px-6 bg-[#f6f8fb] border-t-2 border-[#0A2342]">
             <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
               {programData.quickStats.map((stat, idx) => (
                 <div key={idx} className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 text-center">
@@ -505,7 +507,7 @@ export default function ProgramDetailTemplate({ programData }) {
         )}
 
         {programData.learningFormat && (
-          <section className="py-8 md:py-12 px-6 bg-gradient-to-b from-slate-50 to-white border-t-2 border-[#0A2342]">
+          <section className="py-8 md:py-12 px-6 bg-[#f6f8fb] border-t-2 border-[#0A2342]">
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-8">
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-4">Learning Experience</h2>
@@ -551,7 +553,7 @@ export default function ProgramDetailTemplate({ programData }) {
         )}
 
         {availableSections.length > 0 && (
-          <section className="py-8 px-6 bg-gradient-to-br from-slate-50 via-white to-slate-100 border-t border-b border-slate-200">
+          <section className="py-8 px-6 bg-[#f6f8fb] border-t-2 border-[#0A2342]">
             <div className="max-w-7xl mx-auto lg:hidden mb-4">
               <h3 className="text-sm font-bold text-slate-900 mb-3">Explore Program Sections</h3>
               <div className="grid grid-cols-2 gap-2">

@@ -57,7 +57,7 @@ const programs = [
 
 export default function ProgramsSection() {
   return (
-    <section className="py-14 md:py-16 bg-white border-t-2 border-[#0A2342]">
+    <section className="py-14 md:py-16 bg-[#f6f8fb] border-t-2 border-[#0A2342]">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-14">

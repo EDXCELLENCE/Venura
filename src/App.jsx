@@ -37,27 +37,29 @@ function RouteLoader() {
 function App() {
   return (
     <Router>
-      <ScrollToTop />
-      <Suspense fallback={<RouteLoader />}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutUs />} />
-          <Route path="/ambassador-program" element={<AmbassadorProgramPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/programs" element={<ProgramsPage />} />
-          <Route path="/programs/ai-ml" element={<AiMlPage />} />
-          <Route path="/programs/data-science" element={<DataSciencePage />} />
-          <Route path="/programs/full-stack" element={<FullStackPage />} />
-          <Route path="/programs/java-backend" element={<JavaBackendPage />} />
-          <Route path="/programs/cybersecurity" element={<CybersecurityPage />} />
-          <Route path="/programs/python" element={<PythonPage />} />
-          <Route path="/programs/plan-comparison" element={<PlanComparisonPage />} />
-          <Route path="/programs/compare" element={<ProgramComparePage />} />
-          <Route path="/faq" element={<FAQPage />} />
-          <Route path="/terms" element={<TermsPage />} />
-          <Route path="/privacy" element={<PrivacyPage />} />
-        </Routes>
-      </Suspense>
+      <div className="venura-content-typography">
+        <ScrollToTop />
+        <Suspense fallback={<RouteLoader />}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/ambassador-program" element={<AmbassadorProgramPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/programs" element={<ProgramsPage />} />
+            <Route path="/programs/ai-ml" element={<AiMlPage />} />
+            <Route path="/programs/data-science" element={<DataSciencePage />} />
+            <Route path="/programs/full-stack" element={<FullStackPage />} />
+            <Route path="/programs/java-backend" element={<JavaBackendPage />} />
+            <Route path="/programs/cybersecurity" element={<CybersecurityPage />} />
+            <Route path="/programs/python" element={<PythonPage />} />
+            <Route path="/programs/plan-comparison" element={<PlanComparisonPage />} />
+            <Route path="/programs/compare" element={<ProgramComparePage />} />
+            <Route path="/faq" element={<FAQPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+          </Routes>
+        </Suspense>
+      </div>
     </Router>
   )
 }

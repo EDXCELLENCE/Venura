@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import { Mail, MapPin, Phone, Clock, CheckCircle2, Facebook, Twitter, Linkedin, Instagram, MessageCircle, Download, Star, Users, Award, Building2, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react'
+import { Mail, MapPin, Phone, Clock, CheckCircle2, Facebook, Twitter, Linkedin, Instagram, MessageCircle, Star, Users, Award, Building2, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Toaster, toast } from 'react-hot-toast'
+import { Toaster } from 'react-hot-toast'
 import Header from './Header'
 import Footer from './Footer'
 
@@ -339,7 +339,7 @@ export default function ContactPage() {
           >
             <div className="mb-6">
               <h2 className="text-2xl font-bold text-slate-900 mb-1">Send us a message</h2>
-              <p className="text-slate-500 text-sm">We'll respond within 24 hours • <span className="text-green-600 font-medium">WhatsApp replies in 15 min</span></p>
+              <p className="text-slate-500 text-sm">We&apos;ll respond within 24 hours • <span className="text-green-600 font-medium">WhatsApp replies in 15 min</span></p>
             </div>
 
             {successMessage && (
@@ -349,7 +349,7 @@ export default function ContactPage() {
                 className="bg-green-50 border-l-4 border-green-500 p-4 mb-6 rounded-lg flex items-center gap-3"
               >
                 <CheckCircle2 className="text-green-500 w-5 h-5 flex-shrink-0" />
-                <p className="text-green-800 font-medium text-sm">Thank you! Your email app will open with a pre-filled message. We'll respond within 2 hours.</p>
+                  <p className="text-green-800 font-medium text-sm">Thank you! Your email app will open with a pre-filled message. We&apos;ll respond within 2 hours.</p>
               </motion.div>
             )}
 
@@ -605,7 +605,7 @@ export default function ContactPage() {
         >
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-slate-900 mb-2">Student Success Stories</h2>
-            <p className="text-slate-500">Join 2000+ learners who've transformed their careers</p>
+            <p className="text-slate-500">Join 2000+ learners who&apos;ve transformed their careers</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((t, idx) => (
@@ -619,7 +619,7 @@ export default function ContactPage() {
                     <Star key={i} className="w-4 h-4 text-[#FF7A00] fill-[#FF7A00]" />
                   ))}
                 </div>
-                <p className="text-slate-700 text-sm mb-4 italic">"{t.text}"</p>
+                  <p className="text-slate-700 text-sm mb-4 italic">&ldquo;{t.text}&rdquo;</p>
                 <div>
                   <p className="font-bold text-slate-900 text-sm">{t.name}</p>
                   <p className="text-xs text-[#FF7A00]">{t.role}</p>
@@ -704,7 +704,7 @@ export default function ContactPage() {
         >
           <h2 className="text-3xl font-bold mb-4">Ready to Start Your Tech Journey?</h2>
           <p className="text-slate-300 mb-8 max-w-2xl mx-auto">
-            Join 2000+ learners who've built successful tech careers with Venura. Expert-led programs, real internships, and lifetime placement support.
+              Join 2000+ learners who&apos;ve built successful tech careers with Venura. Expert-led programs, real internships, and lifetime placement support.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <motion.a

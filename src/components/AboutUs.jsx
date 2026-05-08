@@ -45,7 +45,7 @@ export default function AboutUs() {
     }
   ];
 
-  const handleNavClick = (e, label) => {
+  const handleNavClick = (e) => {
     e.preventDefault();
     setMobileMenuOpen(false);
   };
@@ -106,7 +106,7 @@ export default function AboutUs() {
       </section>
 
       {/* Venura Global Learning Framework */}
-      <section className="py-12 bg-white border-t-2 border-[#0A2342]">
+      <section className="py-12 bg-[#f6f8fb] border-t-2 border-[#0A2342]">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-2 text-gray-900">
             Venura Global Learning Framework
@@ -135,7 +135,7 @@ export default function AboutUs() {
       </section>
 
       {/* Venura Core Beliefs */}
-      <section className="py-12 bg-white border-t-2 border-[#0A2342]">
+      <section className="py-12 bg-[#f6f8fb] border-t-2 border-[#0A2342]">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-2 text-gray-900">
             Venura Core Beliefs
@@ -216,10 +216,10 @@ export default function AboutUs() {
             viewport={{ once: true }}
             className="text-5xl font-bold mb-8"
           >
-            Let's Build the Global Future Together
+            Let&apos;s Build the Global Future Together
           </motion.h2>
           <p className="text-white/90 mb-12 text-lg">
-            Whether you're a student, mentor, or hiring partner — there's a
+            Whether you&apos;re a student, mentor, or hiring partner — there&apos;s a
             place for you in our ecosystem.
           </p>
           <Button
