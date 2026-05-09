@@ -205,14 +205,15 @@ export default function AmbassadorProgramPage() {
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Button
-                  className="rounded-full bg-[#FF7A00] px-8 py-6 text-base font-bold text-[#0A2342] hover:bg-[#ff8f2a]"
+                  className="rounded-full px-8 py-6 text-base font-bold"
+                  variant="default"
                   onClick={() => window.location.assign('/contact')}
                 >
                   Apply for the Program <ArrowRight className="ml-2" size={18} />
                 </Button>
                 <Button
+                  className="rounded-full px-8 py-6 text-base font-bold border"
                   variant="outline"
-                  className="rounded-full border-white/25 bg-white/5 px-8 py-6 text-base font-bold text-white hover:bg-white hover:text-[#0A2342]"
                   onClick={() => window.location.assign('/programs')}
                 >
                   See What You’ll Promote
@@ -505,7 +506,7 @@ export default function AmbassadorProgramPage() {
 
           <div className="mt-8 flex flex-wrap gap-4">
             <Button
-              className="rounded-full bg-[#FF7A00] px-8 py-6 text-base font-bold text-[#0A2342] hover:bg-[#ff8f2a]"
+              className="rounded-full bg-[#0A2342] px-8 py-6 text-base font-bold text-white hover:bg-[#14345d]"
               onClick={() => window.location.assign('/contact')}
             >
               Start Your Application

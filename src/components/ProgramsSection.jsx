@@ -47,11 +47,11 @@ const programs = [
       "Complete Advanced Project and Capstone Project",
       "Gain hands-on internship experience with certificate",
     ],
-    border: "#22c55e",
-    iconBg: "#EDFBF3",
-    iconColor: "#16a34a",
-    labelColor: "#16a34a",
-    labelBg: "#EDFBF3",
+    border: "#1d4b7a",
+    iconBg: "#e9f1fb",
+    iconColor: "#1d4b7a",
+    labelColor: "#1d4b7a",
+    labelBg: "#e9f1fb",
   },
 ];
 
@@ -62,11 +62,11 @@ export default function ProgramsSection() {
         {/* Header */}
         <div className="text-center mb-14">
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#0A2342] mb-3">
-            Venura <span className="text-[#FF7A00]">3-Layer</span> Learning Pyramid
+            How Venura&apos;s <span className="text-[#FF7A00]">3-Layer</span> Program Works
           </h2>
           <div className="w-32 h-1 bg-gradient-to-r from-transparent via-[#FF7A00] to-transparent mx-auto mb-4" />
           <p className="text-[#0A2342]/60 text-lg max-w-2xl mx-auto">
-            3 progressive levels, each lasting 4–6 weeks and ending with a tangible deliverable.
+            Move from fundamentals to internship readiness through three structured learning stages.
           </p>
         </div>
 
@@ -150,7 +150,7 @@ export default function ProgramsSection() {
             href="https://forms.gle/DyDigMebuEbwED347"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-[#FF7A00] hover:bg-[#ff8f2a] text-white font-bold px-12 py-4 rounded-2xl text-lg shadow-lg transition-all duration-300 hover:shadow-[#FF7A00]/30 hover:shadow-xl hover:-translate-y-0.5"
+            className="bg-[#0A2342] hover:bg-[#14345d] text-white font-bold px-12 py-4 rounded-2xl text-lg shadow-lg transition-all duration-300 hover:shadow-[#0A2342]/30 hover:shadow-xl hover:-translate-y-0.5"
           >
             Apply Now →
           </a>

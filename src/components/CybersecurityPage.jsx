@@ -7,7 +7,7 @@ function CybersecurityPage() {
     subtitle: 'Security Engineering & Ethical Defense',
     category: 'Technology • Security',
     description: 'Learn practical cybersecurity from fundamentals to advanced defense. Build skills in network security, web security, threat analysis, and incident response.',
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1000&h=600&fit=crop&q=95',
+    image: '/image copy.png',
     path: '/programs/cybersecurity',
     enrollUrl: 'https://forms.gle/DyDigMebuEbwED347?program=cybersecurity',
     duration: '3 months',

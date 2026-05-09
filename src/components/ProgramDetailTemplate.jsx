@@ -178,9 +178,9 @@ export default function ProgramDetailTemplate({ programData }) {
         <div>
           <h3 className={sectionTitleClass}>Program Curriculum</h3>
           <div className="flex gap-2 mb-4 flex-wrap">
-            <button onClick={() => setActiveCurriculumTab('foundation')} className={`px-4 py-2 rounded-lg text-sm font-semibold ${activeCurriculumTab === 'foundation' ? 'bg-green-500 text-white' : 'bg-white border border-green-300 text-green-700'}`}>Foundation</button>
-            <button onClick={() => setActiveCurriculumTab('intermediate')} className={`px-4 py-2 rounded-lg text-sm font-semibold ${activeCurriculumTab === 'intermediate' ? 'bg-yellow-500 text-white' : 'bg-white border border-yellow-300 text-yellow-700'}`}>Intermediate</button>
-            <button onClick={() => setActiveCurriculumTab('advanced')} className={`px-4 py-2 rounded-lg text-sm font-semibold ${activeCurriculumTab === 'advanced' ? 'bg-[#FF7A00] text-white' : 'bg-white border border-orange-300 text-[#FF7A00]'}`}>Advanced</button>
+            <button onClick={() => setActiveCurriculumTab('foundation')} className={`px-4 py-2 rounded-lg text-sm font-semibold ${activeCurriculumTab === 'foundation' ? 'bg-[#FF7A00] text-white' : 'bg-white border border-[#FF7A00]/40 text-[#FF7A00]'}`}>Foundation</button>
+            <button onClick={() => setActiveCurriculumTab('intermediate')} className={`px-4 py-2 rounded-lg text-sm font-semibold ${activeCurriculumTab === 'intermediate' ? 'bg-[#14345d] text-white' : 'bg-white border border-[#14345d]/30 text-[#14345d]'}`}>Intermediate</button>
+            <button onClick={() => setActiveCurriculumTab('advanced')} className={`px-4 py-2 rounded-lg text-sm font-semibold ${activeCurriculumTab === 'advanced' ? 'bg-[#0A2342] text-white' : 'bg-white border border-[#0A2342]/30 text-[#0A2342]'}`}>Advanced</button>
           </div>
           <div className="grid md:grid-cols-2 gap-4 motion-grid">
             {modules.map((module, idx) => (
@@ -429,7 +429,7 @@ export default function ProgramDetailTemplate({ programData }) {
             ))}
           </div>
           <div className="mt-4">
-            <Link to="/contact" className="inline-flex items-center gap-2 bg-[#FF7A00] hover:bg-[#e56d00] text-white font-bold py-2.5 px-5 rounded-lg transition-all text-sm">
+            <Link to="/contact" className="inline-flex items-center gap-2 bg-[#0A2342] hover:bg-[#14345d] text-white font-bold py-2.5 px-5 rounded-lg transition-all text-sm">
               <Mail className="w-4 h-4" /> Contact Us
             </Link>
           </div>
@@ -445,26 +445,34 @@ export default function ProgramDetailTemplate({ programData }) {
       <Header mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} handleNavClick={handleNavClick} handleLogoClick={handleLogoClick} />
 
       <main>
-        <section className="relative pt-32 pb-16 px-6 bg-gradient-to-br from-[#0A2342] via-[#123861] to-[#0A2342]">
-          <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
-            <div>
-              <Link to="/programs" className="inline-flex items-center text-slate-200 hover:text-white text-sm font-semibold mb-4 transition-colors">
+        <section className="relative overflow-hidden bg-[#0A2342] text-white" style={{ marginTop: 'var(--site-header-offset, 4rem)' }}>
+          <div className="absolute inset-y-0 right-0 w-full lg:w-[52%]">
+            <img src={programData.image} alt={programData.title} className="h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-[linear-gradient(to_left,rgba(8,17,31,0.18),rgba(8,17,31,0.42))]" />
+          </div>
+          <div className="absolute inset-y-0 left-0 w-full lg:w-[68%] bg-[linear-gradient(90deg,#0A2342_0%,#0A2342_58%,rgba(10,35,66,0.92)_72%,rgba(10,35,66,0)_100%)]" />
+          <div className="absolute inset-y-0 left-[52%] hidden w-24 -skew-x-[22deg] bg-[#FF7A00] lg:block" />
+          <div className="pointer-events-none absolute left-[-120px] top-[-80px] h-80 w-80 rounded-full bg-[#FF7A00]/14 blur-[100px]" />
+
+          <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 lg:py-28">
+            <div className="max-w-3xl">
+              <Link to="/programs" className="inline-flex items-center text-slate-300 hover:text-white text-sm font-semibold mb-6 transition-colors">
                 ← Back to Programs
               </Link>
-              <p className="text-[#ffb066] text-sm font-semibold mb-2">{programData.category}</p>
-              <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-2">{programData.title}</h1>
-              <p className="text-[#ffb066] text-lg font-semibold mb-4">{programData.subtitle}</p>
-              <p className="text-slate-200 leading-relaxed mb-6">{programData.description}</p>
+              <p className="text-[#FFB273] text-sm font-bold uppercase tracking-widest mb-3">{programData.category}</p>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-3 leading-tight">{programData.title}</h1>
+              <p className="text-[#FF7A00] text-lg md:text-xl font-semibold mb-5">{programData.subtitle}</p>
+              <p className="max-w-2xl text-slate-200 leading-relaxed mb-6">{programData.description}</p>
 
-              <div className="flex flex-wrap gap-2 mb-4">
-                {programData.duration && <span className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm font-semibold">{programData.duration}</span>}
-                {programData.level && <span className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm font-semibold">{programData.level}</span>}
-                {programData.enrolled && <span className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm font-semibold">{programData.enrolled}</span>}
-                {programData.batchInfo?.nextBatchDate && <span className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm font-semibold">Next Batch Starts: {programData.batchInfo.nextBatchDate}</span>}
+              <div className="flex flex-wrap gap-2 mb-5">
+                {programData.duration && <span className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm font-semibold backdrop-blur-sm">{programData.duration}</span>}
+                {programData.level && <span className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm font-semibold backdrop-blur-sm">{programData.level}</span>}
+                {programData.enrolled && <span className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm font-semibold backdrop-blur-sm">{programData.enrolled}</span>}
+                {programData.batchInfo?.nextBatchDate && <span className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm font-semibold backdrop-blur-sm">Next Batch: {programData.batchInfo.nextBatchDate}</span>}
               </div>
 
               {typeof seatsAvailable === 'number' && (
-                <div className="mb-6 bg-[#FF7A00]/15 border border-[#FF7A00]/40 rounded-xl p-4">
+                <div className="mb-6 max-w-xl rounded-xl border border-[#FF7A00]/40 bg-[#FF7A00]/15 p-4 backdrop-blur-sm">
                   <p className="text-[#ffd0aa] font-bold text-sm">🔥 Only {seatsAvailable} seats left!</p>
                   {typeof totalSeats === 'number' && <p className="text-slate-200 text-sm mt-1">Seats left: {seatsAvailable} of {totalSeats}{enrolledCount !== null ? ` • Enrolled: ${enrolledCount}` : ''}</p>}
                 </div>
@@ -473,27 +481,24 @@ export default function ProgramDetailTemplate({ programData }) {
               <div className="flex flex-wrap gap-3">
                 <button
                   onClick={() => window.open(programData.enrollUrl || 'https://forms.gle/DyDigMebuEbwED347', '_blank')}
-                  className="bg-[#FF7A00] hover:bg-[#e56d00] text-white font-bold px-8 py-3.5 rounded-xl transition-all"
+                  className="bg-[#FF7A00] hover:bg-[#e06800] text-white font-bold px-8 py-3.5 rounded-xl transition-all shadow-[0_8px_24px_-8px_rgba(255,122,0,0.55)]"
                 >
                   Enroll Now
                 </button>
                 <button
                   onClick={handleDownloadSyllabus}
-                  className="bg-white/10 border border-white/30 hover:bg-white/20 text-white font-bold px-6 py-3.5 rounded-xl transition-all"
+                  className="bg-white/10 border border-white/30 hover:bg-white/20 text-white font-bold px-6 py-3.5 rounded-xl transition-all backdrop-blur-sm"
                 >
                   Download Syllabus
                 </button>
               </div>
             </div>
-
-            <div className="relative">
-              <img src={programData.image} alt={programData.title} className="w-full h-[360px] rounded-3xl object-cover border border-white/20 shadow-2xl" />
-            </div>
           </div>
         </section>
 
+
         {programData.quickStats && (
-          <section className="py-8 px-6 bg-[#f6f8fb] border-t-2 border-[#0A2342]">
+          <section className="py-8 px-6 bg-[#f6f8fb]">
             <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
               {programData.quickStats.map((stat, idx) => (
                 <div key={idx} className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 text-center">
@@ -507,7 +512,7 @@ export default function ProgramDetailTemplate({ programData }) {
         )}
 
         {programData.learningFormat && (
-          <section className="py-8 md:py-12 px-6 bg-[#f6f8fb] border-t-2 border-[#0A2342]">
+          <section className="py-8 md:py-12 px-6 bg-[#f6f8fb]">
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-8">
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-4">Learning Experience</h2>
@@ -523,25 +528,25 @@ export default function ProgramDetailTemplate({ programData }) {
                   <p className="text-slate-700 text-sm">{programData.learningFormat.mode}</p>
                 </div>
 
-                <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 shadow-lg border-l-4 border-green-500">
+                <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 shadow-lg border-l-4 border-[#FF7A00]">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="bg-green-500 rounded-full p-3"><Users className="w-6 h-6 text-white" /></div>
+                    <div className="bg-[#FF7A00] rounded-full p-3"><Users className="w-6 h-6 text-white" /></div>
                     <h3 className="font-bold text-slate-900 text-lg">Batch Size</h3>
                   </div>
                   <p className="text-slate-700 text-sm">{programData.learningFormat.groupSize}</p>
                 </div>
 
-                <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 shadow-lg border-l-4 border-yellow-500">
+                <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 shadow-lg border-l-4 border-[#14345d]">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="bg-yellow-500 rounded-full p-3"><BadgeCheck className="w-6 h-6 text-white" /></div>
+                    <div className="bg-[#14345d] rounded-full p-3"><BadgeCheck className="w-6 h-6 text-white" /></div>
                     <h3 className="font-bold text-slate-900 text-lg">Community Access</h3>
                   </div>
                   <p className="text-slate-700 text-sm">{programData.learningFormat.communityAccess}</p>
                 </div>
 
-                <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 shadow-lg border-l-4 border-red-500">
+                <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 shadow-lg border-l-4 border-[#d46300]">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="bg-red-500 rounded-full p-3"><Clock3 className="w-6 h-6 text-white" /></div>
+                    <div className="bg-[#d46300] rounded-full p-3"><Clock3 className="w-6 h-6 text-white" /></div>
                     <h3 className="font-bold text-slate-900 text-lg">Session Duration</h3>
                   </div>
                   <p className="text-slate-700 font-semibold mb-2">{programData.learningFormat.liveSessionDuration}</p>
@@ -553,7 +558,7 @@ export default function ProgramDetailTemplate({ programData }) {
         )}
 
         {availableSections.length > 0 && (
-          <section className="py-8 px-6 bg-[#f6f8fb] border-t-2 border-[#0A2342]">
+          <section className="py-8 px-6 bg-[#f6f8fb]">
             <div className="max-w-7xl mx-auto lg:hidden mb-4">
               <h3 className="text-sm font-bold text-slate-900 mb-3">Explore Program Sections</h3>
               <div className="grid grid-cols-2 gap-2">

@@ -7,7 +7,7 @@ function FullStackPage() {
     subtitle: 'Modern Frontend + Backend Engineering',
     category: 'Technology • Web',
     description: 'Build production-ready web applications end-to-end using React, Node.js, APIs, databases, authentication, and deployment workflows used by real engineering teams.',
-    image: 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=1000&h=600&fit=crop&q=95',
+    image: '/fullstack.png',
     path: '/programs/full-stack',
     enrollUrl: 'https://forms.gle/DyDigMebuEbwED347?program=full-stack',
     duration: '3 months',

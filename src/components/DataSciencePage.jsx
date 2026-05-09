@@ -7,7 +7,7 @@ function DataSciencePage() {
         subtitle: "Data Analysis & Visualization",
         category: "Technology • Data",
         description: "Transform raw data into actionable insights. Master data analysis, visualization, statistical modeling, and dashboard creation to drive data-driven decision making.",
-        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1000&h=600&fit=crop&q=95",
+        image: "/image copy.png",
         path: "/programs/data-science",
         enrollUrl: "https://forms.gle/DyDigMebuEbwED347?program=data-science",
         duration: "3 months",

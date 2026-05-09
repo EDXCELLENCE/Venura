@@ -101,6 +101,16 @@ export default function LearningPyramidSection() {
             width: max-content;
             animation: marquee 22s linear infinite;
           }
+          .animate-marquee:hover {
+            animation-play-state: paused;
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .animate-marquee {
+              animation: none;
+              transform: none;
+              width: auto;
+            }
+          }
         `}</style>
       </div>
     </section>

@@ -88,8 +88,8 @@ export default function TestimonialsSection() {
         {/* Scrolling track */}
         <div className="relative">
           {/* Fade edges */}
-          <div className="pointer-events-none absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-white to-transparent z-10" />
-          <div className="pointer-events-none absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-white to-transparent z-10" />
+            <div className="pointer-events-none absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-[#f6f8fb] to-transparent z-10" />
+            <div className="pointer-events-none absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-[#f6f8fb] to-transparent z-10" />
 
           <div className="flex gap-6 animate-scroll-testimonials items-stretch">
             {track.map((t, idx) => (

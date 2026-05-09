@@ -49,12 +49,12 @@ const [cursorGlow, setCursorGlow] = useState({ x: 0, y: 0 })
 const [heroWordIndex, setHeroWordIndex] = useState(0)
 
 const heroPills = [
-{ text: 'Industry Certification', icon: Sparkles, color: 'from-emerald-400 to-cyan-400' },
-{ text: 'Real Projects', icon: Code2, color: 'from-blue-400 to-indigo-400' },
-{ text: 'Flexible Schedule', icon: Clock3, color: 'from-violet-400 to-purple-400' },
-{ text: 'Expert Mentors', icon: Users, color: 'from-rose-400 to-pink-400' },
-{ text: 'Career Launch', icon: Rocket, color: 'from-orange-400 to-red-400' },
-{ text: 'Portfolio Ready', icon: FolderKanban, color: 'from-amber-400 to-yellow-400' },
+{ text: 'Industry Certification', icon: Sparkles, color: 'from-[#FF7A00] to-[#d46300]', iconColor: '#ffffff' },
+{ text: 'Real Projects', icon: Code2, color: 'from-[#0A2342] to-[#14345d]', iconColor: '#38BDF8' },
+{ text: 'Flexible Schedule', icon: Clock3, color: 'from-[#FF7A00] to-[#d46300]', iconColor: '#ffffff' },
+{ text: 'Expert Mentors', icon: Users, color: 'from-[#0A2342] to-[#14345d]', iconColor: '#4ADE80' },
+{ text: 'Career Launch', icon: Rocket, color: 'from-[#FF7A00] to-[#d46300]', iconColor: '#ffffff' },
+{ text: 'Portfolio Ready', icon: FolderKanban, color: 'from-[#0A2342] to-[#14345d]', iconColor: '#C084FC' },
 ]
 
 const heroWords = ['Tech Career', 'AI - Journey', 'Web Development', 'Data Science', 'Cloud Computing']
@@ -157,7 +157,7 @@ const programs = [
 title: 'AI & ML',
 subtitle: 'Artificial Intelligence & Machine Learning',
 desc: 'Build intelligent systems from scratch — train ML models, deploy GenAI apps, and work on real-world AI projects that employers value.',
-image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1000&h=600&fit=crop&q=95',
+image: '/image copy.png',
 duration: '3 months',
 level: 'Advanced',
 path: '/programs/ai-ml',
@@ -171,7 +171,7 @@ badgeColor: 'bg-purple-600',
 title: 'Data Science',
 subtitle: 'Data Analysis & Visualization',
 desc: 'Turn raw data into actionable insights using industry tools. Build dashboards, predictive models, and data-driven products.',
-image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1000&h=600&fit=crop&q=95',
+image: '/image copy.png',
 duration: '3 months',
 level: 'Advanced',
 path: '/programs/data-science',
@@ -185,7 +185,7 @@ badgeColor: 'bg-[#FF7A00]',
 title: 'Full-Stack Web',
 subtitle: 'Modern Web Development',
 desc: 'Go from zero to deploying full-stack apps with React, Node.js, and databases. Build portfolio projects that get you hired.',
-image: 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=1000&h=600&fit=crop&q=95',
+image: '/fullstack.png',
 duration: '3 months',
 level: 'Intermediate',
 path: '/programs/full-stack',
@@ -199,7 +199,7 @@ badgeColor: 'bg-green-600',
 title: 'Java Backend',
 subtitle: 'Enterprise Backend Systems',
 desc: 'Master Spring Boot, REST APIs, and microservices — the stack powering Fortune 500 companies. Ideal for enterprise-track careers.',
-image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1000&h=600&fit=crop&q=95',
+image: '/image copy.png',
 duration: '3 months',
 level: 'Advanced',
 path: '/programs/java-backend',
@@ -213,7 +213,7 @@ badgeColor: 'bg-blue-700',
 title: 'Cybersecurity',
 subtitle: 'Information Security & Ethical Hacking',
 desc: 'Learn to think like an attacker. Hands-on labs in threat analysis, penetration testing, and security hardening.',
-image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1000&h=600&fit=crop&q=95',
+image: '/image copy.png',
 duration: '3 months',
 level: 'Advanced',
 path: '/programs/cybersecurity',
@@ -227,7 +227,7 @@ badgeColor: 'bg-red-600',
 title: 'Python',
 subtitle: 'Python Programming & Backend',
 desc: 'Start fast with Python — the most beginner-friendly yet powerful language. Build APIs, automate workflows, and enter tech confidently.',
-image: 'https://images.unsplash.com/photo-1526378722484-bd91ca387e72?w=1000&h=600&fit=crop&q=95',
+image: '/image copy.png',
 duration: '3 months',
 level: 'Beginner',
 path: '/programs/python',
@@ -254,43 +254,39 @@ handleLogoClick={() => setMobileMenuOpen(false)}
 <section
 id="home"
 aria-labelledby="hero-heading"
-className="relative flex items-center justify-center overflow-hidden bg-gradient-to-t from-blue-50 via-transparent px-0 pt-20 md:px-6"
+className="relative flex items-center justify-center overflow-hidden px-0 pt-4 md:px-6 text-white"
+style={{ marginTop: 'var(--site-header-offset, 4rem)' }}
 >
-  <div className="pointer-events-none absolute inset-0 h-[80%]" aria-hidden="true">
+  {/* Option C: Theme blue with hexagon pattern */}
+  <div className="absolute inset-0 bg-[#0A2342]" />
+  <div className="pointer-events-none absolute inset-0 opacity-[0.22]" aria-hidden="true">
     <div
-      className="absolute inset-0 z-0"
+      className="absolute inset-0"
       style={{
-        backgroundImage: `
-          linear-gradient(90deg, rgba(59, 130, 246, 0.35) 1px, transparent 1px),
-    </div>
-          linear-gradient(0deg, rgba(59, 130, 246, 0.35) 1px, transparent 1px)
-        `,
-        backgroundSize: '70px 70px',
-        backgroundPosition: '0 0',
-        mixBlendMode: 'multiply',
-        opacity: 1,
+        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50V18L28 2l28 16v32L28 66zm0 34L0 84V52l28-16 28 16v32L28 100z' fill='none' stroke='rgba(255,122,0,0.55)' stroke-width='1'/%3E%3C/svg%3E")`,
+        backgroundSize: '56px 100px',
       }}
     />
   </div>
-  <div className="relative z-20 mx-auto w-full" style={{ paddingTop: 'calc(var(--site-header-offset, 4rem) + 1rem)' }}>
-    <div className="relative overflow-hidden backdrop-blur-xl">
-      <div className="absolute -inset-0.5 opacity-30 blur-sm" />
-
-      <div className="relative overflow-hidden backdrop-blur-md">
+  <div className="pointer-events-none absolute -left-10 top-10 h-80 w-80 rounded-full bg-[#FF7A00]/20 blur-[80px]" />
+  <div className="pointer-events-none absolute right-10 top-20 h-64 w-64 rounded-full bg-[#FF7A00]/10 blur-[70px]" />
+  <div className="pointer-events-none absolute bottom-0 left-1/2 h-48 w-[600px] -translate-x-1/2 rounded-full bg-[#FF7A00]/10 blur-[60px]" />
+  <div className="relative z-20 mx-auto w-full" style={{ paddingTop: 'var(--site-header-offset, 4rem)' }}>
+    <div className="relative">
         <div
           className="pointer-events-none absolute inset-0 opacity-20"
           style={{
-            background: `radial-gradient(circle at ${cursorGlow.x}% ${cursorGlow.y}%, rgba(56, 189, 248, 0.3) 0%, transparent 50%)`,
+            background: `radial-gradient(circle at ${cursorGlow.x}% ${cursorGlow.y}%, rgba(255, 122, 0, 0.25) 0%, transparent 50%)`,
           }}
         />
 
         <div className="relative z-10 px-2 py-3 text-center md:px-8 md:py-12">
           <h1 className="group relative mx-auto w-fit overflow-hidden rounded-full px-0.5 py-0.5 text-center">
-            <div className="animate-gradient-x absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 via-pink-500 to-purple-500 bg-[length:200%_200%] opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="animate-gradient-x absolute inset-0 rounded-full bg-gradient-to-r from-[#FF7A00] via-[#0A2342] to-[#FF7A00] bg-[length:200%_200%] opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
             <div className="relative z-10 rounded-full border border-white/30 bg-gradient-to-r from-white/95 via-blue-50/95 to-white/95 px-6 py-3 text-xl font-bold uppercase tracking-tight backdrop-blur-sm md:text-2xl">
-              <span className="text-black">Learn With Purpose. Grow With Confidence.</span>
+              <span className="text-black">Where Learning Meets Opportunity.</span>
             </div>
-            <div className="absolute inset-0 -z-10 rounded-full shadow-lg shadow-cyan-500/20 transition-shadow duration-500 group-hover:shadow-cyan-500/40" />
+            <div className="absolute inset-0 -z-10 rounded-full shadow-lg shadow-orange-500/20 transition-shadow duration-500 group-hover:shadow-orange-500/40" />
           </h1>
 
           <div
@@ -313,7 +309,7 @@ className="relative flex items-center justify-center overflow-hidden bg-gradient
                     className={`flex items-center gap-2 rounded-full border border-white/10 bg-gradient-to-r px-5 py-3 text-sm font-medium text-white shadow-lg md:text-base ${pill.color}`}
                     role="note"
                   >
-                    <Icon className="text-white" size={16} />
+                    <Icon style={{ color: pill.iconColor }} size={16} />
                     <span className="whitespace-nowrap">{pill.text}</span>
                     <Briefcase className="ml-1 text-white/50" size={12} />
                   </div>
@@ -327,16 +323,16 @@ className="relative flex items-center justify-center overflow-hidden bg-gradient
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="mb-6 px-2 text-4xl font-bold leading-tight tracking-tight text-gray-700 md:mb-8 md:text-5xl"
+            className="mb-6 px-2 text-4xl font-bold leading-tight tracking-tight text-white md:mb-8 md:text-5xl"
           >
             Launch your{' '}
             <span className="relative inline-block">
-              <span className="absolute inset-0 bg-gradient-to-r from-cyan-50 via-blue-50 to-violet-50 opacity-70 blur-xl" />
+              <span className="absolute inset-0 bg-[#FF7A00]/15 opacity-60 blur-xl" />
               <motion.span
                 key={heroWordIndex}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="animate-gradient-x relative bg-gradient-to-r from-cyan-400 via-blue-400 to-violet-400 bg-clip-text font-black text-transparent"
+                className="animate-gradient-x relative bg-gradient-to-r from-[#FF7A00] via-[#FFB273] to-[#FF7A00] bg-clip-text font-black text-transparent"
               >
                 {heroWords[heroWordIndex]}
               </motion.span>
@@ -348,7 +344,7 @@ className="relative flex items-center justify-center overflow-hidden bg-gradient
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="mx-auto mb-10 max-w-4xl text-lg leading-relaxed tracking-wide text-slate-600 md:mb-12 md:text-xl"
+            className="mx-auto mb-10 max-w-4xl text-lg leading-relaxed tracking-wide text-slate-200 md:mb-12 md:text-xl"
           >
             Join 5,000+ students who transformed their careers with hands-on projects, expert mentorship,
             and industry-recognized certifications in cutting-edge technologies.
@@ -356,10 +352,10 @@ className="relative flex items-center justify-center overflow-hidden bg-gradient
 
           <div className="flex flex-wrap justify-center gap-8">
             {[
-              { target: 10000, suffix: 'K+', label: 'Students Trained', color: 'text-cyan-400' },
-              { target: 98, suffix: '%', label: 'Success Rate', color: 'text-emerald-400' },
-              { target: 3, suffix: '+', label: 'Years of Excellence', color: 'text-violet-400' },
-              { target: 50, suffix: '', label: 'Program', color: 'text-rose-400' },
+              { target: 10000, suffix: 'K+', label: 'Students Trained', color: 'text-[#FF7A00]' },
+              { target: 98, suffix: '%', label: 'Success Rate', color: 'text-[#FF7A00]' },
+              { target: 3, suffix: '+', label: 'Years of Excellence', color: 'text-[#FF7A00]' },
+              { target: 50, suffix: '', label: 'Program', color: 'text-[#FF7A00]' },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
@@ -371,12 +367,11 @@ className="relative flex items-center justify-center overflow-hidden bg-gradient
                 <div className={`mb-1 text-3xl font-bold md:text-4xl ${stat.color}`}>
                   <AnimatedCounter target={stat.target} suffix={stat.suffix} />
                 </div>
-                <div className="text-sm text-gray-700 md:text-base">{stat.label}</div>
+                <div className="text-sm text-slate-200 md:text-base">{stat.label}</div>
               </motion.div>
             ))}
           </div>
         </div>
-      </div>
     </div>
   </div>
 
@@ -402,7 +397,7 @@ className="relative flex items-center justify-center overflow-hidden bg-gradient
   `}</style>
 </section>
 
-<section className="py-12 md:py-16 px-6 bg-[#f6f8fb] border-t-2 border-[#0A2342]">
+<section className="py-12 md:py-16 px-6 bg-[#f6f8fb]">
 <div className="max-w-7xl mx-auto">
 <div className="text-center mb-10">
 <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-4">Choose Your Learning Path</h2>
@@ -429,76 +424,87 @@ activeFilter === f
 </div>
 
 {/* Compare CTA */}
+<div className="mb-10 flex justify-center">
 <Link
 to="/programs/compare"
-className="inline-flex items-center gap-2 bg-gradient-to-r from-[#FF7A00] to-[#ff8f2a] hover:from-[#e56d00] hover:to-[#FF7A00] text-white font-bold px-8 py-3.5 rounded-xl transition-all text-sm shadow-lg hover:shadow-xl shadow-orange-200"
+className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0A2342] to-[#14345d] hover:from-[#14345d] hover:to-[#1d4b7a] text-white font-bold px-8 py-3.5 rounded-xl transition-all text-sm shadow-lg hover:shadow-xl shadow-blue-200"
 >
 ⚖️ Compare Programs Side-by-Side
 </Link>
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+</div>
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-2">
 {filtered.map((program, index) => (
 <div
 key={index}
-className="bg-white rounded-3xl border border-slate-200 hover:border-[#FF7A00] hover:border-2 shadow-sm overflow-hidden hover:shadow-xl transition-all flex flex-col relative group"
+className="group flex flex-col overflow-hidden rounded-[30px] border border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-[#FF7A00] hover:shadow-xl"
 >
-<div className="h-48 w-full overflow-hidden relative">
+<div className="h-44 overflow-hidden bg-slate-100">
 <img
 src={program.image}
-alt={`${program.title} - ${program.subtitle} program`}
-className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+alt={`${program.title} program`}
+className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
 loading="lazy"
 />
-{/* Badge */}
-<div className={`absolute top-3 left-3 ${program.badgeColor} text-white text-xs font-bold px-3 py-1 rounded-full shadow`}>
-{program.badge}
 </div>
-<div className="absolute bottom-3 left-3 right-3 flex gap-2">
-<div className="flex items-center gap-1 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full">
-<Clock3 className="w-3.5 h-3.5 text-[#FF7A00]" />
-<span className="text-xs font-bold text-[#0A2342]">{program.duration}</span>
-</div>
-<div className="flex items-center gap-1 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full">
-<TrendingUp className="w-3.5 h-3.5 text-[#FF7A00]" />
-<span className="text-xs font-bold text-[#0A2342]">{program.level}</span>
-</div>
-</div>
-</div>
-<div className="p-6 flex flex-col flex-1">
-<h3 className="text-xl font-bold text-slate-900 mb-1 group-hover:text-[#FF7A00] transition-colors">{program.title}</h3>
-<p className="text-sm text-[#FF7A00] font-semibold mb-3">{program.subtitle}</p>
-<p className="text-slate-600 text-sm leading-relaxed mb-4 flex-1">{program.desc}</p>
 
-{/* Stats row */}
-<div className="grid grid-cols-3 gap-2 mb-4 bg-slate-50 rounded-xl p-3">
-<div className="text-center">
-<div className="flex items-center justify-center gap-0.5 text-[#FF7A00] font-bold text-sm">
-<IndianRupee className="w-3 h-3" />
+<div className="flex flex-1 flex-col p-6">
+<div className="flex items-start justify-between gap-4">
+<div>
+<h3 className="text-xl font-bold text-slate-900 transition-colors group-hover:text-[#FF7A00]">{program.title}</h3>
+<p className="mt-1 text-sm font-semibold text-[#FF7A00]">{program.subtitle}</p>
+</div>
+<div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#0A2342] text-white shadow-sm">
+<TrendingUp className="h-5 w-5" />
+</div>
+</div>
+
+<div className="mt-4 flex flex-wrap gap-2">
+<span className={`rounded-full px-3 py-1 text-xs font-bold text-white shadow ${program.badgeColor}`}>
+{program.badge}
+</span>
+<span className="inline-flex items-center gap-1 rounded-full bg-slate-50 px-3 py-1 text-xs font-bold text-[#0A2342]">
+<Clock3 className="h-3.5 w-3.5 text-[#FF7A00]" />
+{program.duration}
+</span>
+<span className="inline-flex items-center gap-1 rounded-full bg-slate-50 px-3 py-1 text-xs font-bold text-[#0A2342]">
+Online
+</span>
+</div>
+
+<p className="mt-4 min-h-[72px] text-sm leading-relaxed text-slate-600">{program.desc}</p>
+
+<div className="mt-5 grid grid-cols-2 gap-3 text-sm">
+<div className="rounded-2xl bg-slate-50 px-3 py-3">
+<div className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-400">Salary</div>
+<div className="mt-1 flex items-center gap-1 font-bold text-[#0A2342]">
+<IndianRupee className="h-3.5 w-3.5 text-[#FF7A00]" />
 <span>{program.salary.replace('₹', '')}</span>
 </div>
-<p className="text-xs text-slate-500 mt-0.5">Avg Salary</p>
 </div>
-<div className="text-center border-x border-slate-200">
-<div className="flex items-center justify-center gap-1 text-green-600 font-bold text-sm">
-<Star className="w-3 h-3 fill-green-600" />
+<div className="rounded-2xl bg-slate-50 px-3 py-3">
+<div className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-400">Placement</div>
+<div className="mt-1 flex items-center gap-1 font-bold text-[#0A2342]">
+<Star className="h-3.5 w-3.5 fill-[#FF7A00] text-[#FF7A00]" />
 <span>{program.placement}</span>
 </div>
-<p className="text-xs text-slate-500 mt-0.5">Placement</p>
 </div>
-<div className="text-center">
-<div className="flex items-center justify-center gap-1 text-blue-600 font-bold text-sm">
-<Users className="w-3 h-3" />
-<span className="truncate text-xs">{program.bestFor}</span>
 </div>
-<p className="text-xs text-slate-500 mt-0.5">Best For</p>
+
+<div className="mt-3 rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3">
+<div className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-400">Best for</div>
+<div className="mt-1 flex items-center gap-2 text-sm font-semibold text-[#0A2342]">
+<Users className="h-4 w-4 text-[#FF7A00]" />
+<span>{program.bestFor}</span>
 </div>
+</div>
+
 <Link
 to={program.path}
-className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#FF7A00] to-[#ff8f2a] hover:from-[#e56d00] hover:to-[#FF7A00] text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 group/btn"
+className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#0A2342] to-[#14345d] px-6 py-3 font-bold text-white transition-all duration-200 hover:from-[#14345d] hover:to-[#1d4b7a]"
 >
 <span>View Details</span>
-<ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
 </Link>
-</div>
 </div>
 </div>
 ))}
@@ -507,7 +513,7 @@ className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#FF7A00
 </div>
 </section>
 
-<section className="py-12 md:py-16 px-6 bg-gradient-to-br from-[#0A2342] to-[#1a3a5f] border-t-2 border-[#0A2342]">
+<section className="py-12 md:py-16 px-6 bg-gradient-to-br from-[#0A2342] to-[#1a3a5f]">
 <div className="max-w-4xl mx-auto text-center">
 <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">Not Sure Which Program to Pick?</h2>
 <p className="text-lg md:text-xl text-slate-200 mb-8">
@@ -516,7 +522,7 @@ We&apos;ll help you find the right fit — whether you&apos;re just starting out
 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
 <button
 onClick={handleApplyNow}
-className="bg-[#FF7A00] hover:bg-[#e56d00] text-white font-bold py-4 px-8 rounded-xl text-lg transition-colors duration-200 w-full sm:w-auto"
+className="bg-[#FF7A00] hover:bg-[#e06800] text-white font-bold py-4 px-8 rounded-xl text-lg transition-colors duration-200 w-full sm:w-auto shadow-[0_8px_24px_-8px_rgba(255,122,0,0.55)]"
 >
 Enroll Now
 </button>

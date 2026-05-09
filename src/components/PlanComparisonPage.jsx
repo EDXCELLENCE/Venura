@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
+import PageHero from './PageHero'
+import { Button } from './ui/button'
 
 export default function PlanComparisonPage() {
   const location = useLocation()
@@ -17,10 +19,22 @@ export default function PlanComparisonPage() {
     return (
       <div className="w-full min-h-screen bg-white">
         <Header mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} handleNavClick={handleNavClick} handleLogoClick={() => setMobileMenuOpen(false)} />
-        <main className="px-6 max-w-5xl mx-auto text-center" style={{ paddingTop: 'calc(var(--site-header-offset, 4rem) + 1.5rem)' }}>
-          <h1 className="text-3xl font-bold text-[#0A2342] mb-4">Plan Comparison</h1>
-          <p className="text-slate-600 mb-8">No comparison data found. Open this page from a program details page.</p>
-          <Link to="/programs" className="bg-[#FF7A00] hover:bg-[#e56d00] text-white font-bold py-3 px-8 rounded-xl">Back to Programs</Link>
+        <main style={{ paddingTop: 'var(--site-header-offset, 4rem)' }}>
+          <PageHero
+            eyebrow="Programs"
+            title="Plan"
+            highlight="Comparison"
+            description="Compare plans side-by-side to pick the right option for your goals, budget, and learning pace."
+            badges={['Feature-by-Feature', 'Transparent Pricing', 'Outcome Focused']}
+            className="px-6 pt-8"
+          >
+            <div className="mt-7">
+              <p className="text-slate-200 mb-4">No comparison data found. Open this page from a program details page.</p>
+              <Button asChild className="font-bold px-8 py-3 rounded-xl">
+                <Link to="/programs">Back to Programs</Link>
+              </Button>
+            </div>
+          </PageHero>
         </main>
         <Footer handleNavClick={handleNavClick} />
       </div>
@@ -31,13 +45,18 @@ export default function PlanComparisonPage() {
     <div className="w-full min-h-screen bg-white">
       <Header mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} handleNavClick={handleNavClick} handleLogoClick={() => setMobileMenuOpen(false)} />
 
-      <main className="pb-14 px-6 bg-slate-50 min-h-[80vh]" style={{ paddingTop: 'calc(var(--site-header-offset, 4rem) + 1.5rem)' }}>
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-extrabold text-[#0A2342] mb-2">{programData.title} Plan Comparison</h1>
-            <p className="text-slate-600">Compare all plans feature-by-feature</p>
-          </div>
+      <main className="pb-14 bg-slate-50 min-h-[80vh]" style={{ paddingTop: 'var(--site-header-offset, 4rem)' }}>
+        <PageHero
+          eyebrow="Programs"
+          title={`${programData.title}`}
+          highlight="Plan Comparison"
+          description="Compare all plans feature-by-feature and choose the best path for your learning and placement goals."
+          badges={['Foundation vs Professional vs Premium', 'Built for Clarity']}
+          className="px-6 pt-8"
+        />
 
+        <div className="px-6 mt-8">
+        <div className="max-w-6xl mx-auto">
           <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
             <table className="w-full min-w-[780px] text-sm">
               <thead>
@@ -62,8 +81,11 @@ export default function PlanComparisonPage() {
           </div>
 
           <div className="mt-8 text-center">
-            <Link to={programData.path || '/programs'} className="bg-[#FF7A00] hover:bg-[#e56d00] text-white font-bold py-3 px-8 rounded-xl">Back to Program</Link>
+            <Button asChild className="font-bold px-8 py-3 rounded-xl">
+              <Link to={programData.path || '/programs'}>Back to Program</Link>
+            </Button>
           </div>
+        </div>
         </div>
       </main>
 

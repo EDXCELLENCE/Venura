@@ -35,7 +35,7 @@ export default function HeroSection() {
 
           <div className="mt-7 flex flex-wrap justify-center gap-3 md:mt-8 md:gap-4">
           <Button 
-            className="h-12 rounded-xl bg-[#FF7A00] px-6 text-sm font-semibold text-[#0A2342] hover:bg-[#ff8f2a] md:h-14 md:px-8 md:text-base"
+            className="h-12 rounded-xl border border-white/25 bg-[#0A2342] px-6 text-sm font-semibold text-white shadow-[0_14px_30px_-18px_rgba(0,0,0,0.9)] hover:bg-[#14345d] md:h-14 md:px-8 md:text-base"
             onClick={() => window.open('https://forms.gle/DyDigMebuEbwED347', '_blank')}
           >
             Apply for Next Batch <ArrowRight className="ml-2" size={18} />

@@ -7,7 +7,7 @@ function PythonPage() {
     subtitle: 'Automation, APIs, and Backend Development',
     category: 'Technology • Python',
     description: 'Master Python from fundamentals to real-world engineering use cases including automation, APIs, backend services, and data-driven applications.',
-    image: 'https://images.unsplash.com/photo-1526378722484-bd91ca387e72?w=1000&h=600&fit=crop&q=95',
+    image: '/image copy.png',
     path: '/programs/python',
     enrollUrl: 'https://forms.gle/DyDigMebuEbwED347?program=python',
     duration: '3 months',

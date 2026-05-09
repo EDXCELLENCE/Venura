@@ -7,7 +7,7 @@ function AiMlPage() {
     subtitle: 'Artificial Intelligence & Machine Learning',
     category: 'Technology • AI',
     description: 'Master the fundamentals of AI and Machine Learning, from Python programming to building and deploying GenAI applications. Learn to create intelligent systems that can learn from data.',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1000&h=600&fit=crop&q=95',
+    image: '/image copy.png',
     path: '/programs/ai-ml',
     enrollUrl: 'https://forms.gle/DyDigMebuEbwED347?program=ai-ml',
     duration: '3 months',

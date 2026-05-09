@@ -69,8 +69,8 @@ export default function WhyVenuraSection() {
                   className="h-[350px] w-full object-cover md:h-[420px] lg:h-[470px]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#071931]/88 via-[#071931]/20 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-6 md:p-7 md:pr-[120px]">
-                  <h3 className="whitespace-nowrap text-[20px] font-black italic leading-none text-white md:text-[18px] lg:text-[22px]">
+                  <div className="absolute inset-x-0 bottom-0 p-6 md:p-7 md:pr-[120px]">
+                    <h3 className="text-[18px] font-black italic leading-tight text-white md:text-[18px] lg:text-[22px]">
                     Real Development Environment
                   </h3>
                   <div className="mt-4 flex flex-nowrap gap-2 overflow-x-auto text-xs font-semibold [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -142,16 +142,16 @@ export default function WhyVenuraSection() {
               {features.map((item, idx) => {
                 const Icon = item.icon
                 const panelStyles = [
-                  'border-[#cfe0fb] bg-[#eaf4ff]',
-                  'border-[#d7eadc] bg-[#edf9f0]',
-                  'border-[#ead8f0] bg-[#f8effb]',
-                  'border-[#f0e1ca] bg-[#fbf4e8]',
+                    'border-[#dbe5f2] bg-white',
+                    'border-[#dbe5f2] bg-white',
+                    'border-[#dbe5f2] bg-white',
+                    'border-[#dbe5f2] bg-white',
                 ]
                 const iconStyles = [
-                  'bg-[#2f72ff] text-white',
-                  'bg-[#29b36b] text-white',
-                  'bg-[#bc55d5] text-white',
-                  'bg-[#ef9635] text-white',
+                    'bg-[#0A2342] text-white',
+                    'bg-[#FF7A00] text-white',
+                    'bg-[#0A2342] text-white',
+                    'bg-[#FF7A00] text-white',
                 ]
 
                 return (

@@ -1,10 +1,9 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import {
   Search,
   HelpCircle,
   ChevronUp,
   ChevronDown,
-  Sparkles,
   BookOpen,
   Briefcase,
   CreditCard,
@@ -14,8 +13,6 @@ import {
   Mail,
   Phone,
   Clock3,
-  ArrowRight,
-  Star,
 } from 'lucide-react'
 import Header from './Header'
 import Footer from './Footer'
@@ -306,7 +303,7 @@ const faqData = [
 
 const categoryMeta = {
   General: {
-    icon: Sparkles,
+    icon: HelpCircle,
     eyebrow: 'Start Here',
     accent: 'from-orange-500 to-amber-400',
     chip: 'bg-orange-50 text-orange-700 border-orange-200',
@@ -399,13 +396,14 @@ export default function FAQPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [openItem, setOpenItem] = useState(null)
   const [searchText, setSearchText] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('All')
+  const [selectedCategory, setSelectedCategory] = useState('General')
+  const topRef = useRef(null)
 
   useEffect(() => {
     document.title = 'FAQ | Venura'
   }, [])
 
-  const categories = useMemo(() => ['All', ...faqData.map((item) => item.category)], [])
+  const categories = useMemo(() => [...faqData.map((item) => item.category)], [])
   const totalQuestions = useMemo(
     () => faqData.reduce((count, item) => count + item.questions.length, 0),
     []
@@ -465,19 +463,6 @@ export default function FAQPage() {
     }
   }, [openItem, visibleQuestionIds])
 
-  const featuredQuestions = useMemo(
-    () => faqData.slice(0, 6).map((item) => {
-      const question = item.questions[0]
-      return {
-        category: item.category,
-        id: createQuestionId(item.category, question.q),
-        question: question.q,
-        answer: question.a,
-      }
-    }),
-    []
-  )
-
   const categoryCounts = useMemo(() => {
     return faqData.reduce((accumulator, item) => {
       accumulator[item.category] = item.questions.length
@@ -485,17 +470,39 @@ export default function FAQPage() {
     }, {})
   }, [])
 
-  const activeCategoryLabel = selectedCategory === 'All' ? 'All Topics' : selectedCategory
+  // Popular questions (first 2 from each category, or customize as needed)
+  const popularFaqs = useMemo(() => {
+    return faqData.flatMap((item) =>
+      item.questions.slice(0, 2).map((question) => ({
+        ...question,
+        category: item.category,
+        meta: categoryMeta[item.category] || categoryMeta.General,
+      }))
+    )
+  }, [])
 
-  const jumpToQuestion = (category, questionId) => {
-    setSelectedCategory(category)
-    setOpenItem(questionId)
+  const flattenedFaqs = useMemo(() => {
+    // Show popular first if no search/category filter
+    if (searchText.trim() === '' && selectedCategory === 'All') {
+      const rest = filteredFaqs.flatMap((item) =>
+        item.questions.slice(2).map((question) => ({
+          ...question,
+          category: item.category,
+          meta: categoryMeta[item.category] || categoryMeta.General,
+        }))
+      )
+      return [...popularFaqs, ...rest]
+    }
+    return filteredFaqs.flatMap((item) =>
+      item.questions.map((question) => ({
+        ...question,
+        category: item.category,
+        meta: categoryMeta[item.category] || categoryMeta.General,
+      }))
+    )
+  }, [filteredFaqs, searchText, selectedCategory, popularFaqs])
 
-    window.requestAnimationFrame(() => {
-      const target = document.getElementById(createCategoryId(category))
-      target?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    })
-  }
+  const activeCategoryLabel = selectedCategory
 
   const handleNavClick = (e) => {
     e.preventDefault()
@@ -507,8 +514,18 @@ export default function FAQPage() {
     setMobileMenuOpen(false)
   }
 
+  // Back to Top button logic
+  const [showTop, setShowTop] = useState(false)
+  useEffect(() => {
+    const onScroll = () => {
+      setShowTop(window.scrollY > 400)
+    }
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
-    <div className="w-full min-h-screen bg-white">
+    <div className="w-full min-h-screen bg-white" ref={topRef}>
       <Header
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
@@ -517,328 +534,196 @@ export default function FAQPage() {
       />
 
       <main style={{ paddingTop: 'var(--site-header-offset, 4rem)' }}>
-        <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(255,122,0,0.18),transparent_28%),linear-gradient(135deg,#071a33_0%,#0A2342_38%,#123861_100%)] px-6 pb-20 pt-32">
-          <div className="absolute inset-0 opacity-20">
-            <div className="absolute left-10 top-16 h-72 w-72 rounded-full bg-[#FF7A00] blur-3xl" />
-            <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-cyan-400/20 blur-3xl" />
+        <section className="relative overflow-hidden border-b border-slate-200 bg-[linear-gradient(120deg,#071a33_0%,#0A2342_35%,#123861_100%)] px-6 py-14">
+          <div className="pointer-events-none absolute inset-0 opacity-30" aria-hidden="true">
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `
+                  linear-gradient(90deg, rgba(255,255,255,0.14) 1px, transparent 1px),
+                  linear-gradient(0deg, rgba(255,255,255,0.14) 1px, transparent 1px)
+                `,
+                backgroundSize: '56px 56px',
+              }}
+            />
           </div>
 
-          <div className="relative z-10 mx-auto max-w-7xl">
-            <div className="grid items-end gap-10 lg:grid-cols-[1.4fr_0.85fr]">
-              <div>
-                <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-slate-100 backdrop-blur-sm">
-                  <Sparkles className="h-4 w-4 text-[#FF7A00]" />
-                  Support hub for future learners
-                </div>
+          <div className="relative z-10 mx-auto max-w-7xl flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+            <div className="flex-1 min-w-0">
+              <p className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[#ffd8b8] mb-4">
+                FAQ Center
+              </p>
+              <h1 className="text-4xl md:text-6xl font-black leading-tight text-white text-left">
+                <span className="text-[#FF7A00]">FAQ</span> — Find Your Answers
+              </h1>
+              <p className="mt-4 max-w-xl text-slate-200 md:text-lg text-left">
+                Got a question? Search or browse by topic. Our FAQ hub has everything you need to know about Venura programs, pricing, placements, and more.
+              </p>
 
-                <h1 className="mt-6 max-w-4xl text-5xl font-bold leading-tight text-white md:text-7xl">
-                  Answers That Feel More Like a
-                  <span className="block text-[#FF7A00]">Guided Enrollment Desk</span>
-                </h1>
-
-                <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate-200 md:text-xl">
-                  Explore the most common questions about programs, pricing, mentorship, placements, and how Venura works before you apply.
-                </p>
-
-                <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
-                  <div className="rounded-2xl border border-white/10 bg-white/8 px-4 py-4 backdrop-blur-sm">
-                    <p className="text-3xl font-extrabold text-[#FF7A00]">{totalQuestions}+</p>
-                    <p className="mt-1 text-sm text-slate-200">Answers curated</p>
-                  </div>
-                  <div className="rounded-2xl border border-white/10 bg-white/8 px-4 py-4 backdrop-blur-sm">
-                    <p className="text-3xl font-extrabold text-[#FF7A00]">{faqData.length}</p>
-                    <p className="mt-1 text-sm text-slate-200">Focused categories</p>
-                  </div>
-                  <div className="rounded-2xl border border-white/10 bg-white/8 px-4 py-4 backdrop-blur-sm">
-                    <p className="text-3xl font-extrabold text-[#FF7A00]">2-6h</p>
-                    <p className="mt-1 text-sm text-slate-200">Typical response</p>
-                  </div>
-                  <div className="rounded-2xl border border-white/10 bg-white/8 px-4 py-4 backdrop-blur-sm">
-                    <p className="text-3xl font-extrabold text-[#FF7A00]">1:1</p>
-                    <p className="mt-1 text-sm text-slate-200">Guidance available</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="rounded-[28px] border border-white/12 bg-white/10 p-6 shadow-2xl backdrop-blur-xl">
-                <div className="mb-5 flex items-center gap-2 text-sm font-semibold text-slate-100">
-                  <MessageCircle className="h-4 w-4 text-[#FF7A00]" />
-                  Search the knowledge base
-                </div>
-
-                <div className="relative">
-                  <label htmlFor="faq-search" className="sr-only">
-                    Search frequently asked questions
-                  </label>
-                  <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
+              {/* Search bar as a card below heading */}
+              <div className="relative w-full max-w-lg mt-8">
+                <form
+                  onSubmit={e => { e.preventDefault(); }}
+                  className="flex items-center rounded-xl border border-white/20 bg-white/95 shadow-lg px-2 py-2"
+                >
+                  <Search className="h-5 w-5 text-slate-400 ml-2" />
                   <input
                     id="faq-search"
                     type="text"
                     placeholder="Search by topic, program, fees, placements..."
                     value={searchText}
                     onChange={(event) => setSearchText(event.target.value)}
-                    className="w-full rounded-2xl border border-white/15 bg-[#07162c]/70 py-4 pl-12 pr-4 text-white placeholder-slate-400 outline-none transition-all focus:border-[#FF7A00] focus:ring-2 focus:ring-[#FF7A00]/25"
+                    className="flex-1 bg-transparent py-2 px-4 text-slate-800 placeholder-slate-400 outline-none"
                   />
-                </div>
-
-                <div className="mt-5 rounded-2xl border border-white/10 bg-[#07162c]/60 p-4">
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">Currently browsing</p>
-                  <p className="mt-2 text-lg font-bold text-white">{activeCategoryLabel}</p>
-                  <p className="mt-1 text-sm text-slate-300">
-                    {searchText.trim() ? 'Results are filtered live as you type.' : 'Pick a category or start with the featured questions below.'}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="border-t-2 border-[#0A2342] bg-[#f6f8fb] px-6 py-10">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-6 flex items-center justify-between gap-4 flex-wrap">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#FF7A00]">Popular questions</p>
-                <h2 className="mt-2 text-2xl font-extrabold text-slate-900 md:text-3xl">Start with what learners ask first</h2>
-              </div>
-              <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm text-slate-600">
-                <Star className="h-4 w-4 fill-[#FF7A00] text-[#FF7A00]" />
-                High-intent questions before enrollment
-              </div>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {featuredQuestions.map((item) => {
-                const meta = categoryMeta[item.category] || categoryMeta.General
-                const Icon = meta.icon
-
-                return (
                   <button
-                    key={item.id}
-                    type="button"
-                    onClick={() => jumpToQuestion(item.category, item.id)}
-                    className={`group rounded-[26px] border border-slate-200 bg-gradient-to-br from-white via-white to-slate-50 p-5 text-left shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl ${meta.ring}`}
+                    type="submit"
+                    className="ml-2 rounded-lg bg-[#FF7A00] px-4 py-2 text-white font-semibold hover:bg-[#e06800] transition"
                   >
-                    <div className="mb-4 flex items-center justify-between gap-3">
-                      <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold ${meta.chip}`}>
-                        <Icon className="h-3.5 w-3.5" />
-                        {item.category}
-                      </span>
-                      <ArrowRight className="h-4 w-4 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-[#FF7A00]" />
-                    </div>
-
-                    <h3 className="text-lg font-bold leading-snug text-slate-900">{item.question}</h3>
-                    <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-slate-600">{item.answer}</p>
+                    Search
                   </button>
-                )
-              })}
+                </form>
+              </div>
+
+              {/* Horizontal scrollable category chips */}
+              <div className="flex gap-2 mt-6 overflow-x-auto pb-2 hide-scrollbar">
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    type="button"
+                    onClick={() => setSelectedCategory(category)}
+                    className={`px-4 py-1.5 whitespace-nowrap rounded-full border text-xs font-semibold transition-all duration-150 ${selectedCategory === category ? 'bg-[#FF7A00] text-white border-[#FF7A00]' : 'bg-white/10 text-[#ffd8b8] border-white/20 hover:bg-[#FF7A00]/80 hover:text-white'}`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Stats row to the right (desktop) or below (mobile) */}
+            <div className="mt-10 md:mt-0 flex-shrink-0 w-full md:w-64">
+              <div className="grid grid-cols-2 gap-3 w-full">
+                <div className="rounded-lg border border-white/15 bg-white/10 px-3 py-2">
+                  <p className="text-xs text-slate-300">Showing</p>
+                  <p className="text-lg font-bold text-white">{flattenedFaqs.length}</p>
+                </div>
+                <div className="rounded-lg border border-white/15 bg-white/10 px-3 py-2">
+                  <p className="text-xs text-slate-300">Category</p>
+                  <p className="truncate text-sm font-bold text-white">{activeCategoryLabel}</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="bg-[linear-gradient(180deg,#f8fafc_0%,#ffffff_24%,#f8fafc_100%)] px-6 py-20">
+        <section className="bg-[#f8fafc] px-6 py-10">
           <div className="mx-auto max-w-7xl">
-            <div className="grid gap-8 xl:grid-cols-[250px_minmax(0,1fr)_320px]">
+            <div className="grid gap-8 xl:grid-cols-[280px_minmax(0,1fr)]">
               <aside className="xl:sticky xl:top-28 xl:self-start">
-                <div className="rounded-[28px] border border-slate-200 bg-white p-4 shadow-sm">
-                  <p className="px-2 text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">Browse topics</p>
+                <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                  <p className="px-2 text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">Browse by topic</p>
                   <div className="mt-3 space-y-2">
                     {categories.map((category) => {
-                      const meta = categoryMeta[category] || categoryMeta.General
-                      const Icon = category === 'All' ? HelpCircle : meta.icon
                       const isActive = selectedCategory === category
-                      const count = category === 'All' ? totalQuestions : categoryCounts[category]
-
+                      const count = categoryCounts[category]
                       return (
                         <button
                           key={category}
                           type="button"
                           onClick={() => setSelectedCategory(category)}
-                          className={`flex w-full items-center justify-between gap-3 rounded-2xl border px-3 py-3 text-left transition-all ${
-                            isActive
-                              ? 'border-[#FF7A00]/30 bg-[#FF7A00]/8 shadow-sm'
-                              : 'border-transparent bg-slate-50 hover:border-slate-200 hover:bg-white'
-                          }`}
+                          className={`flex w-full items-center justify-between rounded-xl border px-3 py-2.5 text-left text-sm font-semibold transition-all ${isActive ? 'border-[#FF7A00]/35 bg-[#fff4ea] text-[#0A2342]' : 'border-transparent bg-slate-50 text-slate-700 hover:border-slate-200 hover:bg-white'}`}
                         >
-                          <span className="flex min-w-0 items-center gap-3">
-                            <span className={`flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br ${category === 'All' ? 'from-[#0A2342] to-[#123861]' : meta.accent} text-white`}>
-                              <Icon className="h-4.5 w-4.5" />
-                            </span>
-                            <span className="min-w-0">
-                              <span className="block truncate text-sm font-semibold text-slate-900">{category === 'All' ? 'All Topics' : category}</span>
-                              <span className="block text-xs text-slate-500">{count} questions</span>
-                            </span>
-                          </span>
-                          <span className={`rounded-full px-2 py-1 text-xs font-semibold ${isActive ? 'bg-[#FF7A00] text-white' : 'bg-white text-slate-500 border border-slate-200'}`}>
-                            {count}
-                          </span>
+                          <span className="truncate">{category}</span>
+                          <span className={`rounded-full px-2 py-0.5 text-xs ${isActive ? 'bg-[#FF7A00] text-white' : 'bg-white text-slate-500 border border-slate-200'}`}>{count}</span>
                         </button>
                       )
                     })}
                   </div>
                 </div>
-              </aside>
 
-              <div>
-                <div className="mb-8 flex items-end justify-between gap-6 flex-wrap">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#FF7A00]">Knowledge base</p>
-                    <h2 className="mt-2 text-3xl font-extrabold text-slate-900">Clear answers, organized by what users actually need</h2>
-                    <p className="mt-3 max-w-3xl text-slate-600">
-                      Search, scan by category, or jump into the most common questions about admissions, program fit, outcomes, and support.
-                    </p>
-                  </div>
-                  <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-600 shadow-sm">
-                    Showing <span className="font-bold text-slate-900">{filteredFaqs.reduce((count, item) => count + item.questions.length, 0)}</span> answers
+                <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                  <h3 className="text-sm font-bold text-[#0A2342]">Need personal guidance?</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-slate-600">Get direct support from admissions for program selection and schedules.</p>
+                  <div className="mt-3 space-y-2">
+                    <a href="mailto:info@venuratech.com" className="flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 hover:bg-slate-50">
+                      <Mail className="h-4 w-4 text-[#FF7A00]" /> info@venuratech.com
+                    </a>
+                    <a href="tel:+917093769898" className="flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 hover:bg-slate-50">
+                      <Phone className="h-4 w-4 text-[#FF7A00]" /> +91 7093769898
+                    </a>
                   </div>
                 </div>
+              </aside>
 
-                {filteredFaqs.map((item) => {
-                  const meta = categoryMeta[item.category] || categoryMeta.General
-                  const Icon = meta.icon
+              <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 
-                  return (
-                    <section key={item.category} id={createCategoryId(item.category)} className="mb-10 scroll-mt-32">
-                      <div className="mb-4 flex items-center justify-between gap-4 flex-wrap">
-                        <div className="flex items-center gap-4">
-                          <div className={`flex h-14 w-14 items-center justify-center rounded-3xl bg-gradient-to-br ${meta.accent} text-white shadow-lg`}>
-                            <Icon className="h-6 w-6" />
+                {/* Removed Answer Stream and category heading for cleaner look */}
+
+                <div className="space-y-3">
+                  {flattenedFaqs.map((question, index) => {
+                    const itemId = question.id
+                    const isOpen = openItem === itemId
+                    const panelId = `faq-panel-${itemId}`
+                    const buttonId = `faq-button-${itemId}`
+                    const Icon = question.meta.icon
+
+                    return (
+                      <article key={itemId} className={`overflow-hidden rounded-xl border transition-all duration-300 ${isOpen ? 'border-[#FF7A00]/35 bg-[#fffaf5] shadow-lg' : 'border-slate-200 bg-white hover:border-slate-300'}`}>
+                        <button
+                          id={buttonId}
+                          type="button"
+                          aria-expanded={isOpen}
+                          aria-controls={panelId}
+                          onClick={() => toggleQuestion(itemId)}
+                          className="w-full px-4 py-3.5 text-left"
+                        >
+                          <div className="flex items-start gap-3">
+                            <span className={`mt-0.5 inline-flex h-7 w-7 items-center justify-center rounded-md text-xs font-bold ${isOpen ? 'bg-[#FF7A00] text-white' : 'bg-slate-100 text-slate-700'}`}>{index + 1}</span>
+                            <div className="min-w-0 flex-1">
+                              <div className="mb-1 flex items-center gap-2">
+                                <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[11px] font-semibold ${question.meta.chip}`}>
+                                  <Icon className="h-3 w-3" /> {question.category}
+                                </span>
+                              </div>
+                              <p className="text-sm font-semibold text-slate-900">{question.q}</p>
+                            </div>
+                            {isOpen ? <ChevronUp className="h-4 w-4 text-[#FF7A00] transition-transform duration-300 rotate-180" /> : <ChevronDown className="h-4 w-4 text-slate-400 transition-transform duration-300" />}
                           </div>
-                          <div>
-                            <p className={`text-xs font-semibold uppercase tracking-[0.22em] ${meta.muted}`}>{meta.eyebrow}</p>
-                            <h3 className="mt-1 text-2xl font-extrabold text-[#0A2342]">{item.category}</h3>
+                        </button>
+
+                        <div
+                          id={panelId}
+                          role="region"
+                          aria-labelledby={buttonId}
+                          className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100 py-3' : 'grid-rows-[0fr] opacity-0 py-0'} border-t border-[#FF7A00]/15 px-4`}
+                          style={{ overflow: 'hidden' }}
+                        >
+                          <div className="pl-10 text-sm leading-relaxed text-slate-700">
+                            {question.a}
                           </div>
                         </div>
-                        <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${meta.chip}`}>
-                          {item.questions.length} questions
-                        </span>
-                      </div>
+                      </article>
+                    )
+                  })}
+                </div>
+      {/* Back to Top Button */}
+      {showTop && (
+        <button
+          onClick={() => topRef.current?.scrollIntoView({ behavior: 'smooth' })}
+          className="fixed bottom-8 right-8 z-50 rounded-full bg-[#FF7A00] p-3 shadow-lg transition hover:bg-[#e06800] focus:outline-none focus:ring-2 focus:ring-white"
+          aria-label="Back to top"
+        >
+          <ChevronUp className="h-6 w-6 text-white" />
+        </button>
+      )}
 
-                      <div className="space-y-4">
-                        {item.questions.map((question, index) => {
-                          const itemId = question.id
-                          const isOpen = openItem === itemId
-                          const panelId = `faq-panel-${itemId}`
-                          const buttonId = `faq-button-${itemId}`
-
-                          return (
-                            <article
-                              key={itemId}
-                              className={`group overflow-hidden rounded-[26px] border bg-white shadow-sm transition-all ${
-                                isOpen
-                                  ? 'border-[#FF7A00]/40 shadow-lg shadow-orange-100'
-                                  : 'border-slate-200 hover:border-slate-300 hover:shadow-md'
-                              }`}
-                            >
-                              <button
-                                id={buttonId}
-                                type="button"
-                                aria-expanded={isOpen}
-                                aria-controls={panelId}
-                                onClick={() => toggleQuestion(itemId)}
-                                className={`w-full px-6 py-5 text-left transition-colors ${isOpen ? 'bg-gradient-to-r from-[#FF7A00]/10 via-white to-white' : 'hover:bg-slate-50/80'}`}
-                              >
-                                <div className="flex items-start gap-4">
-                                  <div className={`mt-0.5 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl border text-sm font-bold ${isOpen ? 'border-[#FF7A00]/25 bg-[#FF7A00] text-white' : 'border-slate-200 bg-slate-50 text-slate-600'}`}>
-                                    {index + 1}
-                                  </div>
-                                  <div className="min-w-0 flex-1">
-                                    <div className="flex items-start justify-between gap-4">
-                                      <span className="pr-2 text-lg font-bold leading-snug text-slate-900">{question.q}</span>
-                                      {isOpen ? (
-                                        <ChevronUp className="mt-1 h-5 w-5 flex-shrink-0 text-[#FF7A00]" />
-                                      ) : (
-                                        <ChevronDown className="mt-1 h-5 w-5 flex-shrink-0 text-slate-400" />
-                                      )}
-                                    </div>
-                                    {!isOpen && (
-                                      <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate-500">{question.a}</p>
-                                    )}
-                                  </div>
-                                </div>
-                              </button>
-
-                              {isOpen && (
-                                <div
-                                  id={panelId}
-                                  role="region"
-                                  aria-labelledby={buttonId}
-                                  className="border-t border-[#FF7A00]/15 bg-gradient-to-b from-[#fff6ef] via-white to-white px-6 pb-6 pt-5"
-                                >
-                                  <div className="ml-14 rounded-2xl border border-[#FF7A00]/10 bg-white px-5 py-4 shadow-sm">
-                                    <p className="leading-relaxed text-slate-700">{question.a}</p>
-                                  </div>
-                                </div>
-                              )}
-                            </article>
-                          )
-                        })}
-                      </div>
-                    </section>
-                  )
-                })}
-
-                {filteredFaqs.length === 0 && (
-                  <div className="rounded-[28px] border border-dashed border-slate-300 bg-white px-8 py-14 text-center shadow-sm">
+                {flattenedFaqs.length === 0 && (
+                  <div className="rounded-xl border border-dashed border-slate-300 bg-white px-8 py-14 text-center">
                     <HelpCircle className="mx-auto mb-4 h-16 w-16 text-slate-300" />
                     <p className="text-xl font-bold text-slate-700">No questions found for this search</p>
-                    <p className="mt-2 text-slate-500">Try broader keywords, or switch back to a larger category.</p>
+                    <p className="mt-2 text-slate-500">Try broader keywords or switch to another category.</p>
                   </div>
                 )}
               </div>
-
-              <aside className="xl:sticky xl:top-28 xl:self-start">
-                <div className="rounded-[30px] border border-[#0A2342]/10 bg-[linear-gradient(180deg,#0A2342_0%,#123861_100%)] p-6 text-white shadow-2xl">
-                  <div className="flex items-center gap-2 text-sm font-semibold text-slate-100">
-                    <MessageCircle className="h-4 w-4 text-[#FF7A00]" />
-                    Admissions support
-                  </div>
-                  <h3 className="mt-4 text-2xl font-extrabold leading-tight">Need a real person to help you choose?</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-200">
-                    Get direct guidance on program fit, schedules, fees, and career outcomes from the Venura team.
-                  </p>
-
-                  <div className="mt-6 space-y-3">
-                    <a href="mailto:info@venuratech.com" className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/10 px-4 py-3 transition hover:bg-white/15">
-                      <span className="flex items-center gap-3">
-                        <Mail className="h-4 w-4 text-[#FF7A00]" />
-                        <span>
-                          <span className="block text-xs text-slate-300">Email</span>
-                          <span className="text-sm font-semibold text-white">info@venuratech.com</span>
-                        </span>
-                      </span>
-                      <ArrowRight className="h-4 w-4 text-slate-300" />
-                    </a>
-
-                    <a href="tel:+917093769898" className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/10 px-4 py-3 transition hover:bg-white/15">
-                      <span className="flex items-center gap-3">
-                        <Phone className="h-4 w-4 text-[#FF7A00]" />
-                        <span>
-                          <span className="block text-xs text-slate-300">Call</span>
-                          <span className="text-sm font-semibold text-white">+91 7093769898</span>
-                        </span>
-                      </span>
-                      <ArrowRight className="h-4 w-4 text-slate-300" />
-                    </a>
-                  </div>
-
-                  <div className="mt-6 rounded-2xl border border-white/10 bg-white/8 p-4">
-                    <div className="flex items-center gap-2 text-sm font-semibold text-white">
-                      <Clock3 className="h-4 w-4 text-[#FF7A00]" />
-                      Response timing
-                    </div>
-                    <p className="mt-2 text-sm text-slate-200">Usually within 2-6 working hours.</p>
-                  </div>
-
-                  <div className="mt-6 rounded-2xl border border-white/10 bg-white/8 p-4">
-                    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-300">Top before enrolling</p>
-                    <ul className="mt-3 space-y-3 text-sm text-slate-100">
-                      <li className="flex gap-2"><span className="mt-1 h-2 w-2 rounded-full bg-[#FF7A00]" />Which program fits my background?</li>
-                      <li className="flex gap-2"><span className="mt-1 h-2 w-2 rounded-full bg-[#FF7A00]" />What schedule works for working professionals?</li>
-                      <li className="flex gap-2"><span className="mt-1 h-2 w-2 rounded-full bg-[#FF7A00]" />How strong is placement support?</li>
-                    </ul>
-                  </div>
-                </div>
-              </aside>
             </div>
           </div>
         </section>

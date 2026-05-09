@@ -3,6 +3,7 @@ import { Info, CheckCircle2, Star, TrendingUp, XCircle, Trophy, ArrowRight } fro
 import { Link } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
+import PageHero from './PageHero'
 
 const programData = {
   'AI & ML': {
@@ -196,23 +197,27 @@ export default function ProgramComparePage() {
         handleLogoClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false) }}
       />
 
-      <main style={{ paddingTop: 'calc(var(--site-header-offset, 4rem) + 1rem)' }}>
-        {/* Hero */}
-        <section className="relative pt-14 pb-12 px-6 bg-gradient-to-br from-[#0A2342] via-[#1a3a5f] to-[#0A2342]">
-          <div className="max-w-7xl mx-auto relative z-10">
-            <div className="flex items-center gap-2 text-sm text-slate-400 mb-4">
-              <Link to="/programs" className="hover:text-[#FF7A00] transition-colors">Programs</Link>
-              <span>/</span>
-              <span className="text-white">Compare Programs</span>
-            </div>
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
-              Compare <span className="text-[#FF7A00]">Programs</span>
-            </h1>
-            <p className="text-xl text-slate-300 max-w-3xl">
-              Find the perfect program for your career goals. Compare curriculum, duration, and outcomes side-by-side.
-            </p>
+      <main style={{ paddingTop: 'var(--site-header-offset, 4rem)' }}>
+        <PageHero
+          eyebrow="Programs"
+          title="Compare"
+          highlight="Programs"
+          description="Find the perfect program for your career goals by comparing curriculum, duration, outcomes, and hiring potential side-by-side."
+          badges={['Choose up to 3 programs', 'Outcome-first comparison']}
+          stats={[
+            { value: '6', label: 'Programs Available' },
+            { value: '90%', label: 'Avg Placement Rate' },
+            { value: '3', label: 'Programs per Comparison' },
+            { value: '3 Months', label: 'Typical Duration' },
+          ]}
+          className="px-6 pt-8"
+        >
+          <div className="mt-6 flex items-center gap-2 text-sm text-slate-300">
+            <Link to="/programs" className="hover:text-[#FF7A00] transition-colors">Programs</Link>
+            <span>/</span>
+            <span className="text-white">Compare Programs</span>
           </div>
-        </section>
+        </PageHero>
 
         <section className="py-16 px-6 bg-gradient-to-b from-slate-50 to-white border-t-2 border-[#0A2342]">
           <div className="max-w-7xl mx-auto">
@@ -233,7 +238,7 @@ export default function ProgramComparePage() {
                       onClick={() => toggle(name)}
                       disabled={disabled}
                       className={`px-6 py-3 rounded-xl font-semibold transition-all duration-200 flex items-center gap-2
-                        ${isOn ? 'bg-[#FF7A00] text-white shadow-lg' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}
+                        ${isOn ? 'bg-[#0A2342] text-white shadow-lg' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}
                         ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
                     >
                       {name}
@@ -290,7 +295,7 @@ export default function ProgramComparePage() {
                               </Link>
                               <button
                                 onClick={() => window.open('https://forms.gle/DyDigMebuEbwED347', '_blank')}
-                                className="inline-block bg-[#FF7A00] hover:bg-[#e56d00] text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors"
+                                className="inline-block bg-[#0A2342] hover:bg-[#14345d] text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors"
                               >
                                 Enroll Now
                               </button>
@@ -330,7 +335,7 @@ export default function ProgramComparePage() {
               <div className="flex flex-wrap gap-4 justify-center">
                 <Link
                   to="/contact"
-                  className="bg-[#FF7A00] hover:bg-[#e56d00] text-white font-bold px-8 py-4 rounded-xl transition-colors inline-flex items-center gap-2"
+                  className="bg-[#0A2342] hover:bg-[#14345d] text-white font-bold px-8 py-4 rounded-xl transition-colors inline-flex items-center gap-2"
                 >
                   Talk to Counselor <ArrowRight className="w-4 h-4" />
                 </Link>

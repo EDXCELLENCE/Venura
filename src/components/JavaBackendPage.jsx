@@ -7,7 +7,7 @@ function JavaBackendPage() {
     subtitle: 'Enterprise API & Microservices Engineering',
     category: 'Technology • Backend',
     description: 'Master Java backend engineering with Spring Boot, microservices, database design, distributed systems basics, and production-ready API development.',
-    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1000&h=600&fit=crop&q=95',
+    image: '/image copy.png',
     path: '/programs/java-backend',
     enrollUrl: 'https://forms.gle/DyDigMebuEbwED347?program=java-backend',
     duration: '3 months',
