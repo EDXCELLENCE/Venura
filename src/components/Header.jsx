@@ -35,7 +35,7 @@ export default function Header({ mobileMenuOpen, setMobileMenuOpen, handleNavCli
     { path: '/programs', label: 'Programs', icon: BookOpen },
     { path: '/faq', label: 'FAQ', icon: HelpCircle },
     { path: '/contact', label: 'Contact', icon: Phone },
-    { path: '/ambassador-program', label: 'Ambassador', icon: Users },
+    // { path: '/ambassador-program', label: 'Ambassador', icon: Users },
   ]
 
   useEffect(() => {

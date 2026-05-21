@@ -43,7 +43,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutUs />} />
-            <Route path="/ambassador-program" element={<AmbassadorProgramPage />} />
+            {/* <Route path="/ambassador-program" element={<AmbassadorProgramPage />} /> */}
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/programs" element={<ProgramsPage />} />
             <Route path="/programs/ai-ml" element={<AiMlPage />} />
