@@ -1,147 +1,584 @@
-import ProgramDetailTemplate from './ProgramDetailTemplate'
-import { getNextBatchDate } from '../lib/programUtils'
+import ProgramDetailTemplate from "./ProgramDetailTemplate";
+import { getNextBatchDate } from "../lib/programUtils";
 
 function FullStackPage() {
   const programData = {
-    title: 'Full-Stack Web Development',
-    subtitle: 'Modern Frontend + Backend Engineering',
-    category: 'Technology • Web',
-    description: 'Build production-ready web applications end-to-end using React, Node.js, APIs, databases, authentication, and deployment workflows used by real engineering teams.',
-    image: '/fullstack.png',
-    path: '/programs/full-stack',
-    enrollUrl: 'https://forms.gle/DyDigMebuEbwED347?program=full-stack',
-    duration: '3 months',
-    level: 'Beginner to Advanced',
-    enrolled: '1050+ enrolled',
+    title: "Full-Stack Web Development",
+    subtitle: "Modern Frontend + Backend Engineering",
+    category: "Technology • Web",
+    description:
+      "Build production-ready web applications end-to-end using React, Node.js, APIs, databases, authentication, and deployment workflows used by real engineering teams.",
+    image: "/full_stack_web.jpeg",
+    path: "/programs/full-stack",
+    enrollUrl: "https://venuratech.com/dashboard/student/login",
+    duration: "3 months",
+    level: "Beginner to Advanced",
+    enrolled: "1050+ enrolled",
     quickStats: [
-      { value: '93%', label: 'Placement Rate', icon: '🎯' },
-      { value: '4.8★', label: 'Student Rating', icon: '⭐' },
-      { value: '1050+', label: 'Alumni Network', icon: '👥' },
-      { value: '45+', label: 'Projects Built', icon: '💼' },
+      { value: "93%", label: "Placement Rate", icon: "🎯" },
+      { value: "4.8★", label: "Student Rating", icon: "⭐" },
+      { value: "1050+", label: "Alumni Network", icon: "👥" },
+      { value: "45+", label: "Projects Built", icon: "💼" },
     ],
     topics: [
-      { title: 'HTML, CSS, JavaScript', description: 'Core web fundamentals and responsive UI development' },
-      { title: 'React & State Management', description: 'Build scalable frontend apps with reusable components' },
-      { title: 'Node.js & Express', description: 'Develop secure backend services and APIs' },
-      { title: 'Databases', description: 'Model and query data with MongoDB and PostgreSQL' },
-      { title: 'Auth & Security', description: 'JWT auth, role-based access, and secure coding practices' },
-      { title: 'Deployment & DevOps', description: 'CI/CD basics, Docker, and cloud deployment workflows' },
+      {
+        title: "HTML, CSS, JavaScript",
+        description: "Core web fundamentals and responsive UI development",
+      },
+      {
+        title: "React & State Management",
+        description: "Build scalable frontend apps with reusable components",
+      },
+      {
+        title: "Node.js & Express",
+        description: "Develop secure backend services and APIs",
+      },
+      {
+        title: "Databases",
+        description: "Model and query data with MongoDB and PostgreSQL",
+      },
+      {
+        title: "Auth & Security",
+        description: "JWT auth, role-based access, and secure coding practices",
+      },
+      {
+        title: "Deployment & DevOps",
+        description: "CI/CD basics, Docker, and cloud deployment workflows",
+      },
     ],
     curriculum: [
-      { title: 'Web Foundations', description: 'Build strong frontend fundamentals', duration: '1 week', phase: 'foundation', topics: ['Semantic HTML', 'CSS Layouts', 'Responsive Design', 'JavaScript Basics'] },
-      { title: 'Frontend with React', description: 'Component-driven frontend engineering', duration: '2 weeks', phase: 'foundation', topics: ['React Hooks', 'Routing', 'Forms', 'State Management'] },
-      { title: 'UI Architecture', description: 'Design systems and scalable UI patterns', duration: '1 week', phase: 'foundation', topics: ['Reusable Components', 'Accessibility', 'Performance', 'Testing Basics'] },
-      { title: 'Foundation Project', description: 'Build complete frontend product', duration: '1 week', phase: 'foundation', topics: ['Portfolio App', 'Dashboard UI', 'API Integration', 'Deployment'] },
-      { title: 'Backend Development', description: 'Create robust backend services', duration: '2 weeks', phase: 'intermediate', topics: ['Node.js', 'Express', 'REST APIs', 'Middleware'] },
-      { title: 'Database Engineering', description: 'Store and query app data effectively', duration: '1 week', phase: 'intermediate', topics: ['MongoDB', 'PostgreSQL', 'Schema Design', 'Indexes'] },
-      { title: 'Intermediate Project', description: 'Develop full-stack business app', duration: '1 week', phase: 'intermediate', topics: ['Auth Workflow', 'CRUD APIs', 'Data Modeling', 'Role-based Access'] },
-      { title: 'Production Readiness', description: 'Harden apps for real users', duration: '1 week', phase: 'advanced', topics: ['Security', 'Monitoring', 'Error Handling', 'Logging'] },
-      { title: 'Capstone Project', description: 'Ship end-to-end product with deployment', duration: '1 week', phase: 'advanced', topics: ['Team Project', 'CI/CD', 'Cloud Deploy', 'Documentation'] },
+      {
+        title: "Web Foundations",
+        description: "Build strong frontend fundamentals",
+        duration: "1 week",
+        phase: "foundation",
+        topics: [
+          "Semantic HTML",
+          "CSS Layouts",
+          "Responsive Design",
+          "JavaScript Basics",
+        ],
+      },
+      {
+        title: "Frontend with React",
+        description: "Component-driven frontend engineering",
+        duration: "2 weeks",
+        phase: "foundation",
+        topics: ["React Hooks", "Routing", "Forms", "State Management"],
+      },
+      {
+        title: "UI Architecture",
+        description: "Design systems and scalable UI patterns",
+        duration: "1 week",
+        phase: "foundation",
+        topics: [
+          "Reusable Components",
+          "Accessibility",
+          "Performance",
+          "Testing Basics",
+        ],
+      },
+      {
+        title: "Foundation Project",
+        description: "Build complete frontend product",
+        duration: "1 week",
+        phase: "foundation",
+        topics: [
+          "Portfolio App",
+          "Dashboard UI",
+          "API Integration",
+          "Deployment",
+        ],
+      },
+      {
+        title: "Backend Development",
+        description: "Create robust backend services",
+        duration: "2 weeks",
+        phase: "intermediate",
+        topics: ["Node.js", "Express", "REST APIs", "Middleware"],
+      },
+      {
+        title: "Database Engineering",
+        description: "Store and query app data effectively",
+        duration: "1 week",
+        phase: "intermediate",
+        topics: ["MongoDB", "PostgreSQL", "Schema Design", "Indexes"],
+      },
+      {
+        title: "Intermediate Project",
+        description: "Develop full-stack business app",
+        duration: "1 week",
+        phase: "intermediate",
+        topics: [
+          "Auth Workflow",
+          "CRUD APIs",
+          "Data Modeling",
+          "Role-based Access",
+        ],
+      },
+      {
+        title: "Production Readiness",
+        description: "Harden apps for real users",
+        duration: "1 week",
+        phase: "advanced",
+        topics: ["Security", "Monitoring", "Error Handling", "Logging"],
+      },
+      {
+        title: "Capstone Project",
+        description: "Ship end-to-end product with deployment",
+        duration: "1 week",
+        phase: "advanced",
+        topics: ["Team Project", "CI/CD", "Cloud Deploy", "Documentation"],
+      },
     ],
-    skills: ['JavaScript', 'React', 'Node.js', 'Express', 'MongoDB', 'PostgreSQL', 'Docker', 'REST APIs'],
+    skills: [
+      "JavaScript",
+      "React",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "PostgreSQL",
+      "Docker",
+      "REST APIs",
+    ],
     projects: [
-      { title: 'E-commerce Platform', description: 'Build storefront, checkout flow, and order APIs with info panel.', technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'], image: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=500' },
-      { title: 'Project Management SaaS', description: 'Create team boards, task workflows, notifications, and analytics.', technologies: ['React', 'Express', 'PostgreSQL', 'JWT'], image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500' },
-      { title: 'Real-Time Chat App', description: 'Implement socket messaging, user presence, and media sharing.', technologies: ['React', 'Node.js', 'Socket.io', 'Redis'], image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=500' },
-      { title: 'Learning Management Portal', description: 'Build role-based LMS with payments, progress tracking, and instructor dashboards.', technologies: ['React', 'Node.js', 'PostgreSQL', 'Docker'], image: 'https://images.unsplash.com/photo-1513258496099-48168024aec0?w=500' },
+      {
+        title: "E-commerce Platform",
+        description:
+          "Build storefront, checkout flow, and order APIs with info panel.",
+        technologies: ["React", "Node.js", "MongoDB", "Stripe"],
+        image:
+          "https://images.unsplash.com/photo-1557821552-17105176677c?w=500",
+      },
+      {
+        title: "Project Management SaaS",
+        description:
+          "Create team boards, task workflows, notifications, and analytics.",
+        technologies: ["React", "Express", "PostgreSQL", "JWT"],
+        image:
+          "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500",
+      },
+      {
+        title: "Real-Time Chat App",
+        description:
+          "Implement socket messaging, user presence, and media sharing.",
+        technologies: ["React", "Node.js", "Socket.io", "Redis"],
+        image:
+          "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=500",
+      },
+      {
+        title: "Learning Management Portal",
+        description:
+          "Build role-based LMS with payments, progress tracking, and instructor dashboards.",
+        technologies: ["React", "Node.js", "PostgreSQL", "Docker"],
+        image:
+          "https://images.unsplash.com/photo-1513258496099-48168024aec0?w=500",
+      },
     ],
-    batchInfo: { nextBatchDate: getNextBatchDate(), seatsAvailable: 20, totalSeats: 30 },
+    batchInfo: {
+      nextBatchDate: getNextBatchDate(),
+      seatsAvailable: 20,
+      totalSeats: 30,
+    },
     learningFormat: {
-      mode: 'Live + Recorded',
-      batchOptions: ['Weekend Batch (Sat-Sun)', 'Weekday Evening Batch (Mon-Fri 7-9 PM)'],
-      groupSize: '25-30 students per batch',
-      doubtsResolution: '24/7 doubt support + weekly mentor sessions',
-      communityAccess: 'Lifetime access to Full-Stack community with 1000+ members',
-      liveSessionDuration: '2 hours per session',
-      additionalSupport: '1-on-1 career guidance for Premium plan students',
+      mode: "Live + Recorded",
+      batchOptions: [
+        "Weekend Batch (Sat-Sun)",
+        "Weekday Evening Batch (Mon-Fri 7-9 PM)",
+      ],
+      groupSize: "25-30 students per batch",
+      doubtsResolution: "24/7 doubt support + weekly mentor sessions",
+      communityAccess:
+        "Lifetime access to Full-Stack community with 1000+ members",
+      liveSessionDuration: "2 hours per session",
+      additionalSupport: "1-on-1 career guidance for Premium plan students",
     },
     prerequisites: {
-      required: ['Basic computer literacy', 'Problem-solving mindset', 'Commitment to weekly practice'],
-      recommended: ['Basic HTML/CSS familiarity', 'Any prior coding exposure', 'Command line basics'],
-      idealFor: ['Students and fresh graduates', 'Career switchers to software', 'Self-taught developers'],
+      required: [
+        "Basic computer literacy",
+        "Problem-solving mindset",
+        "Commitment to weekly practice",
+      ],
+      recommended: [
+        "Basic HTML/CSS familiarity",
+        "Any prior coding exposure",
+        "Command line basics",
+      ],
+      idealFor: [
+        "Students and fresh graduates",
+        "Career switchers to software",
+        "Self-taught developers",
+      ],
     },
-    cost: 'Starting at ₹1,499',
+    cost: "Starting at ₹1,499",
     costDetails: {
-      foundation: { name: 'Foundation', price: '₹1,499', duration: '3 months', features: ['Foundation content', 'Recorded sessions', 'Community access', '3 projects', 'Certificate'] },
-      professional: { name: 'Professional', price: '₹4,999', duration: '3 months', features: ['All Foundation features', 'Live sessions', '5 projects', 'Resume review', 'Placement basics'] },
-      premium: { name: 'Premium', price: '₹7,999', duration: '3 months', features: ['All Professional features', '1-on-1 mentorship', '8+ projects + capstone', 'Mock interviews', 'Priority referrals'] },
+      foundation: {
+        name: "Foundation",
+        price: "₹1,499",
+        duration: "3 months",
+        features: [
+          "Foundation content",
+          "Recorded sessions",
+          "Community access",
+          "3 projects",
+          "Certificate",
+        ],
+      },
+      professional: {
+        name: "Professional",
+        price: "₹4,999",
+        duration: "3 months",
+        features: [
+          "All Foundation features",
+          "Live sessions",
+          "5 projects",
+          "Resume review",
+          "Placement basics",
+        ],
+      },
+      premium: {
+        name: "Premium",
+        price: "₹7,999",
+        duration: "3 months",
+        features: [
+          "All Professional features",
+          "1-on-1 mentorship",
+          "8+ projects + capstone",
+          "Mock interviews",
+          "Priority referrals",
+        ],
+      },
     },
     pricingComparison: [
-      { feature: 'Program Duration', foundation: '3 months', professional: '3 months', premium: '3 months' },
-      { feature: 'Content Access', foundation: 'Foundation only', professional: 'All levels', premium: 'All levels' },
-      { feature: 'Live Sessions', foundation: '❌', professional: '40+ hours', premium: '60+ hours' },
-      { feature: 'Hands-on Projects', foundation: '3 projects', professional: '5 projects', premium: '8+ projects' },
-      { feature: 'Capstone Project', foundation: '❌', professional: '❌', premium: '✅' },
-      { feature: '1-on-1 Mentorship', foundation: '❌', professional: '❌', premium: '✅ Unlimited' },
-      { feature: 'Interview Preparation', foundation: '❌', professional: 'Basic', premium: 'Advanced + Mock' },
-      { feature: 'Placement Assistance', foundation: '❌', professional: 'Basic', premium: '✅ 100%' },
-      { feature: 'Resume Building', foundation: '❌', professional: '✅', premium: '✅ + LinkedIn' },
-      { feature: 'Industry Certifications', foundation: '1 certification', professional: '2 certifications', premium: '3+ certifications' },
-      { feature: 'Job Referrals', foundation: '❌', professional: '❌', premium: '✅ Priority' },
-      { feature: 'Lifetime Access', foundation: '✅', professional: '✅', premium: '✅' },
-      { feature: 'Community Support', foundation: 'Forum only', professional: '✅ Active', premium: '✅ + Alumni Network' },
+      {
+        feature: "Program Duration",
+        foundation: "3 months",
+        professional: "3 months",
+        premium: "3 months",
+      },
+      {
+        feature: "Content Access",
+        foundation: "Foundation only",
+        professional: "All levels",
+        premium: "All levels",
+      },
+      {
+        feature: "Live Sessions",
+        foundation: "❌",
+        professional: "40+ hours",
+        premium: "60+ hours",
+      },
+      {
+        feature: "Hands-on Projects",
+        foundation: "3 projects",
+        professional: "5 projects",
+        premium: "8+ projects",
+      },
+      {
+        feature: "Capstone Project",
+        foundation: "❌",
+        professional: "❌",
+        premium: "✅",
+      },
+      {
+        feature: "1-on-1 Mentorship",
+        foundation: "❌",
+        professional: "❌",
+        premium: "✅ Unlimited",
+      },
+      {
+        feature: "Interview Preparation",
+        foundation: "❌",
+        professional: "Basic",
+        premium: "Advanced + Mock",
+      },
+      {
+        feature: "Placement Assistance",
+        foundation: "❌",
+        professional: "Basic",
+        premium: "✅ 100%",
+      },
+      {
+        feature: "Resume Building",
+        foundation: "❌",
+        professional: "✅",
+        premium: "✅ + LinkedIn",
+      },
+      {
+        feature: "Industry Certifications",
+        foundation: "1 certification",
+        professional: "2 certifications",
+        premium: "3+ certifications",
+      },
+      {
+        feature: "Job Referrals",
+        foundation: "❌",
+        professional: "❌",
+        premium: "✅ Priority",
+      },
+      {
+        feature: "Lifetime Access",
+        foundation: "✅",
+        professional: "✅",
+        premium: "✅",
+      },
+      {
+        feature: "Community Support",
+        foundation: "Forum only",
+        professional: "✅ Active",
+        premium: "✅ + Alumni Network",
+      },
     ],
     competitorComparison: [
-      { feature: 'Price', venura: '₹4,999 - ₹7,999', coursera: '₹20,000+', udemy: '₹4,999', bootcamp: '₹2,00,000+' },
-      { feature: 'Duration', venura: '3 months', coursera: '3 months', udemy: '3 months', bootcamp: '3 months' },
-      { feature: 'Live Sessions', venura: '60+ hours', coursera: 'Limited', udemy: 'None', bootcamp: '200+ hours' },
-      { feature: 'Placement Support', venura: '100% (Premium)', coursera: 'None', udemy: 'None', bootcamp: 'Yes' },
-      { feature: '1-on-1 Mentorship', venura: 'Unlimited (Premium)', coursera: 'None', udemy: 'None', bootcamp: 'Limited' },
-      { feature: 'Real Projects', venura: '8+ projects', coursera: '2-3 projects', udemy: '5-6 projects', bootcamp: '5-7 projects' },
-      { feature: 'Job Referrals', venura: '100+ partners', coursera: 'None', udemy: 'None', bootcamp: '50+ partners' },
-      { feature: 'Community', venura: 'Active 1050+', coursera: 'Forum only', udemy: 'Limited', bootcamp: 'Batch only' },
-      { feature: 'Certification', venura: 'Industry recognized', coursera: 'University backed', udemy: 'Platform certificate', bootcamp: 'Industry recognized' },
+      {
+        feature: "Price",
+        venura: "₹4,999 - ₹7,999",
+        coursera: "₹20,000+",
+        udemy: "₹4,999",
+        bootcamp: "₹2,00,000+",
+      },
+      {
+        feature: "Duration",
+        venura: "3 months",
+        coursera: "3 months",
+        udemy: "3 months",
+        bootcamp: "3 months",
+      },
+      {
+        feature: "Live Sessions",
+        venura: "60+ hours",
+        coursera: "Limited",
+        udemy: "None",
+        bootcamp: "200+ hours",
+      },
+      {
+        feature: "Placement Support",
+        venura: "100% (Premium)",
+        coursera: "None",
+        udemy: "None",
+        bootcamp: "Yes",
+      },
+      {
+        feature: "1-on-1 Mentorship",
+        venura: "Unlimited (Premium)",
+        coursera: "None",
+        udemy: "None",
+        bootcamp: "Limited",
+      },
+      {
+        feature: "Real Projects",
+        venura: "8+ projects",
+        coursera: "2-3 projects",
+        udemy: "5-6 projects",
+        bootcamp: "5-7 projects",
+      },
+      {
+        feature: "Job Referrals",
+        venura: "100+ partners",
+        coursera: "None",
+        udemy: "None",
+        bootcamp: "50+ partners",
+      },
+      {
+        feature: "Community",
+        venura: "Active 1050+",
+        coursera: "Forum only",
+        udemy: "Limited",
+        bootcamp: "Batch only",
+      },
+      {
+        feature: "Certification",
+        venura: "Industry recognized",
+        coursera: "University backed",
+        udemy: "Platform certificate",
+        bootcamp: "Industry recognized",
+      },
     ],
-    jobRoles: ['Frontend Developer', 'Backend Developer', 'Full-Stack Developer', 'Software Engineer', 'Web Developer'],
+    jobRoles: [
+      "Frontend Developer",
+      "Backend Developer",
+      "Full-Stack Developer",
+      "Software Engineer",
+      "Web Developer",
+    ],
     salaryRanges: [
-      { role: 'Frontend Developer', range: '₹5-10 LPA', experience: '0-2 years' },
-      { role: 'Backend Developer', range: '₹6-12 LPA', experience: '0-2 years' },
-      { role: 'Full-Stack Developer', range: '₹7-14 LPA', experience: '0-2 years' },
-      { role: 'Software Engineer', range: '₹6-13 LPA', experience: '0-2 years' },
-      { role: 'MERN Developer', range: '₹6-12 LPA', experience: '0-2 years' },
-      { role: 'API Engineer', range: '₹7-13 LPA', experience: '0-2 years' },
+      {
+        role: "Frontend Developer",
+        range: "₹5-10 LPA",
+        experience: "0-2 years",
+      },
+      {
+        role: "Backend Developer",
+        range: "₹6-12 LPA",
+        experience: "0-2 years",
+      },
+      {
+        role: "Full-Stack Developer",
+        range: "₹7-14 LPA",
+        experience: "0-2 years",
+      },
+      {
+        role: "Software Engineer",
+        range: "₹6-13 LPA",
+        experience: "0-2 years",
+      },
+      { role: "MERN Developer", range: "₹6-12 LPA", experience: "0-2 years" },
+      { role: "API Engineer", range: "₹7-13 LPA", experience: "0-2 years" },
     ],
-    hiringCompanies: ['Google', 'Microsoft', 'Amazon', 'Flipkart', 'Swiggy', 'Razorpay', 'Zoho', 'Infosys'],
+    hiringCompanies: [
+      "Google",
+      "Microsoft",
+      "Amazon",
+      "Flipkart",
+      "Swiggy",
+      "Razorpay",
+      "Zoho",
+      "Infosys",
+    ],
     growthStats: [
-      { value: '32%', label: 'Annual Growth', description: 'Web engineering demand growth' },
-      { value: '1.2M', label: 'Open Roles', description: 'Developer jobs in India + remote' },
-      { value: 'Top 3', label: 'Most Hired Skill', description: 'Full-stack among top hiring tracks' },
+      {
+        value: "32%",
+        label: "Annual Growth",
+        description: "Web engineering demand growth",
+      },
+      {
+        value: "1.2M",
+        label: "Open Roles",
+        description: "Developer jobs in India + remote",
+      },
+      {
+        value: "Top 3",
+        label: "Most Hired Skill",
+        description: "Full-stack among top hiring tracks",
+      },
     ],
     marketDataSource: [
-      { label: 'Stack Overflow Developer Survey', url: 'https://survey.stackoverflow.co/' },
-      { label: 'LinkedIn Economic Graph', url: 'https://economicgraph.linkedin.com/' },
-      { label: 'NASSCOM Insights', url: 'https://nasscom.in/' },
+      {
+        label: "Stack Overflow Developer Survey",
+        url: "https://survey.stackoverflow.co/",
+      },
+      {
+        label: "LinkedIn Economic Graph",
+        url: "https://economicgraph.linkedin.com/",
+      },
+      { label: "NASSCOM Insights", url: "https://nasscom.in/" },
     ],
     comparisonSource: [
-      { label: 'Coursera Pricing', url: 'https://www.coursera.org/' },
-      { label: 'Udemy Pricing', url: 'https://www.udemy.com/' },
-      { label: 'Bootcamp Listings', url: 'https://www.coursereport.com/' },
+      { label: "Coursera Pricing", url: "https://www.coursera.org/" },
+      { label: "Udemy Pricing", url: "https://www.udemy.com/" },
+      { label: "Bootcamp Listings", url: "https://www.coursereport.com/" },
     ],
-    futureOutlook: 'Full-stack developers continue to be among the most hired profiles because they can build and ship products quickly. Companies value engineers who can work across frontend, backend, APIs, and deployment.',
+    futureOutlook:
+      "Full-stack developers continue to be among the most hired profiles because they can build and ship products quickly. Companies value engineers who can work across frontend, backend, APIs, and deployment.",
     instructors: [
-      { name: 'Arvind Menon', role: 'Lead Full-Stack Instructor', experience: '12+ years', credentials: 'Ex-Flipkart, Staff Engineer', image: 'https://ui-avatars.com/api/?name=Arvind+Menon&background=0A2342&color=fff&size=200', specialization: 'Web Architecture' },
-      { name: 'Meera Rao', role: 'Senior Frontend Mentor', experience: '9+ years', credentials: 'Ex-Adobe', image: 'https://ui-avatars.com/api/?name=Meera+Rao&background=FF7A00&color=fff&size=200', specialization: 'React Engineering' },
-      { name: 'Nikhil Jain', role: 'Backend Mentor', experience: '10+ years', credentials: 'Ex-Zoho', image: 'https://ui-avatars.com/api/?name=Nikhil+Jain&background=0A2342&color=fff&size=200', specialization: 'Node.js & APIs' },
+      {
+        name: "Arvind Menon",
+        role: "Lead Full-Stack Instructor",
+        experience: "12+ years",
+        credentials: "Ex-Flipkart, Staff Engineer",
+        image:
+          "https://ui-avatars.com/api/?name=Arvind+Menon&background=0A2342&color=fff&size=200",
+        specialization: "Web Architecture",
+      },
+      {
+        name: "Meera Rao",
+        role: "Senior Frontend Mentor",
+        experience: "9+ years",
+        credentials: "Ex-Adobe",
+        image:
+          "https://ui-avatars.com/api/?name=Meera+Rao&background=FF7A00&color=fff&size=200",
+        specialization: "React Engineering",
+      },
+      {
+        name: "Nikhil Jain",
+        role: "Backend Mentor",
+        experience: "10+ years",
+        credentials: "Ex-Zoho",
+        image:
+          "https://ui-avatars.com/api/?name=Nikhil+Jain&background=0A2342&color=fff&size=200",
+        specialization: "Node.js & APIs",
+      },
     ],
     reviews: [
-      { name: 'Kiran', role: 'Full-Stack Developer', company: 'Razorpay', image: 'https://ui-avatars.com/api/?name=Kiran&background=0A2342&color=fff&size=200', rating: 5, text: 'Very practical program. I built 3 production-like apps and got shortlisted quickly.' },
-      { name: 'Shreya', role: 'Software Engineer', company: 'Zoho', image: 'https://ui-avatars.com/api/?name=Shreya&background=FF7A00&color=fff&size=200', rating: 5, text: 'Mentors were excellent, and capstone project gave me strong interview talking points.' },
-      { name: 'Aman Kapoor', role: 'Backend Developer', company: 'Swiggy', image: 'https://ui-avatars.com/api/?name=Aman+Kapoor&background=0A2342&color=fff&size=200', rating: 5, text: 'The backend and system design modules helped me transition from intern to full-time backend role.' },
-      { name: 'Ritika Sharma', role: 'Frontend Engineer', company: 'Adobe', image: 'https://ui-avatars.com/api/?name=Ritika+Sharma&background=FF7A00&color=fff&size=200', rating: 5, text: 'Loved the React architecture and deployment workflow sessions. The project feedback was top-notch.' },
+      {
+        name: "Kiran",
+        role: "Full-Stack Developer",
+        company: "Razorpay",
+        image:
+          "https://ui-avatars.com/api/?name=Kiran&background=0A2342&color=fff&size=200",
+        rating: 5,
+        text: "Very practical program. I built 3 production-like apps and got shortlisted quickly.",
+      },
+      {
+        name: "Shreya",
+        role: "Software Engineer",
+        company: "Zoho",
+        image:
+          "https://ui-avatars.com/api/?name=Shreya&background=FF7A00&color=fff&size=200",
+        rating: 5,
+        text: "Mentors were excellent, and capstone project gave me strong interview talking points.",
+      },
+      {
+        name: "Aman Kapoor",
+        role: "Backend Developer",
+        company: "Swiggy",
+        image:
+          "https://ui-avatars.com/api/?name=Aman+Kapoor&background=0A2342&color=fff&size=200",
+        rating: 5,
+        text: "The backend and system design modules helped me transition from intern to full-time backend role.",
+      },
+      {
+        name: "Ritika Sharma",
+        role: "Frontend Engineer",
+        company: "Adobe",
+        image:
+          "https://ui-avatars.com/api/?name=Ritika+Sharma&background=FF7A00&color=fff&size=200",
+        rating: 5,
+        text: "Loved the React architecture and deployment workflow sessions. The project feedback was top-notch.",
+      },
     ],
-    certificatePreview: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800',
+    certificatePreview:
+      "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800",
     faqs: [
-      { question: 'Do I need prior coding experience?', answer: 'No. We start from fundamentals and progress to advanced full-stack engineering.' },
-      { question: 'Will I build real projects?', answer: 'Yes, you build multiple portfolio projects and one capstone with deployment.' },
-      { question: 'Do you provide job support?', answer: 'Yes. Premium plan includes strong placement support, mocks, and referrals.' },
-      { question: 'Will I learn deployment and CI/CD?', answer: 'Yes. You will deploy projects and learn CI/CD basics with production-ready workflows.' },
-      { question: 'Can I upgrade to Premium later?', answer: 'Yes, upgrades are available anytime by paying the plan difference.' },
-      { question: 'What if I miss a live class?', answer: 'Recorded sessions are available for lifetime access so you can revisit anytime.' },
-      { question: 'How many hours per week should I commit?', answer: 'We recommend 8-10 hours for Foundation and 12-15 hours for Professional/Premium.' },
+      {
+        question: "Do I need prior coding experience?",
+        answer:
+          "No. We start from fundamentals and progress to advanced full-stack engineering.",
+      },
+      {
+        question: "Will I build real projects?",
+        answer:
+          "Yes, you build multiple portfolio projects and one capstone with deployment.",
+      },
+      {
+        question: "Do you provide job support?",
+        answer:
+          "Yes. Premium plan includes strong placement support, mocks, and referrals.",
+      },
+      {
+        question: "Will I learn deployment and CI/CD?",
+        answer:
+          "Yes. You will deploy projects and learn CI/CD basics with production-ready workflows.",
+      },
+      {
+        question: "Can I upgrade to Premium later?",
+        answer:
+          "Yes, upgrades are available anytime by paying the plan difference.",
+      },
+      {
+        question: "What if I miss a live class?",
+        answer:
+          "Recorded sessions are available for lifetime access so you can revisit anytime.",
+      },
+      {
+        question: "How many hours per week should I commit?",
+        answer:
+          "We recommend 8-10 hours for Foundation and 12-15 hours for Professional/Premium.",
+      },
     ],
-  }
+  };
 
-  return <ProgramDetailTemplate programData={programData} />
+  return <ProgramDetailTemplate programData={programData} />;
 }
 
-export default FullStackPage
+export default FullStackPage;

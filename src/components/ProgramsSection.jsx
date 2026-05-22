@@ -58,7 +58,7 @@ const programs = [
 export default function ProgramsSection() {
   return (
     <section className="py-14 md:py-16 bg-[#f6f8fb] border-t-2 border-[#0A2342]">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="px-6 mx-auto max-w-7xl">
         {/* Header */}
         <div className="text-center mb-14">
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#0A2342] mb-3">
@@ -71,13 +71,13 @@ export default function ProgramsSection() {
         </div>
 
         {/* Cards */}
-        <div className="flex flex-col md:flex-row items-stretch justify-center gap-4 md:gap-2">
+        <div className="flex flex-col items-stretch justify-center gap-4 md:flex-row md:gap-2">
           {programs.map((program, idx) => {
             const Icon = program.icon;
             return (
               <Fragment key={idx}>
                 <div
-                  className="relative bg-white rounded-3xl p-8 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col flex-1 group"
+                  className="relative flex flex-col flex-1 p-8 transition-all duration-300 bg-white shadow-md rounded-3xl hover:shadow-xl hover:-translate-y-1 group"
                   style={{ border: `2px solid ${program.border}` }}
                 >
                   {/* Level badge */}
@@ -90,7 +90,7 @@ export default function ProgramsSection() {
 
                   {/* Icon */}
                   <div
-                    className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110"
+                    className="flex items-center justify-center mb-5 transition-transform duration-300 w-14 h-14 rounded-2xl group-hover:scale-110"
                     style={{ background: program.iconBg }}
                   >
                     <Icon className="w-7 h-7" style={{ color: program.iconColor }} />
@@ -100,13 +100,13 @@ export default function ProgramsSection() {
                   <h3 className="text-xl font-bold text-[#0A2342] mb-1">{program.title}</h3>
 
                   {/* Desc */}
-                  <p className="text-sm font-medium mb-5" style={{ color: program.border }}>{program.desc}</p>
+                  <p className="mb-5 text-sm font-medium" style={{ color: program.border }}>{program.desc}</p>
 
                   {/* Divider */}
-                  <div className="h-px bg-gray-100 mb-5" />
+                  <div className="h-px mb-5 bg-gray-100" />
 
                   {/* Points */}
-                  <ul className="space-y-3 flex-grow">
+                  <ul className="flex-grow space-y-3">
                     {program.points.map((pt, i) => (
                       <li key={i} className="flex items-start gap-3 text-[#0A2342]/75 text-sm">
                         <span
@@ -121,9 +121,9 @@ export default function ProgramsSection() {
                   </ul>
 
                   {/* Category tag */}
-                  <div className="mt-6 pt-4 border-t border-gray-100">
+                  <div className="pt-4 mt-6 border-t border-gray-100">
                     <span
-                      className="inline-block text-xs font-semibold px-3 py-1 rounded-full"
+                      className="inline-block px-3 py-1 text-xs font-semibold rounded-full"
                       style={{ background: program.iconBg, color: program.iconColor }}
                     >
                       {program.category}
@@ -133,7 +133,7 @@ export default function ProgramsSection() {
 
                 {/* Arrow between cards */}
                 {idx < programs.length - 1 && (
-                  <div className="hidden md:flex items-center justify-center flex-shrink-0 px-1">
+                  <div className="items-center justify-center flex-shrink-0 hidden px-1 md:flex">
                     <span className="inline-flex items-center justify-center min-w-14 h-11 px-3 rounded-xl border border-[#FF7A00]/35 bg-[#FFF3E8] text-2xl font-black tracking-tight text-[#FF7A00] shadow-sm">
                       &gt;&gt;
                     </span>
@@ -147,7 +147,7 @@ export default function ProgramsSection() {
         {/* CTA */}
         <div className="flex justify-center mt-14">
           <a
-            href="https://forms.gle/DyDigMebuEbwED347"
+            href="https://venuratech.com/dashboard/student/login"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-[#0A2342] hover:bg-[#14345d] text-white font-bold px-12 py-4 rounded-2xl text-lg shadow-lg transition-all duration-300 hover:shadow-[#0A2342]/30 hover:shadow-xl hover:-translate-y-0.5"

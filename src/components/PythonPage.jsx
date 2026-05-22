@@ -1,147 +1,539 @@
-import ProgramDetailTemplate from './ProgramDetailTemplate'
-import { getNextBatchDate } from '../lib/programUtils'
+import ProgramDetailTemplate from "./ProgramDetailTemplate";
+import { getNextBatchDate } from "../lib/programUtils";
 
 function PythonPage() {
   const programData = {
-    title: 'Python Programming',
-    subtitle: 'Automation, APIs, and Backend Development',
-    category: 'Technology • Python',
-    description: 'Master Python from fundamentals to real-world engineering use cases including automation, APIs, backend services, and data-driven applications.',
-    image: '/image copy.png',
-    path: '/programs/python',
-    enrollUrl: 'https://forms.gle/DyDigMebuEbwED347?program=python',
-    duration: '3 months',
-    level: 'Beginner to Advanced',
-    enrolled: '780+ enrolled',
+    title: "Python Programming",
+    subtitle: "Automation, APIs, and Backend Development",
+    category: "Technology • Python",
+    description:
+      "Master Python from fundamentals to real-world engineering use cases including automation, APIs, backend services, and data-driven applications.",
+    image: "/python.jpeg",
+    path: "/programs/python",
+    enrollUrl: "https://venuratech.com/dashboard/student/login",
+    duration: "3 months",
+    level: "Beginner to Advanced",
+    enrolled: "780+ enrolled",
     quickStats: [
-      { value: '90%', label: 'Placement Rate', icon: '🎯' },
-      { value: '4.7★', label: 'Student Rating', icon: '⭐' },
-      { value: '780+', label: 'Alumni Network', icon: '👥' },
-      { value: '32+', label: 'Projects Built', icon: '💼' },
+      { value: "90%", label: "Placement Rate", icon: "🎯" },
+      { value: "4.7★", label: "Student Rating", icon: "⭐" },
+      { value: "780+", label: "Alumni Network", icon: "👥" },
+      { value: "32+", label: "Projects Built", icon: "💼" },
     ],
     topics: [
-      { title: 'Python Core', description: 'Syntax, control flow, functions, and OOP' },
-      { title: 'Data Structures', description: 'Lists, dicts, sets, and algorithmic problem solving' },
-      { title: 'File & Automation', description: 'Scripts for real-world workflow automation' },
-      { title: 'API Development', description: 'Build REST APIs using FastAPI/Flask' },
-      { title: 'Database Integration', description: 'Connect Python apps to SQL and NoSQL stores' },
-      { title: 'Testing & Deployment', description: 'Reliable code, packaging, and deployment basics' },
+      {
+        title: "Python Core",
+        description: "Syntax, control flow, functions, and OOP",
+      },
+      {
+        title: "Data Structures",
+        description: "Lists, dicts, sets, and algorithmic problem solving",
+      },
+      {
+        title: "File & Automation",
+        description: "Scripts for real-world workflow automation",
+      },
+      {
+        title: "API Development",
+        description: "Build REST APIs using FastAPI/Flask",
+      },
+      {
+        title: "Database Integration",
+        description: "Connect Python apps to SQL and NoSQL stores",
+      },
+      {
+        title: "Testing & Deployment",
+        description: "Reliable code, packaging, and deployment basics",
+      },
     ],
     curriculum: [
-      { title: 'Python Foundations', description: 'Build strong coding base', duration: '1 week', phase: 'foundation', topics: ['Syntax', 'Functions', 'Loops', 'Modules'] },
-      { title: 'Data Structures & OOP', description: 'Write maintainable Python code', duration: '1 week', phase: 'foundation', topics: ['Classes', 'Collections', 'Iterators', 'Error Handling'] },
-      { title: 'Automation Scripts', description: 'Solve practical repetitive tasks', duration: '1 week', phase: 'foundation', topics: ['File Processing', 'Scheduling', 'CLI Tools', 'Web Requests'] },
-      { title: 'Foundation Project', description: 'Automation utility suite', duration: '1 week', phase: 'foundation', topics: ['Parser Tool', 'Data Cleaner', 'Report Generator', 'CLI Package'] },
-      { title: 'Web APIs', description: 'Create backend endpoints in Python', duration: '1 week', phase: 'intermediate', topics: ['FastAPI', 'Flask', 'Validation', 'OpenAPI Docs'] },
-      { title: 'Database Layer', description: 'Persist and query app data', duration: '1 week', phase: 'intermediate', topics: ['SQLAlchemy', 'PostgreSQL', 'Transactions', 'Query Optimization'] },
-      { title: 'Intermediate Project', description: 'Build Python backend service', duration: '1 week', phase: 'intermediate', topics: ['Auth', 'CRUD APIs', 'Pagination', 'Testing'] },
-      { title: 'Testing & Packaging', description: 'Improve code quality and release flow', duration: '1 week', phase: 'advanced', topics: ['Pytest', 'Linting', 'Virtual Env', 'Packaging'] },
-      { title: 'Capstone Project', description: 'Ship full Python product', duration: '1 week', phase: 'advanced', topics: ['Architecture', 'Deployment', 'Monitoring', 'Documentation'] },
+      {
+        title: "Python Foundations",
+        description: "Build strong coding base",
+        duration: "1 week",
+        phase: "foundation",
+        topics: ["Syntax", "Functions", "Loops", "Modules"],
+      },
+      {
+        title: "Data Structures & OOP",
+        description: "Write maintainable Python code",
+        duration: "1 week",
+        phase: "foundation",
+        topics: ["Classes", "Collections", "Iterators", "Error Handling"],
+      },
+      {
+        title: "Automation Scripts",
+        description: "Solve practical repetitive tasks",
+        duration: "1 week",
+        phase: "foundation",
+        topics: ["File Processing", "Scheduling", "CLI Tools", "Web Requests"],
+      },
+      {
+        title: "Foundation Project",
+        description: "Automation utility suite",
+        duration: "1 week",
+        phase: "foundation",
+        topics: [
+          "Parser Tool",
+          "Data Cleaner",
+          "Report Generator",
+          "CLI Package",
+        ],
+      },
+      {
+        title: "Web APIs",
+        description: "Create backend endpoints in Python",
+        duration: "1 week",
+        phase: "intermediate",
+        topics: ["FastAPI", "Flask", "Validation", "OpenAPI Docs"],
+      },
+      {
+        title: "Database Layer",
+        description: "Persist and query app data",
+        duration: "1 week",
+        phase: "intermediate",
+        topics: [
+          "SQLAlchemy",
+          "PostgreSQL",
+          "Transactions",
+          "Query Optimization",
+        ],
+      },
+      {
+        title: "Intermediate Project",
+        description: "Build Python backend service",
+        duration: "1 week",
+        phase: "intermediate",
+        topics: ["Auth", "CRUD APIs", "Pagination", "Testing"],
+      },
+      {
+        title: "Testing & Packaging",
+        description: "Improve code quality and release flow",
+        duration: "1 week",
+        phase: "advanced",
+        topics: ["Pytest", "Linting", "Virtual Env", "Packaging"],
+      },
+      {
+        title: "Capstone Project",
+        description: "Ship full Python product",
+        duration: "1 week",
+        phase: "advanced",
+        topics: ["Architecture", "Deployment", "Monitoring", "Documentation"],
+      },
     ],
-    skills: ['Python', 'FastAPI', 'Flask', 'PostgreSQL', 'Automation', 'Pytest', 'APIs', 'Docker'],
+    skills: [
+      "Python",
+      "FastAPI",
+      "Flask",
+      "PostgreSQL",
+      "Automation",
+      "Pytest",
+      "APIs",
+      "Docker",
+    ],
     projects: [
-      { title: 'Automation Toolkit', description: 'Develop script collection for data processing and reporting workflows.', technologies: ['Python', 'Pandas', 'CLI'], image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=500' },
-      { title: 'Backend API Service', description: 'Create production-style API with authentication and DB integration.', technologies: ['FastAPI', 'PostgreSQL', 'JWT'], image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=500' },
-      { title: 'Workflow Orchestration Platform', description: 'Build a job scheduling and workflow orchestration service for business automation tasks.', technologies: ['Python', 'Celery', 'Redis', 'PostgreSQL'], image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500' },
-      { title: 'Data Validation and Reporting Engine', description: 'Create a robust validation pipeline with notifications and exportable audit reports.', technologies: ['Python', 'Pandas', 'FastAPI', 'Docker'], image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500' },
+      {
+        title: "Automation Toolkit",
+        description:
+          "Develop script collection for data processing and reporting workflows.",
+        technologies: ["Python", "Pandas", "CLI"],
+        image:
+          "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=500",
+      },
+      {
+        title: "Backend API Service",
+        description:
+          "Create production-style API with authentication and DB integration.",
+        technologies: ["FastAPI", "PostgreSQL", "JWT"],
+        image:
+          "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=500",
+      },
+      {
+        title: "Workflow Orchestration Platform",
+        description:
+          "Build a job scheduling and workflow orchestration service for business automation tasks.",
+        technologies: ["Python", "Celery", "Redis", "PostgreSQL"],
+        image:
+          "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500",
+      },
+      {
+        title: "Data Validation and Reporting Engine",
+        description:
+          "Create a robust validation pipeline with notifications and exportable audit reports.",
+        technologies: ["Python", "Pandas", "FastAPI", "Docker"],
+        image:
+          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500",
+      },
     ],
-    batchInfo: { nextBatchDate: getNextBatchDate(), seatsAvailable: 19, totalSeats: 30 },
+    batchInfo: {
+      nextBatchDate: getNextBatchDate(),
+      seatsAvailable: 19,
+      totalSeats: 30,
+    },
     learningFormat: {
-      mode: 'Live + Recorded',
-      batchOptions: ['Weekend Batch', 'Weekday Evening Batch'],
-      groupSize: '25-30 students per batch',
-      doubtsResolution: 'Weekly code reviews + live doubt sessions',
-      communityAccess: 'Python learners network and project support channels',
-      liveSessionDuration: '2 hours per session',
-      additionalSupport: 'Project review for premium learners',
+      mode: "Live + Recorded",
+      batchOptions: ["Weekend Batch", "Weekday Evening Batch"],
+      groupSize: "25-30 students per batch",
+      doubtsResolution: "Weekly code reviews + live doubt sessions",
+      communityAccess: "Python learners network and project support channels",
+      liveSessionDuration: "2 hours per session",
+      additionalSupport: "Project review for premium learners",
     },
     prerequisites: {
-      required: ['Basic computer operation', 'Willingness to code daily'],
-      recommended: ['Basic logic and math comfort', 'Any prior coding exposure'],
-      idealFor: ['Beginners', 'Automation aspirants', 'Backend starters'],
+      required: ["Basic computer operation", "Willingness to code daily"],
+      recommended: [
+        "Basic logic and math comfort",
+        "Any prior coding exposure",
+      ],
+      idealFor: ["Beginners", "Automation aspirants", "Backend starters"],
     },
-    cost: 'Starting at ₹1,499',
+    cost: "Starting at ₹1,499",
     costDetails: {
-      foundation: { name: 'Foundation', price: '₹1,499', duration: '3 months', features: ['Recorded modules', 'Community support', '3 projects'] },
-      professional: { name: 'Professional', price: '₹4,999', duration: '3 months', features: ['Live sessions', '5 projects', 'Mentor guidance'] },
-      premium: { name: 'Premium', price: '₹7,999', duration: '3 months', features: ['1-on-1 mentorship', 'Capstone support', 'Career prep'] },
+      foundation: {
+        name: "Foundation",
+        price: "₹1,499",
+        duration: "3 months",
+        features: ["Recorded modules", "Community support", "3 projects"],
+      },
+      professional: {
+        name: "Professional",
+        price: "₹4,999",
+        duration: "3 months",
+        features: ["Live sessions", "5 projects", "Mentor guidance"],
+      },
+      premium: {
+        name: "Premium",
+        price: "₹7,999",
+        duration: "3 months",
+        features: ["1-on-1 mentorship", "Capstone support", "Career prep"],
+      },
     },
     pricingComparison: [
-      { feature: 'Program Duration', foundation: '3 months', professional: '3 months', premium: '3 months' },
-      { feature: 'Content Access', foundation: 'Foundation only', professional: 'All levels', premium: 'All levels' },
-      { feature: 'Live Sessions', foundation: '❌', professional: '40+ hours', premium: '60+ hours' },
-      { feature: 'Hands-on Projects', foundation: '3 projects', professional: '5 projects', premium: '8+ projects' },
-      { feature: 'Capstone Project', foundation: '❌', professional: '❌', premium: '✅' },
-      { feature: '1-on-1 Mentorship', foundation: '❌', professional: '❌', premium: '✅ Unlimited' },
-      { feature: 'Interview Preparation', foundation: '❌', professional: 'Basic', premium: 'Advanced + Mock' },
-      { feature: 'Placement Assistance', foundation: '❌', professional: 'Basic', premium: '✅ 100%' },
-      { feature: 'Resume Building', foundation: '❌', professional: '✅', premium: '✅ + LinkedIn' },
-      { feature: 'Industry Certifications', foundation: '1 certification', professional: '2 certifications', premium: '3+ certifications' },
-      { feature: 'Job Referrals', foundation: '❌', professional: '❌', premium: '✅ Priority' },
-      { feature: 'Lifetime Access', foundation: '✅', professional: '✅', premium: '✅' },
-      { feature: 'Community Support', foundation: 'Forum only', professional: '✅ Active', premium: '✅ + Alumni Network' },
+      {
+        feature: "Program Duration",
+        foundation: "3 months",
+        professional: "3 months",
+        premium: "3 months",
+      },
+      {
+        feature: "Content Access",
+        foundation: "Foundation only",
+        professional: "All levels",
+        premium: "All levels",
+      },
+      {
+        feature: "Live Sessions",
+        foundation: "❌",
+        professional: "40+ hours",
+        premium: "60+ hours",
+      },
+      {
+        feature: "Hands-on Projects",
+        foundation: "3 projects",
+        professional: "5 projects",
+        premium: "8+ projects",
+      },
+      {
+        feature: "Capstone Project",
+        foundation: "❌",
+        professional: "❌",
+        premium: "✅",
+      },
+      {
+        feature: "1-on-1 Mentorship",
+        foundation: "❌",
+        professional: "❌",
+        premium: "✅ Unlimited",
+      },
+      {
+        feature: "Interview Preparation",
+        foundation: "❌",
+        professional: "Basic",
+        premium: "Advanced + Mock",
+      },
+      {
+        feature: "Placement Assistance",
+        foundation: "❌",
+        professional: "Basic",
+        premium: "✅ 100%",
+      },
+      {
+        feature: "Resume Building",
+        foundation: "❌",
+        professional: "✅",
+        premium: "✅ + LinkedIn",
+      },
+      {
+        feature: "Industry Certifications",
+        foundation: "1 certification",
+        professional: "2 certifications",
+        premium: "3+ certifications",
+      },
+      {
+        feature: "Job Referrals",
+        foundation: "❌",
+        professional: "❌",
+        premium: "✅ Priority",
+      },
+      {
+        feature: "Lifetime Access",
+        foundation: "✅",
+        professional: "✅",
+        premium: "✅",
+      },
+      {
+        feature: "Community Support",
+        foundation: "Forum only",
+        professional: "✅ Active",
+        premium: "✅ + Alumni Network",
+      },
     ],
     competitorComparison: [
-      { feature: 'Price', venura: '₹4,999 - ₹7,999', coursera: '₹15,000+', udemy: '₹3,999', bootcamp: '₹1,20,000+' },
-      { feature: 'Duration', venura: '3 months', coursera: '3 months', udemy: '3 months', bootcamp: '3 months' },
-      { feature: 'Live Sessions', venura: '60+ hours', coursera: 'Limited', udemy: 'None', bootcamp: 'Yes' },
-      { feature: 'Placement Support', venura: '100% (Premium)', coursera: 'None', udemy: 'None', bootcamp: 'Yes' },
-      { feature: '1-on-1 Mentorship', venura: 'Unlimited (Premium)', coursera: 'None', udemy: 'None', bootcamp: 'Limited' },
-      { feature: 'Real Projects', venura: '8+ projects', coursera: '2-3 projects', udemy: '4-5 projects', bootcamp: '5-6 projects' },
-      { feature: 'Job Referrals', venura: '100+ partners', coursera: 'None', udemy: 'None', bootcamp: '50+ partners' },
-      { feature: 'Community', venura: 'Active 780+', coursera: 'Forum only', udemy: 'Limited', bootcamp: 'Batch only' },
-      { feature: 'Certification', venura: 'Industry recognized', coursera: 'University backed', udemy: 'Platform certificate', bootcamp: 'Industry recognized' },
+      {
+        feature: "Price",
+        venura: "₹4,999 - ₹7,999",
+        coursera: "₹15,000+",
+        udemy: "₹3,999",
+        bootcamp: "₹1,20,000+",
+      },
+      {
+        feature: "Duration",
+        venura: "3 months",
+        coursera: "3 months",
+        udemy: "3 months",
+        bootcamp: "3 months",
+      },
+      {
+        feature: "Live Sessions",
+        venura: "60+ hours",
+        coursera: "Limited",
+        udemy: "None",
+        bootcamp: "Yes",
+      },
+      {
+        feature: "Placement Support",
+        venura: "100% (Premium)",
+        coursera: "None",
+        udemy: "None",
+        bootcamp: "Yes",
+      },
+      {
+        feature: "1-on-1 Mentorship",
+        venura: "Unlimited (Premium)",
+        coursera: "None",
+        udemy: "None",
+        bootcamp: "Limited",
+      },
+      {
+        feature: "Real Projects",
+        venura: "8+ projects",
+        coursera: "2-3 projects",
+        udemy: "4-5 projects",
+        bootcamp: "5-6 projects",
+      },
+      {
+        feature: "Job Referrals",
+        venura: "100+ partners",
+        coursera: "None",
+        udemy: "None",
+        bootcamp: "50+ partners",
+      },
+      {
+        feature: "Community",
+        venura: "Active 780+",
+        coursera: "Forum only",
+        udemy: "Limited",
+        bootcamp: "Batch only",
+      },
+      {
+        feature: "Certification",
+        venura: "Industry recognized",
+        coursera: "University backed",
+        udemy: "Platform certificate",
+        bootcamp: "Industry recognized",
+      },
     ],
-    jobRoles: ['Python Developer', 'Backend Developer', 'Automation Engineer', 'Software Engineer'],
+    jobRoles: [
+      "Python Developer",
+      "Backend Developer",
+      "Automation Engineer",
+      "Software Engineer",
+    ],
     salaryRanges: [
-      { role: 'Python Developer', range: '₹5-10 LPA', experience: '0-2 years' },
-      { role: 'Automation Engineer', range: '₹4.5-9 LPA', experience: '0-2 years' },
-      { role: 'Backend Developer', range: '₹6-11 LPA', experience: '0-2 years' },
-      { role: 'API Engineer', range: '₹6-12 LPA', experience: '0-2 years' },
-      { role: 'Data Automation Specialist', range: '₹5-10 LPA', experience: '0-2 years' },
-      { role: 'Software Engineer', range: '₹6-12 LPA', experience: '0-2 years' },
+      { role: "Python Developer", range: "₹5-10 LPA", experience: "0-2 years" },
+      {
+        role: "Automation Engineer",
+        range: "₹4.5-9 LPA",
+        experience: "0-2 years",
+      },
+      {
+        role: "Backend Developer",
+        range: "₹6-11 LPA",
+        experience: "0-2 years",
+      },
+      { role: "API Engineer", range: "₹6-12 LPA", experience: "0-2 years" },
+      {
+        role: "Data Automation Specialist",
+        range: "₹5-10 LPA",
+        experience: "0-2 years",
+      },
+      {
+        role: "Software Engineer",
+        range: "₹6-12 LPA",
+        experience: "0-2 years",
+      },
     ],
-    hiringCompanies: ['TCS', 'Infosys', 'Wipro', 'Zoho', 'Freshworks', 'Accenture'],
+    hiringCompanies: [
+      "TCS",
+      "Infosys",
+      "Wipro",
+      "Zoho",
+      "Freshworks",
+      "Accenture",
+    ],
     growthStats: [
-      { value: '30%', label: 'Annual Growth', description: 'Python ecosystem growth rate' },
-      { value: '900K+', label: 'Open Roles', description: 'Python-based engineering demand' },
-      { value: 'Top Language', label: 'Most Versatile Skill', description: 'Used across backend, AI, automation' },
+      {
+        value: "30%",
+        label: "Annual Growth",
+        description: "Python ecosystem growth rate",
+      },
+      {
+        value: "900K+",
+        label: "Open Roles",
+        description: "Python-based engineering demand",
+      },
+      {
+        value: "Top Language",
+        label: "Most Versatile Skill",
+        description: "Used across backend, AI, automation",
+      },
     ],
     marketDataSource: [
-      { label: 'TIOBE Index', url: 'https://www.tiobe.com/tiobe-index/' },
-      { label: 'Stack Overflow Developer Survey', url: 'https://survey.stackoverflow.co/' },
-      { label: 'LinkedIn Economic Graph', url: 'https://economicgraph.linkedin.com/' },
+      { label: "TIOBE Index", url: "https://www.tiobe.com/tiobe-index/" },
+      {
+        label: "Stack Overflow Developer Survey",
+        url: "https://survey.stackoverflow.co/",
+      },
+      {
+        label: "LinkedIn Economic Graph",
+        url: "https://economicgraph.linkedin.com/",
+      },
     ],
     comparisonSource: [
-      { label: 'Coursera Pricing', url: 'https://www.coursera.org/' },
-      { label: 'Udemy Pricing', url: 'https://www.udemy.com/' },
-      { label: 'Bootcamp Listings', url: 'https://www.coursereport.com/' },
+      { label: "Coursera Pricing", url: "https://www.coursera.org/" },
+      { label: "Udemy Pricing", url: "https://www.udemy.com/" },
+      { label: "Bootcamp Listings", url: "https://www.coursereport.com/" },
     ],
-    futureOutlook: 'Python remains one of the most versatile and employable languages, powering backend systems, automation platforms, and data/AI workflows across industries.',
+    futureOutlook:
+      "Python remains one of the most versatile and employable languages, powering backend systems, automation platforms, and data/AI workflows across industries.",
     instructors: [
-      { name: 'Ananya Das', role: 'Lead Python Mentor', experience: '10+ years', credentials: 'Ex-Product Engineer', image: 'https://ui-avatars.com/api/?name=Ananya+Das&background=FF7A00&color=fff&size=200', specialization: 'Python Backend & Automation' },
-      { name: 'Rohit Malhotra', role: 'Senior API Instructor', experience: '9+ years in backend engineering', credentials: 'Ex-Zoho Backend Team', image: 'https://ui-avatars.com/api/?name=Rohit+Malhotra&background=0A2342&color=fff&size=200', specialization: 'FastAPI & System Design' },
-      { name: 'Meghana Iyer', role: 'Industry Mentor', experience: '8+ years in automation engineering', credentials: 'Ex-Infosys Automation Practice', image: 'https://ui-avatars.com/api/?name=Meghana+Iyer&background=FF7A00&color=fff&size=200', specialization: 'Python Automation & Tooling' },
+      {
+        name: "Ananya Das",
+        role: "Lead Python Mentor",
+        experience: "10+ years",
+        credentials: "Ex-Product Engineer",
+        image:
+          "https://ui-avatars.com/api/?name=Ananya+Das&background=FF7A00&color=fff&size=200",
+        specialization: "Python Backend & Automation",
+      },
+      {
+        name: "Rohit Malhotra",
+        role: "Senior API Instructor",
+        experience: "9+ years in backend engineering",
+        credentials: "Ex-Zoho Backend Team",
+        image:
+          "https://ui-avatars.com/api/?name=Rohit+Malhotra&background=0A2342&color=fff&size=200",
+        specialization: "FastAPI & System Design",
+      },
+      {
+        name: "Meghana Iyer",
+        role: "Industry Mentor",
+        experience: "8+ years in automation engineering",
+        credentials: "Ex-Infosys Automation Practice",
+        image:
+          "https://ui-avatars.com/api/?name=Meghana+Iyer&background=FF7A00&color=fff&size=200",
+        specialization: "Python Automation & Tooling",
+      },
     ],
     reviews: [
-      { name: 'Harish', role: 'Python Developer', company: 'Freshworks', image: 'https://ui-avatars.com/api/?name=Harish&background=0A2342&color=fff&size=200', rating: 5, text: 'Very beginner-friendly and project-focused. Helped me confidently apply for Python roles.' },
-      { name: 'Deeksha Rao', role: 'Backend Engineer', company: 'Zoho', image: 'https://ui-avatars.com/api/?name=Deeksha+Rao&background=FF7A00&color=fff&size=200', rating: 5, text: 'FastAPI and project deployment modules were very practical. I used the same approach in interviews.' },
-      { name: 'Ramesh Kulkarni', role: 'Automation Engineer', company: 'TCS', image: 'https://ui-avatars.com/api/?name=Ramesh+Kulkarni&background=0A2342&color=fff&size=200', rating: 5, text: 'The automation projects gave me immediately applicable skills at work and improved my profile quickly.' },
-      { name: 'Pallavi S', role: 'Software Engineer', company: 'Accenture', image: 'https://ui-avatars.com/api/?name=Pallavi+S&background=FF7A00&color=fff&size=200', rating: 5, text: 'Mentorship and code review quality were excellent. I moved from testing to development after this program.' },
+      {
+        name: "Harish",
+        role: "Python Developer",
+        company: "Freshworks",
+        image:
+          "https://ui-avatars.com/api/?name=Harish&background=0A2342&color=fff&size=200",
+        rating: 5,
+        text: "Very beginner-friendly and project-focused. Helped me confidently apply for Python roles.",
+      },
+      {
+        name: "Deeksha Rao",
+        role: "Backend Engineer",
+        company: "Zoho",
+        image:
+          "https://ui-avatars.com/api/?name=Deeksha+Rao&background=FF7A00&color=fff&size=200",
+        rating: 5,
+        text: "FastAPI and project deployment modules were very practical. I used the same approach in interviews.",
+      },
+      {
+        name: "Ramesh Kulkarni",
+        role: "Automation Engineer",
+        company: "TCS",
+        image:
+          "https://ui-avatars.com/api/?name=Ramesh+Kulkarni&background=0A2342&color=fff&size=200",
+        rating: 5,
+        text: "The automation projects gave me immediately applicable skills at work and improved my profile quickly.",
+      },
+      {
+        name: "Pallavi S",
+        role: "Software Engineer",
+        company: "Accenture",
+        image:
+          "https://ui-avatars.com/api/?name=Pallavi+S&background=FF7A00&color=fff&size=200",
+        rating: 5,
+        text: "Mentorship and code review quality were excellent. I moved from testing to development after this program.",
+      },
     ],
-    certificatePreview: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800',
+    certificatePreview:
+      "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800",
     faqs: [
-      { question: 'Is Python suitable for beginners?', answer: 'Yes, Python is one of the best first languages due to its readable syntax and wide use cases.' },
-      { question: 'Will I learn backend APIs?', answer: 'Yes, API development is a core part of the curriculum with hands-on projects.' },
-      { question: 'Do you cover automation use cases?', answer: 'Yes. The program includes practical automation workflows for files, reports, APIs, and scheduled tasks.' },
-      { question: 'Can I switch plans later?', answer: 'Yes, you can upgrade anytime by paying only the plan difference.' },
-      { question: 'What if I miss a live session?', answer: 'All sessions are recorded and available for lifetime access.' },
-      { question: 'Is placement assistance available?', answer: 'Premium plan includes resume support, mock interviews, and referral opportunities.' },
-      { question: 'How much weekly effort is recommended?', answer: 'Around 8-10 hours for Foundation and 12-15 hours for Professional/Premium plans.' },
+      {
+        question: "Is Python suitable for beginners?",
+        answer:
+          "Yes, Python is one of the best first languages due to its readable syntax and wide use cases.",
+      },
+      {
+        question: "Will I learn backend APIs?",
+        answer:
+          "Yes, API development is a core part of the curriculum with hands-on projects.",
+      },
+      {
+        question: "Do you cover automation use cases?",
+        answer:
+          "Yes. The program includes practical automation workflows for files, reports, APIs, and scheduled tasks.",
+      },
+      {
+        question: "Can I switch plans later?",
+        answer:
+          "Yes, you can upgrade anytime by paying only the plan difference.",
+      },
+      {
+        question: "What if I miss a live session?",
+        answer: "All sessions are recorded and available for lifetime access.",
+      },
+      {
+        question: "Is placement assistance available?",
+        answer:
+          "Premium plan includes resume support, mock interviews, and referral opportunities.",
+      },
+      {
+        question: "How much weekly effort is recommended?",
+        answer:
+          "Around 8-10 hours for Foundation and 12-15 hours for Professional/Premium plans.",
+      },
     ],
-  }
+  };
 
-  return <ProgramDetailTemplate programData={programData} />
+  return <ProgramDetailTemplate programData={programData} />;
 }
 
-export default PythonPage
+export default PythonPage;

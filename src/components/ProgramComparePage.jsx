@@ -126,9 +126,9 @@ function CellValue({ rowKey, value }) {
   if (rowKey === 'studentRating') {
     return (
       <div className="flex items-center justify-center gap-1">
-        <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-        <span className="font-bold text-lg">{value}</span>
-        <span className="text-slate-500 text-sm">/5</span>
+        <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+        <span className="text-lg font-bold">{value}</span>
+        <span className="text-sm text-slate-500">/5</span>
       </div>
     )
   }
@@ -136,7 +136,7 @@ function CellValue({ rowKey, value }) {
     return (
       <div className="flex items-center justify-center gap-2">
         <TrendingUp className="w-5 h-5 text-green-600" />
-        <span className="font-bold text-lg text-green-600">{value}</span>
+        <span className="text-lg font-bold text-green-600">{value}</span>
       </div>
     )
   }
@@ -149,7 +149,7 @@ function CellValue({ rowKey, value }) {
   }
   if (Array.isArray(value)) {
     return (
-      <div className="flex flex-wrap gap-2 justify-center">
+      <div className="flex flex-wrap justify-center gap-2">
         {value.map((s, i) => (
           <span key={i} className="bg-[#FF7A00]/10 text-[#FF7A00] px-3 py-1 rounded-full text-xs font-semibold">
             {s}
@@ -158,8 +158,8 @@ function CellValue({ rowKey, value }) {
       </div>
     )
   }
-  if (value === 'Yes') return <CheckCircle2 className="w-6 h-6 text-green-600 mx-auto" />
-  if (value === 'No') return <XCircle className="w-6 h-6 text-red-500 mx-auto" />
+  if (value === 'Yes') return <CheckCircle2 className="w-6 h-6 mx-auto text-green-600" />
+  if (value === 'No') return <XCircle className="w-6 h-6 mx-auto text-red-500" />
   return <span className="font-medium">{value}</span>
 }
 
@@ -212,7 +212,7 @@ export default function ProgramComparePage() {
           ]}
           className="px-6 pt-8"
         >
-          <div className="mt-6 flex items-center gap-2 text-sm text-slate-300">
+          <div className="flex items-center gap-2 mt-6 text-sm text-slate-300">
             <Link to="/programs" className="hover:text-[#FF7A00] transition-colors">Programs</Link>
             <span>/</span>
             <span className="text-white">Compare Programs</span>
@@ -220,11 +220,11 @@ export default function ProgramComparePage() {
         </PageHero>
 
         <section className="py-16 px-6 bg-gradient-to-b from-slate-50 to-white border-t-2 border-[#0A2342]">
-          <div className="max-w-7xl mx-auto">
+          <div className="mx-auto max-w-7xl">
 
             {/* Program selector */}
-            <div className="mb-10 bg-white rounded-2xl border-2 border-slate-200 p-6 shadow-lg">
-              <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+            <div className="p-6 mb-10 bg-white border-2 shadow-lg rounded-2xl border-slate-200">
+              <h2 className="flex items-center gap-2 mb-4 text-2xl font-bold text-slate-900">
                 <Info className="w-6 h-6 text-[#FF7A00]" />
                 Select Programs to Compare (Choose up to 3)
               </h2>
@@ -248,7 +248,7 @@ export default function ProgramComparePage() {
                 })}
               </div>
               {selected.length < 3 && (
-                <p className="text-sm text-slate-500 mt-3 flex items-center gap-1">
+                <p className="flex items-center gap-1 mt-3 text-sm text-slate-500">
                   <Info className="w-4 h-4" />
                   Select {3 - selected.length} more program{3 - selected.length > 1 ? 's' : ''} for better comparison
                 </p>
@@ -257,7 +257,7 @@ export default function ProgramComparePage() {
 
             {/* Stats bar */}
             <div className="mb-8 bg-gradient-to-r from-[#FF7A00]/10 via-white to-[#FF7A00]/10 rounded-2xl border border-[#FF7A00]/20 p-6">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+              <div className="grid grid-cols-1 gap-6 text-center sm:grid-cols-3">
                 <div>
                   <div className="text-3xl font-bold text-[#FF7A00] mb-1">90%</div>
                   <div className="text-sm text-slate-600">Average Placement Rate</div>
@@ -275,7 +275,7 @@ export default function ProgramComparePage() {
 
             {/* Comparison table */}
             {selected.length > 0 && (
-              <div className="bg-white rounded-2xl border-2 border-slate-200 overflow-hidden shadow-lg">
+              <div className="overflow-hidden bg-white border-2 shadow-lg rounded-2xl border-slate-200">
                 <div className="overflow-x-auto">
                   <table className="w-full min-w-[800px]">
                     <thead>
@@ -289,12 +289,12 @@ export default function ProgramComparePage() {
                             <div className="flex flex-col gap-2">
                               <Link
                                 to={p.path}
-                                className="inline-block bg-white/20 hover:bg-white/30 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors border border-white/30"
+                                className="inline-block px-4 py-2 text-sm font-semibold text-white transition-colors border rounded-lg bg-white/20 hover:bg-white/30 border-white/30"
                               >
                                 View Details
                               </Link>
                               <button
-                                onClick={() => window.open('https://forms.gle/DyDigMebuEbwED347', '_blank')}
+                                onClick={() => window.open('https://venuratech.com/dashboard/student/login', '_blank')}
                                 className="inline-block bg-[#0A2342] hover:bg-[#14345d] text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors"
                               >
                                 Enroll Now
@@ -307,7 +307,7 @@ export default function ProgramComparePage() {
                     <tbody>
                       {compareRows.map((row, idx) => (
                         <tr key={row.key} className={idx % 2 === 0 ? 'bg-slate-50' : 'bg-white'}>
-                          <td className="p-4 font-semibold text-slate-900 border-r border-slate-200 sticky left-0 bg-inherit z-10">
+                          <td className="sticky left-0 z-10 p-4 font-semibold border-r text-slate-900 border-slate-200 bg-inherit">
                             <div className="flex items-center gap-2">
                               {row.icon && <row.icon className="w-4 h-4 text-[#FF7A00]" />}
                               {row.label}
@@ -328,11 +328,11 @@ export default function ProgramComparePage() {
 
             {/* CTA */}
             <div className="mt-12 text-center bg-gradient-to-br from-[#0A2342] to-[#1a3a5f] rounded-2xl p-8 text-white">
-              <h2 className="text-3xl font-bold mb-4">Still Can&apos;t Decide?</h2>
-              <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
+              <h2 className="mb-4 text-3xl font-bold">Still Can&apos;t Decide?</h2>
+              <p className="max-w-2xl mx-auto mb-6 text-slate-300">
                 Talk to our career counselor for personalized guidance based on your background and goals.
               </p>
-              <div className="flex flex-wrap gap-4 justify-center">
+              <div className="flex flex-wrap justify-center gap-4">
                 <Link
                   to="/contact"
                   className="bg-[#0A2342] hover:bg-[#14345d] text-white font-bold px-8 py-4 rounded-xl transition-colors inline-flex items-center gap-2"
@@ -341,7 +341,7 @@ export default function ProgramComparePage() {
                 </Link>
                 <button
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className="bg-white/10 hover:bg-white/20 text-white font-bold px-8 py-4 rounded-xl border-2 border-white/30 transition-colors"
+                  className="px-8 py-4 font-bold text-white transition-colors border-2 bg-white/10 hover:bg-white/20 rounded-xl border-white/30"
                 >
                   Compare Again
                 </button>

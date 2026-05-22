@@ -1,13 +1,13 @@
-import { Button } from './ui/button'
-import AnimatedCounter from './AnimatedCounter'
+import { Button } from "./ui/button";
+import AnimatedCounter from "./AnimatedCounter";
 
 export default function CTASection() {
   const stats = [
     { value: "10K+", label: "Active Learners", icon: "👥" },
     { value: "250+", label: "Expert Mentors", icon: "🎓" },
     { value: "98%", label: "Success Rate", icon: "🎯" },
-    { value: "120+", label: "Industry Partners", icon: "🤝" }
-  ]
+    { value: "120+", label: "Industry Partners", icon: "🤝" },
+  ];
 
   return (
     <section className="relative overflow-hidden border-t-2 border-[#0A2342] py-14 text-white md:py-16">
@@ -17,8 +17,8 @@ export default function CTASection() {
           className="absolute inset-0"
           style={{
             backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-            backgroundSize: '64px 64px',
+              "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
+            backgroundSize: "64px 64px",
           }}
         />
       </div>
@@ -33,14 +33,19 @@ export default function CTASection() {
                 Enrolment
               </p>
               <h2 className="mt-5 text-3xl font-extrabold leading-tight md:text-4xl">
-                Start Your <span className="text-[#FF7A00]">Journey</span> with Venura
+                Start Your <span className="text-[#FF7A00]">Journey</span> with
+                Venura
               </h2>
               <p className="mt-4 max-w-xl text-base text-slate-100 md:text-lg">
-                Limited seats • Rolling cohorts. Get your personalized roadmap after applying.
+                Limited seats • Rolling cohorts. Get your personalized roadmap
+                after applying.
               </p>
 
               <ul className="mt-6 space-y-3 text-slate-100/95">
-                <li>• Three-level structured learning with dedicated mentor support</li>
+                <li>
+                  • Three-level structured learning with dedicated mentor
+                  support
+                </li>
                 <li>• Skill, project, and internship certifications</li>
                 <li>• Internship pathways with startup and NGO partners</li>
               </ul>
@@ -48,16 +53,23 @@ export default function CTASection() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <Button
                   className="rounded-xl bg-white px-8 py-4 font-semibold text-[#0A2342] shadow-lg hover:bg-slate-100"
-                  onClick={() => window.open('https://forms.gle/DyDigMebuEbwED347', '_blank')}
-                >
+                  onClick={() =>
+                    window.open(
+                      "https://venuratech.com/dashboard/student/login",
+                      "_blank",
+                    )
+                  }>
                   Apply Now
                 </Button>
 
                 <Button
                   variant="outline"
                   className="rounded-xl border border-white/40 bg-white/[0.10] px-8 py-4 font-semibold text-white hover:bg-white/[0.18]"
-                  onClick={() => document.getElementById('learning-paths')?.scrollIntoView({ behavior: 'smooth' })}
-                >
+                  onClick={() =>
+                    document
+                      .getElementById("learning-paths")
+                      ?.scrollIntoView({ behavior: "smooth" })
+                  }>
                   View Programs
                 </Button>
               </div>
@@ -67,13 +79,18 @@ export default function CTASection() {
               {stats.map((stat, i) => (
                 <div
                   key={i}
-                  className="rounded-2xl border border-white/25 bg-white/[0.10] p-5 transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/[0.16]"
-                >
+                  className="rounded-2xl border border-white/25 bg-white/[0.10] p-5 transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/[0.16]">
                   <div className="mb-3 text-4xl">{stat.icon}</div>
                   <div className="mb-1 text-3xl font-bold text-[#FF7A00]">
                     <AnimatedCounter
                       value={stat.value}
-                      suffix={stat.value.includes('K') ? 'K+' : stat.value.includes('%') ? '%' : '+'}
+                      suffix={
+                        stat.value.includes("K")
+                          ? "K+"
+                          : stat.value.includes("%")
+                            ? "%"
+                            : "+"
+                      }
                     />
                   </div>
                   <div className="text-sm text-slate-100">{stat.label}</div>
@@ -84,5 +101,5 @@ export default function CTASection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
